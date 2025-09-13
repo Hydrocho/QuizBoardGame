@@ -34,13 +34,13 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, var(--color-background) 0%, var(--color-normal) 100%);
-            min-height: 100vh;
+            min-height: calc(var(--vh, 1vh) * 100);
             overflow: hidden;
         }
 
         .game-container {
             width: 100vw;
-            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
             display: flex;
             flex-direction: column;
             position: relative;
@@ -57,9 +57,10 @@
             flex-direction: column;
             align-items: center;
             gap: 15px;
-            width: 70vw;
-            max-width: 650px;
-            min-width: 320px;
+            width: calc(85vw * 5 / 7);
+            max-width: calc(85vw * 5 / 7);
+            min-width: calc(85vw * 5 / 7);
+            box-sizing: border-box;
             z-index: 5;
         }
 
@@ -205,6 +206,7 @@
             padding: 2px 5vw;
             overflow: hidden;
             position: relative;
+            clip-path: inset(0);
         }
 
         .game-board {
@@ -222,6 +224,8 @@
             grid-template-rows: repeat(7, 1fr);
             gap: 0px;
             padding: 0px;
+            overflow: hidden;
+            clip-path: inset(0);
         }
 
         .board-space {
@@ -236,12 +240,16 @@
             box-shadow: none;
             min-height: 25px;
             border: 1px solid rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            overflow: hidden;
+            contain: layout;
         }
 
         .board-space:hover {
             transform: scale(1.02);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+
 
         /* 내부 빈칸들을 위한 특별 스타일 - 모든 그림자와 테두리 제거 */
         .board-space.center-background {
@@ -311,8 +319,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 9px; /* 높이를 1.5배로 증가 */
-            border-radius: 4.5px 4.5px 0 0;
+            height: 18px; /* 높이를 2배로 증가 */
+            border-radius: 9px 9px 0 0;
         }
 
         /* 2번 플레이어 지역 (칸 7, 8, 10, 11) - 오른쪽 띠 */
@@ -323,8 +331,8 @@
             top: 0;
             right: 0;
             bottom: 0;
-            width: 9px; /* 너비를 1.5배로 증가 */
-            border-radius: 0 4.5px 4.5px 0;
+            width: 18px; /* 너비를 2배로 증가 */
+            border-radius: 0 9px 9px 0;
         }
 
         /* 3번 플레이어 지역 (칸 13, 14, 16, 17) - 하단 띠 */
@@ -335,8 +343,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 9px; /* 높이를 1.5배로 증가 */
-            border-radius: 0 0 4.5px 4.5px;
+            height: 18px; /* 높이를 2배로 증가 */
+            border-radius: 0 0 9px 9px;
         }
 
         /* 4번 플레이어 지역 (칸 19, 20, 22, 23) - 왼쪽 띠 */
@@ -347,8 +355,8 @@
             top: 0;
             left: 0;
             bottom: 0;
-            width: 9px; /* 너비를 1.5배로 증가 */
-            border-radius: 4.5px 0 0 4.5px;
+            width: 18px; /* 너비를 2배로 증가 */
+            border-radius: 9px 0 0 9px;
         }
 
         .space-number {
@@ -911,18 +919,23 @@
         .fullscreen-mode .board-container {
             padding: 2px 2vw !important;
             margin: 0 !important;
+            overflow: hidden !important;
+            clip-path: inset(0) !important;
         }
 
         .fullscreen-mode .game-board {
             width: 95vw;
             height: calc(100% - 4px);
             margin: 0 !important;
+            overflow: hidden !important;
+            clip-path: inset(0) !important;
         }
 
         .fullscreen-mode .center-panel {
-            width: 75vw;
-            max-width: 750px;
-            min-width: 400px;
+            width: calc(95vw * 5 / 7);
+            max-width: calc(95vw * 5 / 7);
+            min-width: calc(95vw * 5 / 7);
+            box-sizing: border-box;
         }
 
 
@@ -996,6 +1009,11 @@
             animation: fadeIn 0.3s ease;
         }
 
+        /* 황금 열쇠 팝업은 어두운 배경 없이 */
+        #goldenKeyPopup {
+            background: transparent;
+        }
+
         .popup-overlay.show {
             display: flex;
         }
@@ -1010,7 +1028,7 @@
             border-radius: 20px;
             padding: 30px;
             max-width: 90vw;
-            max-height: 80vh;
+            max-height: calc(var(--vh, 1vh) * 80);
             width: 500px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             animation: slideUp 0.3s ease;
@@ -1113,9 +1131,10 @@
             .center-panel {
                 padding: 15px 20px;
                 gap: 12px;
-                width: 65vw;
-                max-width: 450px;
-                min-width: 300px;
+                width: calc(85vw * 5 / 7);
+                max-width: calc(85vw * 5 / 7);
+                min-width: calc(85vw * 5 / 7);
+                box-sizing: border-box;
             }
             
             .players-section {
@@ -1166,9 +1185,10 @@
             .center-panel {
                 padding: 15px 18px;
                 gap: 10px;
-                width: 60vw;
-                max-width: 400px;
-                min-width: 280px;
+                width: calc(85vw * 5 / 7);
+                max-width: calc(85vw * 5 / 7);
+                min-width: calc(85vw * 5 / 7);
+                box-sizing: border-box;
             }
             
             .players-section {
@@ -1219,9 +1239,10 @@
             .center-panel {
                 padding: 12px 15px;
                 gap: 8px;
-                width: 55vw;
-                max-width: 300px;
-                min-width: 250px;
+                width: calc(90vw * 5 / 7);
+                max-width: calc(90vw * 5 / 7);
+                min-width: calc(90vw * 5 / 7);
+                box-sizing: border-box;
             }
             
             .players-section {
@@ -1269,9 +1290,10 @@
             .center-panel {
                 padding: 10px 12px;
                 gap: 6px;
-                width: 50vw;
-                max-width: 280px;
-                min-width: 220px;
+                width: calc(90vw * 5 / 7);
+                max-width: calc(90vw * 5 / 7);
+                min-width: calc(90vw * 5 / 7);
+                box-sizing: border-box;
             }
             
             .players-section {
@@ -1346,6 +1368,97 @@
             
             .space-name {
                 font-size: clamp(5px, 2.5vw, 10px);
+            }
+        }
+
+
+
+        /* 황금 열쇠 발견 메시지 팝업 */
+        .golden-discovery-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+            border: 4px solid #B8860B;
+            border-radius: 20px;
+            padding: 30px 40px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 165, 0, 0.6);
+            z-index: 1000;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            min-width: 300px;
+            max-width: 500px;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .golden-discovery-popup.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+
+        .golden-event-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #8B4513;
+            margin: 0 0 15px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .golden-event-content {
+            font-size: 1.2em;
+            color: #8B4513;
+            margin: 0 0 20px 0;
+            font-weight: 500;
+        }
+
+        .mystery-box-result {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 8px;
+            border: 1px solid #B8860B;
+        }
+
+        .mystery-box-result p {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #8B4513;
+            margin: 0;
+            text-align: center;
+        }
+
+        .golden-event-actions {
+            text-align: center;
+        }
+
+        .golden-event-actions .btn-confirm {
+            background: linear-gradient(135deg, #B8860B, #DAA520, #B8860B);
+            color: #fff;
+            border: 2px solid #8B4513;
+            border-radius: 10px;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .golden-event-actions .btn-confirm:hover {
+            background: linear-gradient(135deg, #DAA520, #FFD700, #DAA520);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes goldenTextShine {
+            0%, 100% { 
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            50% { 
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px #FFD700, 0 0 20px #FFD700;
             }
         }
 
@@ -1489,6 +1602,20 @@
         </div>
     </div>
 
+    <!-- 황금 열쇠 이벤트 팝업 -->
+    <div class="golden-discovery-popup" id="goldenDiscoveryPopup">
+        <div class="golden-event-title" id="discoveryEventTitle">✨ 황금 열쇠 이벤트!</div>
+        <div class="golden-event-content" id="discoveryEventContent">
+            <p id="discoveryEventDescription">이벤트가 로드 중입니다...</p>
+            <div class="mystery-box-result" id="mysteryBoxResult" style="display: none;">
+                <p id="mysteryBoxResultText"></p>
+            </div>
+        </div>
+        <div class="golden-event-actions">
+            <button class="btn-confirm" onclick="closeGoldenDiscovery()">확인</button>
+        </div>
+    </div>
+
     <!-- 턴 전환 알림 팝업 -->
     <div class="popup-overlay" id="turnNotificationPopup">
         <div class="popup-container">
@@ -1515,6 +1642,23 @@
             gamePhase: 'waiting',
             diceValue: 0
         };
+
+        // 모바일 뷰포트 높이 문제 해결 함수
+        function setViewportHeight() {
+            // 실제 뷰포트 높이를 가져옵니다 (브라우저 UI 제외)
+            const vh = window.innerHeight * 0.01;
+            // CSS 변수 --vh에 값을 설정합니다
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        // 뷰포트 높이 설정 이벤트 리스너
+        window.addEventListener('resize', setViewportHeight);
+        window.addEventListener('orientationchange', setViewportHeight);
+        window.addEventListener('load', setViewportHeight);
+        
+        // 페이지 로드 시 즉시 실행
+        document.addEventListener('DOMContentLoaded', setViewportHeight);
+
 
         // 7x7 보드 칸 데이터 (스크린샷 기준)
         const boardSpaces = [
@@ -1607,30 +1751,16 @@
                 }
             },
             {
-                name: "🎪 서커스단 초대",
-                description: "모든 플레이어가 3칸씩 이동하고 100점씩 획득합니다!",
-                effect: () => {
-                    gameState.players.forEach(player => {
-                        let newPosition = player.position + 3;
-                        // 보드를 한 바퀴 돌면 시작점 통과 보너스
-                        if (newPosition >= 24) {
-                            newPosition = newPosition - 24;
-                            player.score += 200; // 시작점 통과 보너스
-                        }
-                        player.position = newPosition;
-                        player.score += 100;
-                    });
-                    updatePlayerPieces();
-                    updateUI();
-                }
-            },
-            {
                 name: "🌪️ 토네이도 습격",
-                description: "모든 플레이어가 랜덤 위치로 흩어지고 50점씩 차감됩니다!",
+                description: "다른 플레이어들이 랜덤 위치로 흩어지고 50점씩 차감됩니다!",
                 effect: () => {
+                    const currentPlayerId = gameState.currentPlayer;
                     gameState.players.forEach(player => {
-                        player.position = Math.floor(Math.random() * 24);
-                        player.score = Math.max(0, player.score - 50);
+                        // 현재 플레이어(황금 열쇠에 도착한 플레이어)는 제외
+                        if (player.id !== currentPlayerId) {
+                            player.position = Math.floor(Math.random() * 24);
+                            player.score = Math.max(0, player.score - 50);
+                        }
                     });
                     updatePlayerPieces();
                     updateUI();
@@ -1640,40 +1770,16 @@
                 name: "🎁 신비한 상자",
                 description: "상자를 열어보세요! 500점, 0점, 또는 -200점 중 하나를 획득합니다!",
                 effect: () => {
-                    const player = gameState.players.find(p => p.id === gameState.currentPlayer);
-                    const results = [
-                        { points: 500, message: "🎉 대박! 황금 보물을 발견했습니다! +500점!" },
-                        { points: 0, message: "😅 빈 상자였습니다... 아무것도 얻지 못했습니다." },
-                        { points: -200, message: "💥 함정이었습니다! 상자에서 독가스가 나와 -200점!" }
-                    ];
-                    const randomResult = results[Math.floor(Math.random() * results.length)];
-                    
-                    // 점수 적용
-                    const oldScore = player.score;
-                    player.score = Math.max(0, player.score + randomResult.points);
-                    const actualChange = player.score - oldScore;
-                    
-                    // 결과 메시지 표시
-                    let resultMessage = randomResult.message;
-                    if (randomResult.points < 0 && actualChange > randomResult.points) {
-                        resultMessage += ` (실제 변화: ${actualChange}점)`;
-                    }
-                    
-                    setTimeout(() => {
-                        showMessage(resultMessage);
-                        // 결과 메시지 표시 후 턴 전환
-                        setTimeout(() => {
-                            endTurn();
-                        }, 2000);
-                    }, 500);
-                    
-                    updateUI();
+                    // 신비한 상자 이벤트는 팝업에서 직접 처리되므로 여기서는 아무것도 하지 않음
                 }
             }
         ];
 
         // 게임 초기화
         function initGame() {
+            // 뷰포트 높이 설정
+            setViewportHeight();
+            
             // 기본 팔레트(오션 톤) 적용
             const defaultPalette = palettesData.palettes[0]; // 오션 톤
             
@@ -2061,7 +2167,29 @@
             rollBtn.disabled = true;
             // 버튼 텍스트는 그대로 유지 (크기 변화 방지)
 
-            const finalValue = Math.floor(Math.random() * 6) + 1;
+            // 테스트용: 황금 열쇠 위치로만 이동할 수 있는 값 계산
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            const currentPosition = currentPlayer.position;
+            
+            // 황금 열쇠 위치: 3, 9, 15, 21
+            const goldenKeyPositions = [3, 9, 15, 21];
+            
+            // 현재 위치에서 황금 열쇠까지의 거리 계산
+            let possibleValues = [];
+            goldenKeyPositions.forEach(goldenPos => {
+                let distance = goldenPos - currentPosition;
+                if (distance <= 0) {
+                    distance += 24; // 보드를 한 바퀴 돌아서 도달
+                }
+                if (distance >= 1 && distance <= 6) {
+                    possibleValues.push(distance);
+                }
+            });
+            
+            // 가능한 값이 없으면 기본 랜덤 값 사용
+            const finalValue = possibleValues.length > 0 
+                ? possibleValues[Math.floor(Math.random() * possibleValues.length)]
+                : Math.floor(Math.random() * 6) + 1;
             
             // 애니메이션 효과를 위한 여러 번 값 변경
             let rolls = 0;
@@ -2311,25 +2439,81 @@
         // 현재 황금 열쇠 이벤트 저장 변수
         let currentGoldenKeyEvent = null;
 
-        // 황금 열쇠 이벤트 표시
-        function showGoldenKeyEvent() {
+        // 황금 열쇠 이벤트 표시 (간소화 버전)
+        function showGoldenDiscoveryMessage() {
             const event = goldenKeyEvents[Math.floor(Math.random() * goldenKeyEvents.length)];
             currentGoldenKeyEvent = event;
             
-            const popup = document.getElementById('goldenKeyPopup');
-            const titleEl = document.getElementById('eventTitle');
-            const contentEl = document.getElementById('eventContent');
+            const popup = document.getElementById('goldenDiscoveryPopup');
+            const eventTitleEl = document.getElementById('discoveryEventTitle');
+            const eventDescriptionEl = document.getElementById('discoveryEventDescription');
+            const mysteryBoxResultEl = document.getElementById('mysteryBoxResult');
+            const mysteryBoxResultTextEl = document.getElementById('mysteryBoxResultText');
 
-            titleEl.textContent = event.name;
-            contentEl.innerHTML = `<p>${event.description}</p>`;
-
+            eventTitleEl.textContent = event.name;
+            eventDescriptionEl.textContent = event.description;
+            
+            // 신비한 상자 이벤트인 경우 결과 생성 및 표시
+            if (event.name === "🎁 신비한 상자") {
+                const player = gameState.players.find(p => p.id === gameState.currentPlayer);
+                const results = [
+                    { points: 500, message: "🎉 대박! 황금 보물을 발견했습니다! +500점!" },
+                    { points: 0, message: "😅 빈 상자였습니다... 아무것도 얻지 못했습니다." },
+                    { points: -200, message: "💥 함정이었습니다! 상자에서 독가스가 나와 -200점!" }
+                ];
+                const randomResult = results[Math.floor(Math.random() * results.length)];
+                
+                // 점수 적용
+                const oldScore = player.score;
+                player.score = Math.max(0, player.score + randomResult.points);
+                const actualChange = player.score - oldScore;
+                
+                // 결과 메시지 생성
+                let resultMessage = randomResult.message;
+                if (randomResult.points < 0 && actualChange > randomResult.points) {
+                    resultMessage += ` (실제 변화: ${actualChange}점)`;
+                }
+                
+                // 결과 표시
+                mysteryBoxResultTextEl.textContent = resultMessage;
+                mysteryBoxResultEl.style.display = 'block';
+                
+                // UI 업데이트
+                updateUI();
+            } else {
+                mysteryBoxResultEl.style.display = 'none';
+            }
+            
+            // 팝업 표시
             popup.classList.add('show');
-
+            
             // 신비한 상자 이벤트가 아닌 경우에만 자동 효과 적용
             if (event.name !== "🎁 신비한 상자") {
-            setTimeout(() => {
+                setTimeout(() => {
+                    applyGoldenKeyEffect(event);
+                }, 1000);
+            }
+        }
+
+        // 통합된 황금 열쇠 팝업 닫기
+        function closeGoldenDiscovery() {
+            const popup = document.getElementById('goldenDiscoveryPopup');
+            popup.classList.remove('show');
+            
+            // 다음 플레이어로 턴 전환
+            endTurn();
+        }
+
+        // 황금 열쇠 이벤트 표시 (통합 버전 사용)
+        function showGoldenKeyEvent() {
+            // 통합된 황금 열쇠 발견 메시지 표시
+            showGoldenDiscoveryMessage();
+        }
+
+        // 황금 열쇠 효과 적용
+        function applyGoldenKeyEffect(event) {
+            if (event && event.effect) {
                 event.effect();
-            }, 1000);
             }
         }
 
@@ -2673,7 +2857,7 @@
                         "normal": "#B0E0E6",
                         "background": "#F0F8FF"
                     },
-                    "playerColors": ["#1976D2", "#E65100", "#2E7D32", "#9C27B0"]
+                    "playerColors": ["#E91E63", "#2196F3", "#4CAF50", "#9C27B0"]
                 },
                 {
                     "id": 1,
@@ -2689,7 +2873,7 @@
                         "normal": "#87CEEB",
                         "background": "#F0F8FF"
                     },
-                    "playerColors": ["#9C27B0", "#FFC107", "#00E676", "#FF9800"]
+                    "playerColors": ["#F44336", "#4CAF50", "#2196F3", "#9C27B0"]
                 },
                 {
                     "id": 2,
@@ -2705,7 +2889,7 @@
                         "normal": "#E3F2FD",
                         "background": "#FAFAFA"
                     },
-                    "playerColors": ["#C2185B", "#FF5722", "#9C27B0", "#F57C00"]
+                    "playerColors": ["#FF5722", "#4CAF50", "#9C27B0", "#2196F3"]
                 },
                 {
                     "id": 3,
@@ -2721,7 +2905,7 @@
                         "normal": "#F0E68C",
                         "background": "#FFFACD"
                     },
-                    "playerColors": ["#4CAF50", "#1976D2", "#FF9800", "#7B1FA2"]
+                    "playerColors": ["#E91E63", "#4CAF50", "#9C27B0", "#2196F3"]
                 },
                 {
                     "id": 4,
@@ -2737,7 +2921,7 @@
                         "normal": "#E0FFFF",
                         "background": "#F0F8FF"
                     },
-                    "playerColors": ["#FF9800", "#E65100", "#E91E63", "#795548"]
+                    "playerColors": ["#FF5722", "#4CAF50", "#2196F3", "#9C27B0"]
                 },
                 {
                     "id": 5,
@@ -2753,7 +2937,7 @@
                         "normal": "#E0FFE0",
                         "background": "#F0FFF0"
                     },
-                    "playerColors": ["#795548", "#1976D2", "#607D8B", "#7B1FA2"]
+                    "playerColors": ["#E91E63", "#2196F3", "#9C27B0", "#4CAF50"]
                 },
                 {
                     "id": 6,
@@ -2769,7 +2953,7 @@
                         "normal": "#FFFACD",
                         "background": "#F5F5F5"
                     },
-                    "playerColors": ["#D32F2F", "#1976D2", "#388E3C", "#7B1FA2"]
+                    "playerColors": ["#E91E63", "#2196F3", "#9C27B0", "#4CAF50"]
                 },
                 {
                     "id": 7,
@@ -2785,7 +2969,7 @@
                         "normal": "#FFE4B5",
                         "background": "#FFFACD"
                     },
-                    "playerColors": ["#4A148C", "#FFC107", "#C2185B", "#FF5722"]
+                    "playerColors": ["#F44336", "#4CAF50", "#2196F3", "#9C27B0"]
                 },
                 {
                     "id": 8,
@@ -2801,7 +2985,7 @@
                         "normal": "#E6E6FA",
                         "background": "#F0F0FF"
                     },
-                    "playerColors": ["#FF5722", "#607D8B", "#1976D2", "#795548"]
+                    "playerColors": ["#FF5722", "#4CAF50", "#2196F3", "#E91E63"]
                 },
                 {
                     "id": 9,
@@ -2817,7 +3001,7 @@
                         "normal": "#E0FFFF",
                         "background": "#F5FFFA"
                     },
-                    "playerColors": ["#FF5722", "#9C27B0", "#1976D2", "#795548"]
+                    "playerColors": ["#E91E63", "#9C27B0", "#2196F3", "#4CAF50"]
                 },
                 {
                     "id": 10,
@@ -2833,7 +3017,7 @@
                         "normal": "#FFE4E1",
                         "background": "#FFF5EE"
                     },
-                    "playerColors": ["#4CAF50", "#FFC107", "#2E7D32", "#7B1FA2"]
+                    "playerColors": ["#4CAF50", "#2196F3", "#9C27B0", "#E91E63"]
                 },
                 {
                     "id": 11,
@@ -2849,7 +3033,7 @@
                         "normal": "#E0FFE0",
                         "background": "#F5FFFA"
                     },
-                    "playerColors": ["#FF5722", "#1976D2", "#7B1FA2", "#E65100"]
+                    "playerColors": ["#E91E63", "#2196F3", "#9C27B0", "#4CAF50"]
                 }
             ]
         };

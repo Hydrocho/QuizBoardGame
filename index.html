@@ -1737,6 +1737,269 @@
             box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
         }
 
+        /* 땅 정보 모드 팝업 스타일 */
+        .land-info-mode .popup-container {
+            background: linear-gradient(135deg, #4CAF50, #45a049, #66BB6A);
+            border: 3px solid #4CAF50;
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.6);
+        }
+
+        .land-info-mode .popup-title {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .land-info-mode .popup-content {
+            color: #fff;
+        }
+
+        .land-info-mode .popup-button {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+            color: #fff;
+            border: 2px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(69, 160, 73, 0.4);
+        }
+
+        .land-info-mode .popup-button:hover {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+        }
+
+        /* 땅 정보 섹션 스타일 */
+        .land-info-section {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0;
+            backdrop-filter: blur(10px);
+        }
+
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 4px 0;
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .info-value {
+            color: #FFD700;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .owner-name {
+            color: #FFE082;
+        }
+
+        .star-count {
+            color: #FFD700;
+        }
+
+        .toll-amount {
+            color: #FFCDD2;
+        }
+
+        .star-display {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        /* 통행세 범례 섹션 스타일 */
+        .toll-legend-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0 0 0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .toll-legend-section h5 {
+            color: #fff;
+            text-align: center;
+            margin: 0 0 8px 0;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .toll-legend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .toll-legend-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 3px 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .legend-stars {
+            font-size: 12px;
+            line-height: 1;
+        }
+
+        .legend-amount {
+            color: #FFD700;
+            font-size: 10px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 명언 섹션 스타일 */
+        .quote-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 0 0 10px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        .quote-text {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #FFD700;
+            margin-bottom: 6px;
+            line-height: 1.2;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        .quote-author {
+            font-size: 0.75em;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        /* 시작 모드 팝업 스타일 */
+        .start-mode .popup-container {
+            background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #E0E0E0);
+            border: 3px solid #FFFFFF;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+        }
+
+        .start-mode .popup-title {
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .start-mode .popup-content {
+            color: #333;
+        }
+
+        .start-mode .popup-button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: #fff;
+            border: 2px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .start-mode .popup-button:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+        }
+
+        /* 특별 칸 정보 섹션 스타일 */
+        .special-space-section {
+            text-align: left;
+        }
+
+        .space-description {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .space-description h4 {
+            color: #fff;
+            text-align: center;
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .space-description p {
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .space-features {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .space-features h5 {
+            color: #fff;
+            text-align: center;
+            margin: 0 0 12px 0;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            padding: 6px 0;
+        }
+
+        .feature-icon {
+            font-size: 16px;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+
+        .feature-text {
+            color: #fff;
+            font-size: 13px;
+            line-height: 1.3;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 시작 모드 전용 스타일 */
+        .start-mode .space-description,
+        .start-mode .space-features {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .start-mode .space-description h4,
+        .start-mode .space-description p,
+        .start-mode .space-features h5,
+        .start-mode .feature-text {
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
         /* 무인도 모드 표시기 (제거됨) */
         /*
         .island-mode-indicator {
@@ -2843,29 +3106,29 @@
             // 시작점 (0) - 우하단
             { id: 0, name: '시작', type: 'start', color: 'space-start' },
             // 하단 변 (1-5) - 오른쪽에서 왼쪽으로
-            { id: 1, name: '사랑(1)', type: 'quiz', color: 'space-quiz' },
-            { id: 2, name: '존중(2)', type: 'quiz', color: 'space-quiz' },
+            { id: 1, name: '겸손(1)', type: 'quiz', color: 'space-quiz' },
+            { id: 2, name: '노력(2)', type: 'quiz', color: 'space-quiz' },
             { id: 3, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 4, name: '화합(4)', type: 'quiz', color: 'space-quiz' },
-            { id: 5, name: '나눔(5)', type: 'quiz', color: 'space-quiz' },
+            { id: 4, name: '정직(4)', type: 'quiz', color: 'space-quiz' },
+            { id: 5, name: '신뢰(5)', type: 'quiz', color: 'space-quiz' },
             // 좌측 변 (7-11) - 아래에서 위로
-            { id: 7, name: '배려(7)', type: 'quiz', color: 'space-quiz' },
-            { id: 8, name: '용기(8)', type: 'quiz', color: 'space-quiz' },
+            { id: 7, name: '친절(7)', type: 'quiz', color: 'space-quiz' },
+            { id: 8, name: '성실(8)', type: 'quiz', color: 'space-quiz' },
             { id: 9, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 10, name: '소통(10)', type: 'quiz', color: 'space-quiz' },
-            { id: 11, name: '감사(11)', type: 'quiz', color: 'space-quiz' },
+            { id: 10, name: '열정(10)', type: 'quiz', color: 'space-quiz' },
+            { id: 11, name: '협력(11)', type: 'quiz', color: 'space-quiz' },
             // 상단 변 (13-17) - 왼쪽에서 오른쪽으로
-            { id: 13, name: '협력(13)', type: 'quiz', color: 'space-quiz' },
-            { id: 14, name: '열정(14)', type: 'quiz', color: 'space-quiz' },
+            { id: 13, name: '감사(13)', type: 'quiz', color: 'space-quiz' },
+            { id: 14, name: '소통(14)', type: 'quiz', color: 'space-quiz' },
             { id: 15, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 16, name: '성실(16)', type: 'quiz', color: 'space-quiz' },
-            { id: 17, name: '친절(17)', type: 'quiz', color: 'space-quiz' },
+            { id: 16, name: '용기(16)', type: 'quiz', color: 'space-quiz' },
+            { id: 17, name: '배려(17)', type: 'quiz', color: 'space-quiz' },
             // 우측 변 (19-23) - 위에서 아래로
-            { id: 19, name: '신뢰(19)', type: 'quiz', color: 'space-quiz' },
-            { id: 20, name: '정직(20)', type: 'quiz', color: 'space-quiz' },
+            { id: 19, name: '나눔(19)', type: 'quiz', color: 'space-quiz' },
+            { id: 20, name: '화합(20)', type: 'quiz', color: 'space-quiz' },
             { id: 21, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 22, name: '노력(22)', type: 'quiz', color: 'space-quiz' },
-            { id: 23, name: '겸손(23)', type: 'quiz', color: 'space-quiz' },
+            { id: 22, name: '존중(22)', type: 'quiz', color: 'space-quiz' },
+            { id: 23, name: '사랑(23)', type: 'quiz', color: 'space-quiz' },
             // 특별 칸들 (모서리) - BoardColorTest.html과 동일하게 corner 타입으로 변경
             { id: 6, name: '슈퍼 점프', type: 'corner', color: 'space-corner' },
             { id: 12, name: '무인도', type: 'corner', color: 'space-corner' },
@@ -3129,7 +3392,7 @@
                             }
                             cell.innerHTML = '<div class="space-name">   무  인  도   </div>';
                             cell.dataset.spaceId = 12;
-                            cell.onclick = () => handleSpaceClick(12);
+                            // onclick 이벤트 제거 - addLandClickHandlers에서 처리
                         } else if (row === 0 && col === 6) {
                             // 기부금 모금 - special 타입
                             const space = boardSpaces.find(s => s.id === 18);
@@ -3138,7 +3401,7 @@
                             }
                             cell.innerHTML = '<div class="space-name">기부금 모금<br><span class="donation-amount" id="donationAmount">0점</span></div>';
                             cell.dataset.spaceId = 18;
-                            cell.onclick = () => handleSpaceClick(18);
+                            // onclick 이벤트 제거 - addLandClickHandlers에서 처리
                         } else if (row === 6 && col === 0) {
                             // 슈퍼 점프 - special 타입
                             const space = boardSpaces.find(s => s.id === 6);
@@ -3147,7 +3410,7 @@
                             }
                             cell.innerHTML = '<div class="space-name">슈퍼 점프</div>';
                             cell.dataset.spaceId = 6;
-                            cell.onclick = () => handleSpaceClick(6);
+                            // onclick 이벤트 제거 - addLandClickHandlers에서 처리
                         } else if (row === 6 && col === 6) {
                             // 시작 - start 타입
                             const space = boardSpaces.find(s => s.id === 0);
@@ -3156,7 +3419,7 @@
                             }
                             cell.innerHTML = '<div class="space-name">START</div>';
                             cell.dataset.spaceId = 0;
-                            cell.onclick = () => handleSpaceClick(0);
+                            // onclick 이벤트 제거 - addLandClickHandlers에서 처리
                         }
                         
                         // 중앙 패널과 겹치는 모서리 칸들은 호버 효과 비활성화
@@ -3185,14 +3448,14 @@
                                 cell.dataset.space = spaceIndex; // 띠지 시스템을 위한 data-space 속성 추가
                                 // 황금 열쇠 칸인 경우 특별 처리
                                 if (space.type === 'golden') {
-                                    cell.innerHTML = `
+                                cell.innerHTML = `
                                         <div class="space-name">황금 열쇠</div>
                                         <div class="space-content">🔑</div>
                                     `;
                                 } else {
                                 cell.innerHTML = `
                                     <div class="space-content-wrapper">
-                                        <div class="space-name">${space.name}</div>
+                                    <div class="space-name">${space.name}</div>
                                     </div>
                                 `;
                                 }
@@ -3203,7 +3466,10 @@
                                     // 클릭 이벤트 제거 (onclick 설정하지 않음)
                                 } else {
                                     cell.dataset.spaceId = space.id;
-                                    cell.onclick = () => handleSpaceClick(space.id);
+                                    // 땅 칸과 특별 칸은 addLandClickHandlers에서 처리하므로 onclick 이벤트 제거
+                                    if (space.type !== 'quiz' && space.type !== 'corner' && space.type !== 'start' && space.type !== 'golden') {
+                                        cell.onclick = () => handleSpaceClick(space.id);
+                                    }
                                 }
                             }
                         } else {
@@ -3597,18 +3863,72 @@
 
         // 땅 클릭 이벤트 핸들러 추가
         function addLandClickHandlers() {
-            const spaces = document.querySelectorAll('.board-space[data-space]');
-            spaces.forEach(space => {
-                const spaceNumber = parseInt(space.dataset.space);
-                // 땅 칸만 클릭 이벤트 추가 (특별 칸 제외)
-                if (spaceOwners[spaceNumber] !== undefined) {
-                    space.style.cursor = 'pointer';
-                    space.addEventListener('click', () => {
-                        showLandInfoPopup(spaceNumber);
-                    });
+            // 모든 보드 칸에 대해 이벤트 핸들러 추가
+            const allSpaces = document.querySelectorAll('.board-space');
+            allSpaces.forEach(space => {
+                // data-space 속성이 있는 칸들 (일반 칸)
+                if (space.dataset.space) {
+                    const spaceNumber = parseInt(space.dataset.space);
+                    const spaceData = boardSpaces.find(s => s.id === spaceNumber);
+                    
+                    // 땅 칸 클릭 이벤트 추가 (quiz 타입만)
+                    if (spaceData && spaceData.type === 'quiz' && spaceOwners[spaceNumber] !== undefined) {
+                        space.style.cursor = 'pointer';
+                        space.addEventListener('click', () => {
+                            showLandInfoPopup(spaceNumber);
+                        });
+                    }
+                    // 특별 칸 클릭 이벤트 추가
+                    else if (spaceData && (spaceData.type === 'corner' || spaceData.type === 'start')) {
+                        space.style.cursor = 'pointer';
+                        space.addEventListener('click', () => {
+                            showSpecialSpaceInfoPopup(spaceNumber);
+                        });
+                    }
+                    // 황금 열쇠 칸 클릭 이벤트 추가
+                    else if (spaceData && spaceData.type === 'golden') {
+                        space.style.cursor = 'pointer';
+                        space.addEventListener('click', () => {
+                            showGoldenKeyInfoPopup(spaceNumber);
+                        });
+                    }
+                }
+                
+                // data-spaceId 속성이 있는 칸들 (모서리 칸)
+                if (space.dataset.spaceId) {
+                    const spaceNumber = parseInt(space.dataset.spaceId);
+                    const spaceData = boardSpaces.find(s => s.id === spaceNumber);
+                    
+                    // 특별 칸 클릭 이벤트 추가
+                    if (spaceData && (spaceData.type === 'corner' || spaceData.type === 'start')) {
+                        space.style.cursor = 'pointer';
+                        space.addEventListener('click', () => {
+                            showSpecialSpaceInfoPopup(spaceNumber);
+                        });
+                    }
                 }
             });
         }
+
+        // 땅별 명언 데이터
+        const landQuotes = {
+            1: { quote: "겸손은 진정한 위대함의 기초이다.", author: "윌리엄 셰익스피어" },
+            2: { quote: "노력은 결코 배신하지 않는다.", author: "나폴레옹 힐" },
+            4: { quote: "정직은 최고의 정책이다.", author: "벤저민 프랭클린" },
+            5: { quote: "신뢰는 모든 인간관계의 기초이다.", author: "스티븐 코비" },
+            7: { quote: "친절함은 언어를 이해하지 못하는 사람도 이해할 수 있는 언어이다.", author: "마더 테레사" },
+            8: { quote: "성실함은 가장 위대한 지혜이다.", author: "토마스 제퍼슨" },
+            10: { quote: "열정 없이는 위대한 일이 이루어지지 않는다.", author: "랄프 왈도 에머슨" },
+            11: { quote: "협력은 모든 성공의 열쇠이다.", author: "헨리 포드" },
+            13: { quote: "감사는 마음의 기억이다.", author: "장 밥티스트 마시용" },
+            14: { quote: "소통은 인간관계의 생명선이다.", author: "존 파월" },
+            16: { quote: "용기는 공포를 극복하는 것이지, 공포가 없는 것이 아니다.", author: "마크 트웨인" },
+            17: { quote: "배려는 사랑의 가장 아름다운 표현이다.", author: "마더 테레사" },
+            19: { quote: "나눔은 사랑의 시작이다.", author: "마더 테레사" },
+            20: { quote: "화합은 힘이다.", author: "마하트마 간디" },
+            22: { quote: "존중은 상대방을 인정하는 마음이다.", author: "스티븐 코비" },
+            23: { quote: "사랑은 모든 것을 이긴다.", author: "베르길리우스" }
+        };
 
         // 땅 정보 팝업 표시
         function showLandInfoPopup(spaceNumber) {
@@ -3617,36 +3937,316 @@
             const toll = calculateToll(spaceNumber);
             const space = boardSpaces.find(s => s.id === spaceNumber);
             const landName = space ? space.name : `${spaceNumber}번`;
+            const baseRate = tollRates[spaceNumber] || 0;
+            const quote = landQuotes[spaceNumber];
             
-            let content = `<h3>${landName} 땅 정보</h3>`;
-            
-            if (ownerIndex === null) {
-                content += `<p>소유자: 없음</p>`;
-                content += `<p>별 개수: 0개</p>`;
-                content += `<p>통행세: 없음</p>`;
-            } else {
-                const owner = gameState.players[ownerIndex];
-                content += `<p>소유자: ${owner.name}</p>`;
-                content += `<p>별 개수: ${starCount}개</p>`;
-                content += `<p>통행세: ${formatNumber(toll)}점</p>`;
-            }
-            
-            // 팝업 생성
-            const popup = document.createElement('div');
-            popup.className = 'popup land-info-popup';
-            popup.innerHTML = `
-                <div class="popup-content">
-                    ${content}
-                    <button onclick="this.parentElement.parentElement.remove()">확인</button>
+            // 통행세 범례 생성
+            const tollLegend = `
+                <div class="toll-legend-section">
+                    <h5>💰 통행세 범례</h5>
+                    <div class="toll-legend-grid">
+                        <div class="toll-legend-item">
+                            <span class="legend-stars">⭐</span>
+                            <span class="legend-amount">${formatNumber(baseRate)}점</span>
+                        </div>
+                        <div class="toll-legend-item">
+                            <span class="legend-stars">⭐⭐</span>
+                            <span class="legend-amount">${formatNumber(baseRate * 2)}점</span>
+                        </div>
+                        <div class="toll-legend-item">
+                            <span class="legend-stars">⭐⭐⭐</span>
+                            <span class="legend-amount">${formatNumber(baseRate * 3)}점</span>
+                        </div>
+                        <div class="toll-legend-item">
+                            <span class="legend-stars">⭐⭐⭐⭐</span>
+                            <span class="legend-amount">${formatNumber(baseRate * 4)}점</span>
+                        </div>
+                        <div class="toll-legend-item">
+                            <span class="legend-stars">⭐⭐⭐⭐⭐</span>
+                            <span class="legend-amount">${formatNumber(baseRate * 5)}점</span>
+                        </div>
+                    </div>
                 </div>
             `;
             
-            document.body.appendChild(popup);
+            let content = '';
             
-            // 팝업 표시
-            setTimeout(() => {
-                popup.classList.add('show');
-            }, 10);
+            // 명언 섹션 생성
+            const quoteSection = quote ? `
+                <div class="quote-section">
+                    <div class="quote-text">"${quote.quote}"</div>
+                    <div class="quote-author">- ${quote.author} -</div>
+                </div>
+            ` : '';
+
+            if (ownerIndex === null) {
+                content = `
+                    ${quoteSection}
+                    <div class="land-info-section">
+                        <div class="info-item">
+                            <span class="info-label">소유자:</span>
+                            <span class="info-value">없음</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">별 개수:</span>
+                            <span class="info-value">0개</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">통행세:</span>
+                            <span class="info-value">없음</span>
+                        </div>
+                    </div>
+                    ${tollLegend}
+                `;
+            } else {
+                const owner = gameState.players[ownerIndex];
+                const starDisplay = '⭐'.repeat(starCount) + '☆'.repeat(5 - starCount);
+                content = `
+                    ${quoteSection}
+                    <div class="land-info-section">
+                        <div class="info-item">
+                            <span class="info-label">소유자:</span>
+                            <span class="info-value owner-name">${owner.name}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">별 개수:</span>
+                            <span class="info-value star-count">${starCount}개</span>
+                        </div>
+                        <div class="star-display">${starDisplay}</div>
+                        <div class="info-item">
+                            <span class="info-label">통행세:</span>
+                            <span class="info-value toll-amount">${formatNumber(toll)}점</span>
+                        </div>
+                    </div>
+                    ${tollLegend}
+                `;
+            }
+            
+            // 기존 turnNotificationPopup을 사용하여 표시
+            const popup = document.getElementById('turnNotificationPopup');
+            const titleEl = popup.querySelector('.popup-title');
+            const contentEl = popup.querySelector('.popup-content');
+            const buttonEl = popup.querySelector('.popup-button');
+
+            titleEl.textContent = `🏠 ${landName} 땅 정보`;
+            contentEl.innerHTML = content;
+            buttonEl.textContent = '확인';
+            buttonEl.onclick = () => {
+                popup.classList.remove('show');
+                popup.classList.remove('land-info-mode');
+            };
+            
+            // 땅 정보 팝업 테마 적용
+            popup.classList.add('land-info-mode');
+            popup.classList.add('show');
+        }
+
+        // 황금 열쇠 정보 팝업 표시
+        function showGoldenKeyInfoPopup(spaceNumber) {
+            const space = boardSpaces.find(s => s.id === spaceNumber);
+            if (!space) return;
+
+            const title = '🔑 황금 열쇠';
+            const themeClass = 'golden-key-mode';
+            const content = `
+                <div class="special-space-section">
+                    <div class="space-description">
+                        <h4>🔑 황금 열쇠란?</h4>
+                        <p>이 특별한 칸에 도착하면 랜덤한 이벤트가 발생합니다! 운에 따라 다양한 보상이나 효과를 받을 수 있습니다.</p>
+                    </div>
+                    <div class="space-features">
+                        <h5>✨ 가능한 이벤트들</h5>
+                        <div class="feature-item">
+                            <span class="feature-icon">🚀</span>
+                            <span class="feature-text">로켓 부스터: 즉시 시작점으로 워프 이동</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">💰</span>
+                            <span class="feature-text">복권 당첨: 500점 획득</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <span class="feature-text">정확한 던지기: 다음 주사위가 6이 나옴</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🌪️</span>
+                            <span class="feature-text">토네이도: 다른 플레이어를 무작위로 이동</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎁</span>
+                            <span class="feature-text">기타 다양한 보상과 효과들</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const popup = document.getElementById('turnNotificationPopup');
+            const titleEl = popup.querySelector('.popup-title');
+            const contentEl = popup.querySelector('.popup-content');
+            const buttonEl = popup.querySelector('.popup-button');
+
+            titleEl.textContent = title;
+            contentEl.innerHTML = content;
+            buttonEl.textContent = '확인';
+            buttonEl.onclick = () => {
+                popup.classList.remove('show');
+                popup.classList.remove(themeClass);
+            };
+            popup.classList.add(themeClass);
+            popup.classList.add('show');
+        }
+
+        // 특별 칸 정보 팝업 표시
+        function showSpecialSpaceInfoPopup(spaceNumber) {
+            const space = boardSpaces.find(s => s.id === spaceNumber);
+            if (!space) return;
+            
+            let content = '';
+            let themeClass = '';
+            let title = '';
+            
+            switch (space.name) {
+                case '슈퍼 점프':
+                    title = '🚀 슈퍼 점프';
+                    themeClass = 'super-jump-mode';
+                    content = `
+                        <div class="special-space-section">
+                            <div class="space-description">
+                                <h4>🚀 슈퍼 점프란?</h4>
+                                <p>이 특별한 칸에 도착하면 다음 턴에 퀴즈를 맞춰 원하는 곳으로 이동할 수 있는 기회를 얻습니다!</p>
+                            </div>
+                            <div class="space-features">
+                                <h5>✨ 사용 방법</h5>
+                                <div class="feature-item">
+                                    <span class="feature-icon">🎲</span>
+                                    <span class="feature-text">다음 턴에 퀴즈를 풀어 정답을 맞춰야 함</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">🎯</span>
+                                    <span class="feature-text">퀴즈 성공 시 원하는 칸을 선택하여 즉시 이동</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">⚡</span>
+                                    <span class="feature-text">주사위 굴리기 없이 바로 이동 가능</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">❌</span>
+                                    <span class="feature-text">퀴즈 실패 시 일반 주사위로 이동</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case '무인도':
+                    title = '🏝️ 무인도';
+                    themeClass = 'island-mode';
+                    content = `
+                        <div class="special-space-section">
+                            <div class="space-description">
+                                <h4>🏝️ 무인도란?</h4>
+                                <p>이 특별한 칸에 도착하면 무인도에 갇혀 여러 턴 동안 퀴즈를 풀어야 탈출할 수 있습니다.</p>
+                            </div>
+                            <div class="space-features">
+                                <h5>📅 탈출 조건</h5>
+                                <div class="feature-item">
+                                    <span class="feature-icon">1️⃣</span>
+                                    <span class="feature-text">첫번째 턴: 연속으로 2번의 퀴즈를 맞춰야야 탈출</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">2️⃣</span>
+                                    <span class="feature-text">두번째 턴: 1번의 퀴즈를 맞춰야 탈출</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">3️⃣</span>
+                                    <span class="feature-text">세번째 턴: 자동으로 탈출</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">⚠️</span>
+                                    <span class="feature-text">퀴즈로 탈출 실패 시 세번째 턴까지 기다려야 함</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case '기부금 모금':
+                    title = '💝 기부금 모금';
+                    themeClass = 'donation-mode';
+                    content = `
+                        <div class="special-space-section">
+                            <div class="space-description">
+                                <h4>💝 기부금 모금이란?</h4>
+                                <p>이 칸에 도착하면 기부금을 내고 공동 기부금 모금에 기여합니다.</p>
+                            </div>
+                            <div class="space-features">
+                                <h5>💰 기부금 정보</h5>
+                                <div class="feature-item">
+                                    <span class="feature-icon">💸</span>
+                                    <span class="feature-text">기부금: 300점 차감</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">🏦</span>
+                                    <span class="feature-text">공동 기부금 모금에 추가</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">📊</span>
+                                    <span class="feature-text">현재 기부금 모금: ${formatNumber(gameState.donationFund)}점</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case '시작':
+                    title = '🏁 시작';
+                    themeClass = 'start-mode';
+                    content = `
+                        <div class="special-space-section">
+                            <div class="space-description">
+                                <h4>🏁 시작점이란?</h4>
+                                <p>게임의 시작점으로, 이곳을 지나갈 때마다 보너스를 받습니다!</p>
+                            </div>
+                            <div class="space-features">
+                                <h5>🎁 보너스</h5>
+                                <div class="feature-item">
+                                    <span class="feature-icon">💰</span>
+                                    <span class="feature-text">통과 보너스: 500점 획득</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">🔄</span>
+                                    <span class="feature-text">매번 지나갈 때마다 보너스</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">🎯</span>
+                                    <span class="feature-text">게임의 출발점이자 목표점</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                default:
+                    return;
+            }
+            
+            // 기존 turnNotificationPopup을 사용하여 표시
+            const popup = document.getElementById('turnNotificationPopup');
+            const titleEl = popup.querySelector('.popup-title');
+            const contentEl = popup.querySelector('.popup-content');
+            const buttonEl = popup.querySelector('.popup-button');
+
+            titleEl.textContent = title;
+            contentEl.innerHTML = content;
+            buttonEl.textContent = '확인';
+            buttonEl.onclick = () => {
+                popup.classList.remove('show');
+                popup.classList.remove(themeClass);
+            };
+            
+            // 특별 칸 팝업 테마 적용
+            popup.classList.add(themeClass);
+            popup.classList.add('show');
         }
 
         // 주사위 아이콘 SVG 패턴들 (흰색 배경)

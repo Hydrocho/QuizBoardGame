@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>PWA 모바일 보드게임</title>
+    <title>모바일 보드게임</title>
     <meta name="description" content="친구들과 함께 즐기는 재미있는 모바일 보드게임">
     <meta name="theme-color" content="#4CAF50">
     <style>
@@ -29,6 +29,20 @@
             --color-center: #E0F6FF;
             --color-background: #F0F8FF;
             --color-normal: #B0E0E6;
+            
+            /* 특별 칸별 고유 색상 */
+            --color-superjump: #00BFFF;
+            --color-jail: #616161;
+            --color-donation: #FF69B4;
+            
+            /* 주사위 버튼 색상 시스템 */
+            --dice-primary: #10B981;
+            --dice-secondary: #059669;
+            --dice-dark: #047857;
+            --dice-glow: rgba(16, 185, 129, 0.6);
+            --dice-glow-strong: rgba(16, 185, 129, 0.9);
+            --dice-glow-urgent: rgba(16, 185, 129, 0.8);
+            --dice-glow-max: rgba(16, 185, 129, 1);
         }
 
         body {
@@ -375,6 +389,107 @@
             margin-top: 1px;
             line-height: 1;
         }
+
+        /* 특별 칸들의 글자 크기를 더 크게 */
+        .corner-space .space-name {
+            font-size: clamp(8px, 2.2vw, 16px);
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+
+        /* 시작 칸 텍스트 스타일 */
+        .space-start .space-name {
+            font-size: clamp(10px, 2.8vw, 20px) !important;
+            font-weight: 900 !important;
+            color: #000000 !important;
+            text-shadow: none !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: #FFFFFF !important;
+            padding: 4px 6px !important;
+            border-radius: 8px !important;
+            border: 2px solid #000000 !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+            width: 90% !important;
+            height: 80% !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        /* 슈퍼 점프 칸 텍스트 스타일 (전기 파란색 테마) */
+        .corner-space[data-space-id="6"] .space-name {
+            font-size: clamp(8px, 2.2vw, 16px) !important;
+            font-weight: 900 !important;
+            color: #FFFFFF !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+            background: var(--color-superjump) !important;
+            padding: 4px 6px !important;
+            border-radius: 8px !important;
+            border: 2px solid var(--color-superjump) !important;
+            box-shadow: 0 2px 4px rgba(0, 191, 255, 0.4) !important;
+            width: 90% !important;
+            height: 80% !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        /* 감옥 칸 텍스트 스타일 (어두운 회색 테마) */
+        .corner-space[data-space-id="12"] .space-name {
+            font-size: clamp(8px, 2.2vw, 16px) !important;
+            font-weight: 900 !important;
+            color: #FFFFFF !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+            background: var(--color-jail) !important;
+            padding: 4px 6px !important;
+            border-radius: 8px !important;
+            border: 2px solid var(--color-jail) !important;
+            box-shadow: 0 2px 4px rgba(66, 66, 66, 0.4) !important;
+            width: 90% !important;
+            height: 80% !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        /* 기부금 모금 칸 텍스트 스타일 (핫핑크 테마) */
+        .corner-space[data-space-id="18"] .space-name {
+            font-size: clamp(8px, 2.2vw, 16px) !important;
+            font-weight: 900 !important;
+            color: #FFFFFF !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+            background: var(--color-donation) !important;
+            padding: 4px 6px !important;
+            border-radius: 8px !important;
+            border: 2px solid var(--color-donation) !important;
+            box-shadow: 0 2px 4px rgba(255, 105, 180, 0.4) !important;
+            width: 90% !important;
+            height: 80% !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-direction: column !important;
+        }
+
+        /* 기부금 금액 스타일 */
+        .corner-space[data-space-id="18"] .donation-amount {
+            font-size: clamp(8px, 2.2vw, 16px) !important;
+            font-weight: bold !important;
+            color: #FFD700 !important;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+            margin-top: 2px !important;
+        }
+
 
         /* 모노폴리 스타일 보드 칸 배치 */
         .corner-space {
@@ -968,7 +1083,7 @@
         }
 
         .control-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--dice-primary) 0%, var(--dice-secondary) 100%);
             color: white;
             border: none;
             padding: 15px 25px;
@@ -976,13 +1091,14 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px var(--dice-glow);
             transition: all 0.3s ease;
         }
 
         .control-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px var(--dice-glow-strong);
+            background: linear-gradient(135deg, var(--dice-secondary) 0%, var(--dice-dark) 100%);
         }
 
         .control-button:active {
@@ -1399,6 +1515,271 @@
             opacity: 1;
         }
 
+        /* 슈퍼 점프 모드 스타일 */
+        .super-jump-target {
+            border: 3px solid #FFD700 !important;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            cursor: pointer !important;
+            animation: superJumpPulse 1.5s infinite;
+        }
+
+        .super-jump-disabled {
+            opacity: 0.3 !important;
+            cursor: not-allowed !important;
+            filter: grayscale(50%);
+        }
+
+        @keyframes superJumpPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 25px rgba(255, 215, 0, 1);
+            }
+        }
+
+        .super-jump-mode-indicator {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #00BFFF, #00CED1, #9370DB);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 3px solid #00BFFF;
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.6);
+            z-index: 1000;
+            animation: superJumpIndicatorPulse 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes superJumpIndicatorPulse {
+            0%, 100% { 
+                opacity: 1;
+                box-shadow: 0 0 30px rgba(0, 191, 255, 0.6);
+            }
+            50% { 
+                opacity: 0.8;
+                box-shadow: 0 0 40px rgba(0, 191, 255, 0.8);
+            }
+        }
+
+        /* 주사위 버튼 활성화 효과 */
+        .dice-button-active {
+            animation: diceButtonPulse 2s infinite;
+            box-shadow: 0 0 20px var(--dice-glow);
+            border: 3px solid var(--dice-primary);
+            transform: scale(1.05);
+            background: linear-gradient(135deg, var(--dice-primary), var(--dice-secondary));
+        }
+
+        .dice-button-active:hover {
+            animation: diceButtonPulse 1s infinite;
+            box-shadow: 0 0 30px var(--dice-glow-urgent);
+            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--dice-secondary), var(--dice-dark));
+        }
+
+        @keyframes diceButtonPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px var(--dice-glow);
+                transform: scale(1.05);
+            }
+            50% { 
+                box-shadow: 0 0 30px var(--dice-glow-strong);
+                transform: scale(1.08);
+            }
+        }
+
+        /* 성능 최적화를 위한 will-change 속성 */
+        .dice-button-active,
+        .dice-button-urgent {
+            will-change: transform, box-shadow;
+        }
+
+        /* 애니메이션 완료 후 will-change 제거 */
+        .dice-button-active:not(:hover),
+        .dice-button-urgent:not(:hover) {
+            will-change: auto;
+        }
+
+        /* 주사위 버튼 비활성화 상태 */
+        .dice-button-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            animation: none;
+            box-shadow: none;
+            transform: scale(1);
+        }
+
+        /* 주사위 버튼 긴급 상태 (턴 대기) */
+        .dice-button-urgent {
+            animation: diceButtonUrgent 1.5s infinite;
+            box-shadow: 0 0 25px var(--dice-glow-urgent);
+            border: 3px solid var(--dice-primary);
+            background: linear-gradient(135deg, var(--dice-primary), var(--dice-dark));
+        }
+
+        @keyframes diceButtonUrgent {
+            0%, 100% { 
+                box-shadow: 0 0 25px var(--dice-glow-urgent);
+                transform: scale(1.05);
+            }
+            50% { 
+                box-shadow: 0 0 35px var(--dice-glow-max);
+                transform: scale(1.1);
+            }
+        }
+
+        /* 슈퍼 점프 모드 팝업 스타일 */
+        .super-jump-mode .popup-container {
+            background: linear-gradient(135deg, #00BFFF, #00CED1, #9370DB);
+            border: 3px solid #00BFFF;
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.6);
+        }
+
+        .super-jump-mode .popup-title {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .super-jump-mode .popup-content {
+            color: #fff;
+        }
+
+        .super-jump-mode .popup-button {
+            background: linear-gradient(135deg, #9370DB, #00CED1);
+            color: #fff;
+            border: 2px solid #00BFFF;
+            box-shadow: 0 4px 15px rgba(147, 112, 219, 0.4);
+        }
+
+        .super-jump-mode .popup-button:hover {
+            background: linear-gradient(135deg, #00CED1, #00BFFF);
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.6);
+        }
+
+        /* 황금 열쇠 모드 팝업 스타일 */
+        .golden-key-mode .popup-container {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF6347);
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        .golden-key-mode .popup-title {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .golden-key-mode .popup-content {
+            color: #fff;
+        }
+
+        .golden-key-mode .popup-button {
+            background: linear-gradient(135deg, #FF6347, #FFA500);
+            color: #fff;
+            border: 2px solid #FFD700;
+            box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
+        }
+
+        .golden-key-mode .popup-button:hover {
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        /* 감옥 모드 팝업 스타일 */
+        .jail-mode .popup-container {
+            background: linear-gradient(135deg, #424242, #616161, #757575);
+            border: 3px solid #424242;
+            box-shadow: 0 0 30px rgba(66, 66, 66, 0.6);
+        }
+
+        .jail-mode .popup-title {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .jail-mode .popup-content {
+            color: #fff;
+        }
+
+        .jail-mode .popup-button {
+            background: linear-gradient(135deg, #616161, #757575);
+            color: #fff;
+            border: 2px solid #424242;
+            box-shadow: 0 4px 15px rgba(97, 97, 97, 0.4);
+        }
+
+        .jail-mode .popup-button:hover {
+            background: linear-gradient(135deg, #757575, #424242);
+            box-shadow: 0 6px 20px rgba(66, 66, 66, 0.6);
+        }
+
+        /* 기부금 모드 팝업 스타일 */
+        .donation-mode .popup-container {
+            background: linear-gradient(135deg, #FF69B4, #FF1493, #FFB6C1);
+            border: 3px solid #FF69B4;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+        }
+
+        .donation-mode .popup-title {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .donation-mode .popup-content {
+            color: #fff;
+        }
+
+        .donation-mode .popup-button {
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
+            color: #fff;
+            border: 2px solid #FF69B4;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        .donation-mode .popup-button:hover {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
+        }
+
+        /* 감옥 모드 표시기 (제거됨) */
+        /*
+        .jail-mode-indicator {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #8B0000, #DC143C, #B22222);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 3px solid #8B0000;
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.6);
+            z-index: 1000;
+            animation: jailIndicatorPulse 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes jailIndicatorPulse {
+            0%, 100% { 
+                opacity: 1;
+                box-shadow: 0 0 30px rgba(139, 0, 0, 0.6);
+            }
+            50% { 
+                opacity: 0.8;
+                box-shadow: 0 0 40px rgba(139, 0, 0, 0.8);
+            }
+        }
+        */
+
 
         .golden-event-title {
             font-size: 1.8em;
@@ -1473,6 +1854,14 @@
         .space-jail { background: var(--color-corner); color: #fff; }
         .space-free { background: var(--color-corner); color: #fff; }
         .space-goto { background: var(--color-corner); color: #fff; }
+        
+        .donation-amount {
+            font-size: 10px;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            margin-top: 2px;
+        }
     </style>
 </head>
 <body>
@@ -1631,18 +2020,498 @@
     <!-- 설정 관리 스크립트 -->
     
     <script>
-        // 게임 상태
-        let gameState = {
+        // 게임 상태 관리 클래스
+        class GameStateManager {
+            constructor() {
+                this.state = {
             players: [
-                { id: 1, name: '플레이어 1', color: '#1976D2', position: 0, score: 0, isActive: true },
-                { id: 2, name: '플레이어 2', color: '#E65100', position: 0, score: 0, isActive: false },
-                { id: 3, name: '플레이어 3', color: '#2E7D32', position: 0, score: 0, isActive: false },
-                { id: 4, name: '플레이어 4', color: '#9C27B0', position: 0, score: 0, isActive: false }
+                        { id: 1, name: '플레이어 1', color: '#1976D2', position: 0, score: 1000, isActive: true, isWaitJump: false, hasSuperJumpChance: false, isInJail: false, jailTurnCount: 0, jailQuizStreak: 0 },
+                        { id: 2, name: '플레이어 2', color: '#E65100', position: 0, score: 1000, isActive: false, isWaitJump: false, hasSuperJumpChance: false, isInJail: false, jailTurnCount: 0, jailQuizStreak: 0 },
+                        { id: 3, name: '플레이어 3', color: '#2E7D32', position: 0, score: 1000, isActive: false, isWaitJump: false, hasSuperJumpChance: false, isInJail: false, jailTurnCount: 0, jailQuizStreak: 0 },
+                        { id: 4, name: '플레이어 4', color: '#9C27B0', position: 0, score: 1000, isActive: false, isWaitJump: false, hasSuperJumpChance: false, isInJail: false, jailTurnCount: 0, jailQuizStreak: 0 }
             ],
             currentPlayer: 1,
             gamePhase: 'waiting',
-            diceValue: 0
+            diceValue: 0,
+                    donationFund: 0,
+                    // 특수 모드 관리
+                    modes: {
+                        superJump: { active: false, failed: false },
+                        goldenKey: { active: false, event: null },
+                        jail: { active: false, escapePhase: null, justEscaped: false }
+                    }
+                };
+            }
+
+            // 상태 업데이트
+            updateState(updates) {
+                Object.assign(this.state, updates);
+                this.notifyStateChange();
+            }
+
+            // 특수 모드 관리
+            setMode(modeName, modeData) {
+                this.state.modes[modeName] = { ...this.state.modes[modeName], ...modeData };
+                this.notifyStateChange();
+            }
+
+            // 현재 플레이어 가져오기
+            getCurrentPlayer() {
+                return this.state.players.find(p => p.id === this.state.currentPlayer);
+            }
+
+            // 상태 변경 알림
+            notifyStateChange() {
+                // UI 업데이트 트리거
+                if (window.updateUI) {
+                    window.updateUI();
+                }
+            }
+        }
+
+        // 게임 상태 인스턴스
+        const gameStateManager = new GameStateManager();
+        const gameState = gameStateManager.state; // 기존 코드 호환성을 위한 참조
+
+        // 팝업 관리 시스템
+        class PopupManager {
+            constructor() {
+                this.activePopups = new Set();
+                this.popupQueue = [];
+            }
+
+            // 팝업 표시
+            show(popupId, options = {}) {
+                const popup = document.getElementById(popupId);
+                if (!popup) return;
+
+                // 기존 팝업이 있으면 큐에 추가
+                if (this.activePopups.size > 0) {
+                    this.popupQueue.push({ popupId, options });
+                    return;
+                }
+
+                this.activePopups.add(popupId);
+                
+                // 스타일 적용
+                if (options.theme) {
+                    popup.classList.add(`${options.theme}-mode`);
+                }
+
+                // 내용 업데이트
+                if (options.title) {
+                    const titleEl = popup.querySelector('.popup-title');
+                    if (titleEl) titleEl.textContent = options.title;
+                }
+                if (options.content) {
+                    const contentEl = popup.querySelector('.popup-content');
+                    if (contentEl) contentEl.innerHTML = options.content;
+                }
+
+                popup.classList.add('show');
+            }
+
+            // 팝업 닫기
+            close(popupId, callback = null) {
+                const popup = document.getElementById(popupId);
+                if (!popup) return;
+
+                popup.classList.remove('show');
+                popup.classList.remove('super-jump-mode', 'golden-key-mode');
+                this.activePopups.delete(popupId);
+
+                // 콜백 실행
+                if (callback) {
+                    setTimeout(callback, 300); // 애니메이션 완료 후
+                }
+
+                // 큐에서 다음 팝업 처리
+                if (this.popupQueue.length > 0) {
+                    const next = this.popupQueue.shift();
+                    setTimeout(() => this.show(next.popupId, next.options), 100);
+                }
+            }
+
+            // 모든 팝업 닫기
+            closeAll() {
+                this.activePopups.forEach(popupId => {
+                    const popup = document.getElementById(popupId);
+                    if (popup) {
+                        popup.classList.remove('show');
+                        popup.classList.remove('super-jump-mode', 'golden-key-mode');
+                    }
+                });
+                this.activePopups.clear();
+                this.popupQueue = [];
+            }
+        }
+
+        // 팝업 매니저 인스턴스
+        const popupManager = new PopupManager();
+
+        // 이벤트 처리 시스템
+        class EventHandler {
+            constructor() {
+                this.eventHandlers = new Map();
+            }
+
+            // 이벤트 등록
+            on(eventType, handler) {
+                if (!this.eventHandlers.has(eventType)) {
+                    this.eventHandlers.set(eventType, []);
+                }
+                this.eventHandlers.get(eventType).push(handler);
+            }
+
+            // 이벤트 발생
+            emit(eventType, data = {}) {
+                const handlers = this.eventHandlers.get(eventType);
+                if (handlers) {
+                    handlers.forEach(handler => handler(data));
+                }
+            }
+
+            // 이벤트 제거
+            off(eventType, handler) {
+                const handlers = this.eventHandlers.get(eventType);
+                if (handlers) {
+                    const index = handlers.indexOf(handler);
+                    if (index > -1) {
+                        handlers.splice(index, 1);
+                    }
+                }
+            }
+        }
+
+        // 이벤트 핸들러 인스턴스
+        const eventHandler = new EventHandler();
+
+        // 게임 이벤트 정의
+        const GAME_EVENTS = {
+            TURN_START: 'turnStart',
+            TURN_END: 'turnEnd',
+            PLAYER_MOVE: 'playerMove',
+            QUIZ_START: 'quizStart',
+            QUIZ_END: 'quizEnd',
+            SUPER_JUMP_START: 'superJumpStart',
+            SUPER_JUMP_END: 'superJumpEnd',
+            GOLDEN_KEY_FOUND: 'goldenKeyFound',
+            SPACE_ACTION: 'spaceAction'
         };
+
+        // 주사위 버튼 상태 관리 (개선된 버전)
+        class DiceButtonManager {
+            constructor() {
+                this.button = document.getElementById('rollDiceBtn');
+                this.currentState = 'disabled';
+                this.stateClasses = ['dice-button-active', 'dice-button-disabled', 'dice-button-urgent'];
+                this.stateRules = new Map([
+                    ['superJumpMode', () => this.setState('disabled')],
+                    ['superJumpFailed', () => this.setState('active', true)],
+                    ['waiting', () => this.setState('active')],
+                    ['default', () => this.setState('disabled')]
+                ]);
+            }
+
+            // 버튼 상태 설정 (최적화된 버전)
+            setState(state, urgent = false) {
+                if (!this.button) return;
+
+                // 기존 상태 클래스 제거 (배치 처리)
+                this.button.classList.remove(...this.stateClasses);
+
+                // 새 상태 클래스 추가
+                const stateClass = urgent ? 'dice-button-urgent' : `dice-button-${state}`;
+                this.button.classList.add(stateClass);
+                this.button.disabled = state === 'disabled';
+                this.currentState = state;
+            }
+
+            // 게임 상태에 따른 자동 상태 설정 (규칙 기반)
+            updateFromGameState() {
+                const { gamePhase, superJumpMode, superJumpFailed, modes } = gameState;
+                const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                
+                // 규칙 우선순위에 따라 실행
+                if (superJumpMode) {
+                    this.stateRules.get('superJumpMode')();
+                } else if (currentPlayer && currentPlayer.isInJail) {
+                    this.setState('disabled'); // 감옥에 갇힌 플레이어는 주사위 비활성화
+                } else if (modes.jail.justEscaped) {
+                    this.setState('active'); // 감옥에서 방금 탈출한 플레이어는 주사위 활성화
+                } else if (superJumpFailed) {
+                    this.stateRules.get('superJumpFailed')();
+                } else if (gamePhase === 'waiting') {
+                    this.stateRules.get('waiting')();
+                } else {
+                    this.stateRules.get('default')();
+                }
+            }
+
+            // 새로운 상태 규칙 추가 (확장성)
+            addStateRule(condition, action) {
+                this.stateRules.set(condition, action);
+            }
+
+            // 현재 상태 반환
+            getCurrentState() {
+                return this.currentState;
+            }
+        }
+
+        // 주사위 버튼 매니저 인스턴스
+        const diceButtonManager = new DiceButtonManager();
+
+        // 감옥 관리 클래스
+        class JailManager {
+            constructor() {
+                this.jailIndicator = null;
+            }
+
+            // 감옥에 플레이어 투입
+            putPlayerInJail(playerId) {
+                const player = gameState.players.find(p => p.id === playerId);
+                if (!player) return;
+
+                player.isInJail = true;
+                player.jailTurnCount = 0;
+                player.jailQuizStreak = 0;
+                player.position = 12; // 감옥 위치 (12번 칸)
+
+                gameState.modes.jail.active = true;
+                gameState.modes.jail.escapePhase = 'first';
+
+                // this.showJailIndicator(); // 감옥 모드 배너 제거
+                showMessage(`${player.name}이 감옥에 갇혔습니다!`);
+                updatePlayerPieces();
+            }
+
+            // 감옥 탈출 시도
+            attemptJailEscape(playerId) {
+                const player = gameState.players.find(p => p.id === playerId);
+                console.log('[DEBUG] attemptJailEscape 호출됨 - 플레이어:', player?.name, '감옥 상태:', player?.isInJail);
+                if (!player || !player.isInJail) {
+                    console.log('[DEBUG] attemptJailEscape 종료 - 플레이어가 감옥에 없음');
+                    return;
+                }
+
+                player.jailTurnCount++;
+                console.log('[DEBUG] 감옥 턴 카운트 증가:', player.jailTurnCount);
+
+                if (player.jailTurnCount === 1) {
+                    // 첫 번째 턴: 2문제 연속 정답 필요
+                    console.log('[DEBUG] 첫 번째 턴 - 2문제 연속 정답 필요');
+                    gameState.modes.jail.escapePhase = 'first';
+                    this.showJailQuiz(player, 2);
+                } else if (player.jailTurnCount === 2) {
+                    // 두 번째 턴: 1문제 정답 필요
+                    gameState.modes.jail.escapePhase = 'second';
+                    this.showJailQuiz(player, 1);
+                } else if (player.jailTurnCount >= 3) {
+                    // 세 번째 턴: 자동 탈출
+                    this.autoEscape(player);
+                }
+            }
+
+            // 감옥 퀴즈 표시
+            showJailQuiz(player, requiredStreak) {
+                console.log('[DEBUG] showJailQuiz 호출됨 - 플레이어:', player.name, '필요 연속 정답:', requiredStreak);
+                // 퀴즈 시작 (showQuiz 함수가 감옥 모드를 자동으로 인식함)
+                showQuiz();
+                console.log('[DEBUG] showQuiz 호출 완료');
+            }
+
+            // 퀴즈 정답 처리
+            handleJailQuizAnswer(playerId, isCorrect) {
+                const player = gameState.players.find(p => p.id === playerId);
+                if (!player || !player.isInJail) return;
+
+                if (isCorrect) {
+                    player.jailQuizStreak++;
+                    
+                    if (player.jailTurnCount === 1 && player.jailQuizStreak >= 2) {
+                        // 첫 번째 턴에서 2문제 연속 정답
+                        this.successfulEscape(player);
+                    } else if (player.jailTurnCount === 2 && player.jailQuizStreak >= 1) {
+                        // 두 번째 턴에서 1문제 정답
+                        this.successfulEscape(player);
+                    } else if (player.jailTurnCount === 1 && player.jailQuizStreak < 2) {
+                        // 첫 번째 턴에서 아직 2문제 미달성
+                        showMessage(`정답! ${2 - player.jailQuizStreak}문제 더 맞춰주세요!`);
+                        setTimeout(() => showQuiz(), 1000);
+                    }
+                } else {
+                    // 오답 시 연속 정답 초기화
+                    player.jailQuizStreak = 0;
+                    showMessage('틀렸습니다! 다음 턴에 다시 도전하세요.');
+                    closeQuiz();
+                    
+                    // 턴 전환
+                    setTimeout(() => {
+                        endTurn();
+                    }, 1500);
+                }
+            }
+
+            // 성공적인 탈출
+            successfulEscape(player) {
+                player.isInJail = false;
+                player.jailTurnCount = 0;
+                player.jailQuizStreak = 0;
+                
+                gameState.modes.jail.active = false;
+                gameState.modes.jail.escapePhase = null;
+                gameState.modes.jail.justEscaped = true; // 감옥에서 방금 탈출했음을 표시
+
+                // this.hideJailIndicator(); // 감옥 모드 배너 제거
+                closeQuiz();
+
+                // 탈출 성공 안내 팝업 표시
+                showJailEscapeSuccessPopup(player);
+            }
+
+            // 자동 탈출 (3턴째)
+            autoEscape(player) {
+                player.isInJail = false;
+                player.jailTurnCount = 0;
+                player.jailQuizStreak = 0;
+                
+                gameState.modes.jail.active = false;
+                gameState.modes.jail.escapePhase = null;
+                gameState.modes.jail.justEscaped = true; // 감옥에서 방금 탈출했음을 표시
+
+                // this.hideJailIndicator(); // 감옥 모드 배너 제거
+                
+                // 자동 탈출 성공 안내 팝업 표시
+                showJailAutoEscapeSuccessPopup(player);
+            }
+
+            // 감옥 표시기 표시
+            showJailIndicator() {
+                if (this.jailIndicator) return;
+                
+                // 감옥에 갇힌 플레이어가 있는지 확인
+                if (!this.hasJailedPlayers()) return;
+
+                this.jailIndicator = document.createElement('div');
+                this.jailIndicator.className = 'jail-mode-indicator';
+                this.jailIndicator.textContent = '🔒 감옥 모드';
+                document.body.appendChild(this.jailIndicator);
+            }
+
+            // 감옥 표시기 숨기기
+            hideJailIndicator() {
+                if (this.jailIndicator) {
+                    this.jailIndicator.remove();
+                    this.jailIndicator = null;
+                }
+            }
+
+            // 감옥에 갇힌 플레이어가 있는지 확인
+            hasJailedPlayers() {
+                return gameState.players.some(player => player.isInJail);
+            }
+
+            // 현재 플레이어가 감옥에 있는지 확인
+            isCurrentPlayerInJail() {
+                const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                return currentPlayer && currentPlayer.isInJail;
+            }
+        }
+
+        // 감옥 매니저 인스턴스
+        const jailManager = new JailManager();
+
+        // 감옥 탈출 성공 팝업 표시
+        function showJailEscapeSuccessPopup(player) {
+            const popup = document.getElementById('turnNotificationPopup');
+            const titleEl = popup.querySelector('.popup-title');
+            const contentEl = popup.querySelector('.popup-content');
+            const buttonEl = popup.querySelector('.popup-button');
+
+            titleEl.textContent = '🎉 감옥 탈출 성공!';
+            contentEl.innerHTML = `<p>${player.name}이 감옥에서 탈출했습니다!</p><p>주사위를 굴려 이동하세요.</p>`;
+            buttonEl.textContent = '확인';
+            buttonEl.onclick = () => {
+                closeJailEscapeSuccessPopup();
+            };
+            // 감옥 색상 테마 제거 (성공 메시지는 일반 색상 사용)
+            popup.classList.remove('jail-mode');
+            popup.classList.add('show');
+        }
+
+        // 기부금 전용 팝업 표시
+        function showDonationPopup(donationAmount, totalFund) {
+            const popup = document.getElementById('turnNotificationPopup');
+            const titleEl = popup.querySelector('.popup-title');
+            const contentEl = popup.querySelector('.popup-content');
+            const buttonEl = popup.querySelector('.popup-button');
+
+            if (donationAmount > 0) {
+                titleEl.textContent = '💕 기부금 모금!';
+                contentEl.innerHTML = `<p>기부금 모금에 ${donationAmount}점을 기부했습니다!</p><p>총 모금액: ${totalFund}점</p>`;
+            } else {
+                titleEl.textContent = '💔 기부금 모금';
+                contentEl.innerHTML = `<p>점수가 부족하여 기부할 수 없습니다.</p><p>총 모금액: ${totalFund}점</p>`;
+            }
+            
+            buttonEl.textContent = '확인';
+            buttonEl.onclick = () => {
+                closeDonationPopup();
+            };
+            
+            // 기부금 색상 테마 적용
+            popup.classList.add('donation-mode');
+            popup.classList.add('show');
+        }
+
+        // 기부금 팝업 닫기
+        function closeDonationPopup() {
+            const popup = document.getElementById('turnNotificationPopup');
+            popup.classList.remove('show');
+            popup.classList.remove('donation-mode');
+            
+            // 기부금 팝업 확인 후 턴 전환
+            setTimeout(() => {
+                try {
+                    endTurn();
+                } catch (error) {
+                    console.error('기부금 팝업 후 endTurn 에러:', error);
+                    // 에러 발생 시 기본 턴 전환 처리
+                    gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
+                    gameState.gamePhase = 'waiting';
+                    updateUI();
+                }
+            }, 500); // 0.5초 후 턴 전환
+        }
+
+        // 감옥 탈출 성공 팝업 닫기
+        function closeJailEscapeSuccessPopup() {
+            const popup = document.getElementById('turnNotificationPopup');
+            popup.classList.remove('show');
+            
+            // 게임 상태를 waiting으로 설정하고 주사위 버튼 활성화
+            gameState.gamePhase = 'waiting';
+            diceButtonManager.updateFromGameState();
+        }
+
+        // 감옥 자동 탈출 성공 팝업 표시
+        function showJailAutoEscapeSuccessPopup(player) {
+            const popup = document.getElementById('turnNotificationPopup');
+            const titleEl = popup.querySelector('.popup-title');
+            const contentEl = popup.querySelector('.popup-content');
+            const buttonEl = popup.querySelector('.popup-button');
+
+            titleEl.textContent = '🔓 감옥에서 나가기!';
+            contentEl.innerHTML = `<p>${player.name}는 이제 감옥에서 나갈 수 있습니다.</p><p>주사위를 굴려 이동하세요.</p>`;
+            buttonEl.textContent = '확인';
+            buttonEl.onclick = () => {
+                closeJailEscapeSuccessPopup();
+            };
+
+            popup.classList.add('show');
+        }
+
 
         // 모바일 뷰포트 높이 문제 해결 함수
         function setViewportHeight() {
@@ -1659,6 +2528,16 @@
         
         // 페이지 로드 시 즉시 실행
         document.addEventListener('DOMContentLoaded', setViewportHeight);
+
+        // 기부금 모금 표시 업데이트 함수
+        function updateDonationDisplay() {
+            const donationElement = document.getElementById('donationAmount');
+            if (donationElement) {
+                donationElement.textContent = `${gameState.donationFund}점`;
+            }
+        }
+
+
 
 
         // 7x7 보드 칸 데이터 (스크린샷 기준)
@@ -1690,9 +2569,9 @@
             { id: 22, name: '22', type: 'quiz', color: 'space-quiz' },
             { id: 23, name: '23', type: 'quiz', color: 'space-quiz' },
             // 특별 칸들 (모서리) - BoardColorTest.html과 동일하게 corner 타입으로 변경
-            { id: 6, name: '무료주차', type: 'corner', color: 'space-corner' },
-            { id: 12, name: '출발지로', type: 'corner', color: 'space-corner' },
-            { id: 18, name: '감옥', type: 'corner', color: 'space-corner' },
+            { id: 6, name: '슈퍼 점프', type: 'corner', color: 'space-corner' },
+            { id: 12, name: '감옥', type: 'corner', color: 'space-corner' },
+            { id: 18, name: '기부금 모금', type: 'corner', color: 'space-corner' },
             { id: 24, name: '특별칸', type: 'special', color: 'space-special' }
         ];
 
@@ -1739,6 +2618,12 @@
                     const player = gameState.players.find(p => p.id === gameState.currentPlayer);
                     player.position = 0;
                     player.score += 400;
+                    
+                    // 워프 이동으로 인해 슈퍼 점프 기회 취소 (감옥 상태는 유지)
+                    if (player.hasSuperJumpChance) {
+                        player.hasSuperJumpChance = false;
+                    }
+                    
                     updateUI();
                 }
             },
@@ -1759,12 +2644,46 @@
                     gameState.players.forEach(player => {
                         // 현재 플레이어(황금 열쇠에 도착한 플레이어)는 제외
                         if (player.id !== currentPlayerId) {
-                            player.position = Math.floor(Math.random() * 24);
+                            // 감옥에 있는 플레이어는 토네이도로 이동하지 않음
+                            if (player.isInJail) {
+                                console.log(`[DEBUG] 토네이도 - ${player.name}은 감옥에 있어서 이동하지 않음`);
+                                return;
+                            }
+                            
+                            // 토네이도로 랜덤 위치 이동 (감옥 제외)
+                            let newPosition;
+                            do {
+                                newPosition = Math.floor(Math.random() * 24);
+                            } while (newPosition === 12); // 감옥(12번 칸) 제외
+                            
+                            player.position = newPosition;
                             player.score = Math.max(0, player.score - 50);
+                            
+                            // 토네이도로 인해 이동한 경우 슈퍼 점프 기회 취소 (감옥 상태는 유지)
+                            if (player.hasSuperJumpChance) {
+                                player.hasSuperJumpChance = false;
+                            }
+                            
+                            console.log(`[DEBUG] 토네이도 - ${player.name}이 ${newPosition}번 칸으로 이동`);
                         }
                     });
                     updatePlayerPieces();
                     updateUI();
+                }
+            },
+            {
+                name: "💰 기부금 수령하기",
+                description: "기부금 모금에서 모든 금액을 가져갑니다!",
+                effect: () => {
+                    const player = gameState.players.find(p => p.id === gameState.currentPlayer);
+                    const receivedAmount = gameState.donationFund;
+                    
+                    if (receivedAmount > 0) {
+                        player.score += receivedAmount;
+                        gameState.donationFund = 0;
+                        updateDonationDisplay();
+                        updateUI();
+                    }
                 }
             },
             {
@@ -1781,6 +2700,26 @@
             // 뷰포트 높이 설정
             setViewportHeight();
             
+            // 슈퍼 점프 관련 상태 초기화
+            gameState.superJumpMode = false;
+            gameState.superJumpFailed = false;
+            gameState.players.forEach(player => {
+                player.isWaitJump = false;
+                player.hasSuperJumpChance = false;
+                player.isInJail = false;
+                player.jailTurnCount = 0;
+                player.jailQuizStreak = 0;
+            });
+            
+            // 감옥 모드 초기화
+            gameState.modes.jail.active = false;
+            gameState.modes.jail.escapePhase = null;
+            gameState.modes.jail.justEscaped = false;
+            
+            // 감옥 표시기 숨기기 (제거됨)
+            // jailManager.hideJailIndicator();
+            
+            
             // 기본 팔레트(오션 톤) 적용
             const defaultPalette = palettesData.palettes[0]; // 오션 톤
             
@@ -1793,6 +2732,11 @@
             document.documentElement.style.setProperty('--color-center', defaultPalette.colors.center);
             document.documentElement.style.setProperty('--color-background', defaultPalette.colors.background);
             document.documentElement.style.setProperty('--color-normal', defaultPalette.colors.normal);
+            
+            // 특별 칸 고유 색상 유지
+            document.documentElement.style.setProperty('--color-superjump', '#00BFFF');
+            document.documentElement.style.setProperty('--color-jail', '#616161');
+            document.documentElement.style.setProperty('--color-donation', '#FF69B4');
             
             // 팔레트별 플레이어 색상 CSS 변수 설정
             defaultPalette.playerColors.forEach((color, index) => {
@@ -1814,16 +2758,21 @@
             updateDiceIcon(1);
             updateUI();
             
+            // 주사위 버튼 초기 상태 설정
+            diceButtonManager.updateFromGameState();
+            
             // 소유권 초기화 및 띠지 색상 설정
             resetSpaceOwners();
             // 보드 생성 후 띠지 색상 초기화
             setTimeout(() => {
                 updateRibbonColors();
                 updateLandOwnershipDisplay(); // 땅 소유 표시 초기화
+                updateDonationDisplay(); // 기부금 모금 표시 초기화
             }, 100);
         }
 
         // 모노폴리 스타일 보드 생성
+
         function createBoard() {
             const board = document.getElementById('gameBoard');
             board.innerHTML = '';
@@ -1840,28 +2789,31 @@
                         cell.classList.add('corner-space');
                         
                         if (row === 0 && col === 0) {
-                            // 출발지로 - special 타입
+                            // 감옥 - special 타입
                             const space = boardSpaces.find(s => s.id === 12);
                             if (space) {
                                 cell.className = `board-space corner-space ${space.color}`;
                             }
-                            cell.innerHTML = '<div class="space-name">출발지로</div>';
+                            cell.innerHTML = '<div class="space-name">   감  옥   </div>';
+                            cell.dataset.spaceId = 12;
                             cell.onclick = () => handleSpaceClick(12);
                         } else if (row === 0 && col === 6) {
-                            // 감옥 - special 타입
+                            // 기부금 모금 - special 타입
                             const space = boardSpaces.find(s => s.id === 18);
                             if (space) {
                                 cell.className = `board-space corner-space ${space.color}`;
                             }
-                            cell.innerHTML = '<div class="space-name">감옥</div>';
+                            cell.innerHTML = '<div class="space-name">기부금 모금<br><span class="donation-amount" id="donationAmount">0점</span></div>';
+                            cell.dataset.spaceId = 18;
                             cell.onclick = () => handleSpaceClick(18);
                         } else if (row === 6 && col === 0) {
-                            // 무료주차 - special 타입
+                            // 슈퍼 점프 - special 타입
                             const space = boardSpaces.find(s => s.id === 6);
                             if (space) {
                                 cell.className = `board-space corner-space ${space.color}`;
                             }
-                            cell.innerHTML = '<div class="space-name">무료주차</div>';
+                            cell.innerHTML = '<div class="space-name">슈퍼 점프</div>';
+                            cell.dataset.spaceId = 6;
                             cell.onclick = () => handleSpaceClick(6);
                         } else if (row === 6 && col === 6) {
                             // 시작 - start 타입
@@ -1869,7 +2821,8 @@
                             if (space) {
                                 cell.className = `board-space corner-space ${space.color}`;
                             }
-                            cell.innerHTML = '<div class="space-name">시작</div>';
+                            cell.innerHTML = '<div class="space-name">START</div>';
+                            cell.dataset.spaceId = 0;
                             cell.onclick = () => handleSpaceClick(0);
                         }
                         
@@ -1907,6 +2860,7 @@
                                     cell.className += ' center-background';
                                     // 클릭 이벤트 제거 (onclick 설정하지 않음)
                                 } else {
+                                    cell.dataset.spaceId = space.id;
                                     cell.onclick = () => handleSpaceClick(space.id);
                                 }
                             }
@@ -1988,11 +2942,11 @@
                             if (totalPlayers === 1) {
                                 rightPosition = '5%';
                             } else if (totalPlayers === 2) {
-                                rightPosition = index === 0 ? '30%' : '5%';
+                                rightPosition = index === 0 ? '20%' : '5%';
                             } else if (totalPlayers === 3) {
-                                rightPosition = index === 0 ? '55%' : index === 1 ? '30%' : '5%';
+                                rightPosition = index === 0 ? '35%' : index === 1 ? '20%' : '5%';
                             } else { // 4명
-                                rightPosition = index === 0 ? '80%' : index === 1 ? '55%' : index === 2 ? '30%' : '5%';
+                                rightPosition = index === 0 ? '50%' : index === 1 ? '35%' : index === 2 ? '20%' : '5%';
                             }
                             
                             piece.style.right = rightPosition;
@@ -2007,9 +2961,9 @@
         // 보드 칸 인덱스를 그리드 위치로 변환 (스크린샷 기준)
         function getGridPosition(spaceIndex) {
             if (spaceIndex === 0) return { row: 6, col: 6 }; // 시작 (우하단)
-            if (spaceIndex === 6) return { row: 6, col: 0 }; // 무료주차 (좌하단)
-            if (spaceIndex === 12) return { row: 0, col: 0 }; // 출발지로 (좌상단)
-            if (spaceIndex === 18) return { row: 0, col: 6 }; // 감옥 (우상단)
+            if (spaceIndex === 6) return { row: 6, col: 0 }; // 슈퍼 점프 (좌하단)
+            if (spaceIndex === 12) return { row: 0, col: 0 }; // 감옥 (좌상단)
+            if (spaceIndex === 18) return { row: 0, col: 6 }; // 기부금 모금 (우상단)
             
             // 상단 변 (13-17) - 왼쪽에서 오른쪽으로
             if (spaceIndex >= 13 && spaceIndex <= 17) {
@@ -2154,8 +3108,14 @@
 
         // 주사위 굴리기
         function rollDice() {
-            if (gameState.gamePhase !== 'waiting' && gameState.gamePhase !== 'rolling') return;
-            if (isRolling) return;
+            if (gameState.gamePhase !== 'waiting' && gameState.gamePhase !== 'rolling') {
+                return;
+            }
+            if (isRolling) {
+                return;
+            }
+            if (gameState.superJumpMode) return; // 슈퍼 점프 모드일 때는 주사위 비활성화
+            
 
             const diceIcon = document.getElementById('diceIcon');
             const rollBtn = document.getElementById('rollDiceBtn');
@@ -2165,32 +3125,13 @@
             
             // 애니메이션 시작
             diceIcon.classList.add('spinning');
-            rollBtn.disabled = true;
+            
+            // 새로운 주사위 버튼 관리 시스템 사용
+            diceButtonManager.setState('disabled');
             // 버튼 텍스트는 그대로 유지 (크기 변화 방지)
 
-            // 테스트용: 황금 열쇠 위치로만 이동할 수 있는 값 계산
-            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
-            const currentPosition = currentPlayer.position;
-            
-            // 황금 열쇠 위치: 3, 9, 15, 21
-            const goldenKeyPositions = [3, 9, 15, 21];
-            
-            // 현재 위치에서 황금 열쇠까지의 거리 계산
-            let possibleValues = [];
-            goldenKeyPositions.forEach(goldenPos => {
-                let distance = goldenPos - currentPosition;
-                if (distance <= 0) {
-                    distance += 24; // 보드를 한 바퀴 돌아서 도달
-                }
-                if (distance >= 1 && distance <= 6) {
-                    possibleValues.push(distance);
-                }
-            });
-            
-            // 가능한 값이 없으면 기본 랜덤 값 사용
-            const finalValue = possibleValues.length > 0 
-                ? possibleValues[Math.floor(Math.random() * possibleValues.length)]
-                : Math.floor(Math.random() * 6) + 1;
+            // 랜덤 주사위 값 생성 (1-6)
+            const finalValue = Math.floor(Math.random() * 6) + 1;
             
             // 애니메이션 효과를 위한 여러 번 값 변경
             let rolls = 0;
@@ -2205,6 +3146,7 @@
                     gameState.diceValue = finalValue;
                     gameState.gamePhase = 'moving';
                     updateDiceIcon(finalValue);
+                    
                     
                     diceIcon.classList.remove('spinning');
                 rollBtn.disabled = false;
@@ -2289,6 +3231,9 @@
             const space = boardSpaces.find(s => s.id === position);
             if (!space) return;
 
+
+            let shouldAutoEndTurn = true; // 자동 턴 전환 여부
+
             switch (space.type) {
                 case 'start':
                     // 시작점은 이미 통과 보너스로 처리됨
@@ -2302,16 +3247,29 @@
                 case 'corner':
                     // corner 타입 칸들의 이름에 따라 다른 액션 수행
                     if (space.name === '감옥') {
-                        const jailPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
-                        jailPlayer.position = 18; // 감옥에 머물기 (실제 감옥 위치)
-                        showMessage('감옥에 갇혔습니다! 다음 턴에 주사위를 굴려서 탈출하세요.');
-                    } else if (space.name === '무료주차') {
-                        showMessage('무료 주차! 특별한 일이 없습니다.');
-                    } else if (space.name === '출발지로') {
-                        const gotoPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
-                        gotoPlayer.position = 0; // 시작점으로 이동
-                        gotoPlayer.score += 200;
-                        showMessage('출발지로 이동! +200점');
+                        const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                        jailManager.putPlayerInJail(currentPlayer.id);
+                        shouldAutoEndTurn = true; // 감옥 처리 후 턴 전환
+                    } else if (space.name === '슈퍼 점프') {
+                        const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                        currentPlayer.hasSuperJumpChance = true; // 슈퍼 점프 기회 플래그 설정
+                        showMessage('다음 차례에 슈퍼 점프에 도전합니다.');
+                        
+                        // 일반적인 턴 전환 (자동 턴 전환 허용)
+                    } else if (space.name === '기부금 모금') {
+                        const donationPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                        
+                        // 기부금 300점 차감 (최소 0점 유지)
+                        const donationAmount = Math.min(300, donationPlayer.score);
+                        donationPlayer.score = Math.max(0, donationPlayer.score - donationAmount);
+                        
+                        // 기부금 모금에 추가
+                        gameState.donationFund += donationAmount;
+                        updateDonationDisplay();
+                        
+                        // 기부금 전용 팝업 표시
+                        showDonationPopup(donationAmount, gameState.donationFund);
+                        shouldAutoEndTurn = false; // 기부금 팝업은 사용자 확인 후 턴 전환
                     } else {
                         // 기타 모서리 칸은 황금열쇠 이벤트로 처리
                         showGoldenKeyEvent();
@@ -2329,22 +3287,61 @@
             }
 
             // 자동으로 턴 전환 (턴 종료 버튼 제거)
-            setTimeout(() => {
-                endTurn();
-            }, 2000); // 2초 후 자동 턴 전환
+            if (shouldAutoEndTurn && !gameState.modes.jail.justEscaped) {
+                setTimeout(() => {
+                    endTurn();
+                }, 2000); // 2초 후 자동 턴 전환
+            } else if (gameState.modes.jail.justEscaped) {
+                // 감옥에서 방금 탈출한 플레이어의 경우 이벤트 처리 완료 후 턴 전환
+                // 플래그는 턴 전환 알림 팝업을 표시한 후 초기화
+                setTimeout(() => {
+                    try {
+                        endTurn();
+                        updateUI();
+                    } catch (error) {
+                        console.error('endTurn 에러:', error);
+                        // 에러 발생 시 기본 턴 전환 처리
+                        gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
+                        gameState.gamePhase = 'waiting';
+                        updateUI();
+                    }
+                }, 2000); // 2초 후 턴 전환
+            }
             updateUI();
         }
 
         // 퀴즈 표시
         function showQuiz() {
+            
             try {
             const question = quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
             const popup = document.getElementById('quizPopup');
             const questionEl = document.getElementById('quizQuestion');
             const optionsEl = document.getElementById('quizOptions');
+            const titleEl = document.querySelector('#quizPopup .popup-title');
 
                 if (!popup || !questionEl || !optionsEl) {
                     return;
+                }
+
+            // 현재 플레이어 정보로 제목 업데이트
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            const playerName = currentPlayer ? currentPlayer.name : `플레이어 ${gameState.currentPlayer}`;
+            
+            if (titleEl) {
+                if (gameState.superJumpMode) {
+                    titleEl.textContent = `🚀 ${playerName} - 슈퍼 점프 퀴즈!`;
+                    popup.classList.add('super-jump-mode');
+                } else if (currentPlayer && currentPlayer.isInJail) {
+                    // 감옥 퀴즈인 경우
+                    const requiredStreak = currentPlayer.jailTurnCount === 1 ? 2 : 1;
+                    titleEl.textContent = `🔒 ${playerName} - 감옥 탈출 퀴즈!`;
+                    popup.classList.add('jail-mode');
+                } else {
+                    titleEl.textContent = `🧠 ${playerName} - 퀴즈 도전!`;
+                    popup.classList.remove('super-jump-mode');
+                    popup.classList.remove('jail-mode');
+                }
                 }
 
             questionEl.textContent = question.question;
@@ -2358,8 +3355,25 @@
                 optionsEl.appendChild(button);
             });
 
+            // 감옥 퀴즈인 경우 진행 상황 표시
+            if (currentPlayer && currentPlayer.isInJail) {
+                const requiredStreak = currentPlayer.jailTurnCount === 1 ? 2 : 1;
+                const progressEl = document.createElement('div');
+                progressEl.style.cssText = 'margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; text-align: center;';
+                progressEl.innerHTML = `
+                    <p style="margin: 5px 0; font-size: 14px;">문제를 ${requiredStreak}개 연속으로 맞춰 탈출하세요!</p>
+                    <p style="margin: 5px 0; font-size: 16px; font-weight: bold;">현재 연속 정답: ${currentPlayer.jailQuizStreak}/${requiredStreak}</p>
+                `;
+                optionsEl.appendChild(progressEl);
+            }
+
             popup.classList.add('show');
             startQuizTimer();
+            
+            // 감옥 퀴즈인 경우 현재 플레이어 하이라이트 설정
+            if (currentPlayer && currentPlayer.isInJail) {
+                updatePlayerHighlightForJail(currentPlayer);
+            }
             } catch (error) {
                 showMessage('퀴즈를 불러올 수 없습니다.');
             }
@@ -2400,6 +3414,40 @@
             const player = gameState.players.find(p => p.id === gameState.currentPlayer);
             const currentSpace = player.position;
             
+            // 감옥 퀴즈인지 확인
+            if (player.isInJail) {
+                const isCorrect = selected === correct;
+                jailManager.handleJailQuizAnswer(player.id, isCorrect);
+                return;
+            }
+            
+            // 슈퍼 점프 모드인지 확인
+            if (gameState.superJumpMode) {
+                if (selected === -1) {
+                    gameState.superJumpMode = false;
+                    player.isWaitJump = false;
+                    gameState.gamePhase = 'waiting'; // 퀴즈 실패 후 waiting 상태
+                    gameState.superJumpFailed = true; // 슈퍼 점프 실패 플래그 설정
+                    
+                    // 슈퍼 점프 시간 초과 시 턴 전환 알림 팝업 표시
+                    showTurnNotification('도전 실패! 주사위를 굴려 이동하세요.');
+                } else if (selected === correct) {
+                    showMessage('정답! 슈퍼 점프하고 싶은 지역을 터치하세요.');
+                    enableSuperJumpMode();
+                } else {
+                    gameState.superJumpMode = false;
+                    player.isWaitJump = false;
+                    gameState.gamePhase = 'waiting'; // 퀴즈 실패 후 waiting 상태
+                    gameState.superJumpFailed = true; // 슈퍼 점프 실패 플래그 설정
+                    
+                    // 슈퍼 점프 실패 시 턴 전환 알림 팝업 표시
+                    showTurnNotification('도전 실패! 주사위를 굴려 이동하세요.');
+                }
+                closeQuiz();
+                return;
+            }
+            
+            // 일반 퀴즈 처리
             // 시간 초과 처리
             if (selected === -1) {
                 showMessage('시간 초과! 점수 없음');
@@ -2424,17 +3472,40 @@
 
         // 퀴즈 닫기
         function closeQuiz() {
+            
             // 타이머 정리
             if (quizTimer) {
                 clearInterval(quizTimer);
                 quizTimer = null;
             }
             
-            document.getElementById('quizPopup').classList.remove('show');
-            // 자동으로 턴 전환
-            setTimeout(() => {
-                endTurn();
-            }, 1500); // 1.5초 후 자동 턴 전환
+            const popup = document.getElementById('quizPopup');
+            popup.classList.remove('show');
+            
+            // 슈퍼 점프 모드가 아닐 때는 슈퍼 점프 모드 클래스 제거
+            if (!gameState.superJumpMode) {
+                popup.classList.remove('super-jump-mode');
+            }
+            
+            // 감옥 모드 클래스 제거
+            popup.classList.remove('jail-mode');
+            
+            // 슈퍼 점프 모드가 아니고 슈퍼 점프 실패가 아니고 감옥 모드가 아니고 감옥 탈출 성공이 아닐 때만 턴 전환
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            if (!gameState.superJumpMode && !gameState.superJumpFailed && !(currentPlayer && currentPlayer.isInJail) && !gameState.modes.jail.justEscaped) {
+                setTimeout(() => {
+                    try {
+                    endTurn();
+                    } catch (error) {
+                        console.error('closeQuiz에서 endTurn 에러:', error);
+                        // 에러 발생 시 기본 턴 전환 처리
+                        gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
+                        gameState.gamePhase = 'waiting';
+                        updateUI();
+                    }
+                }, 1500); // 1.5초 후 자동 턴 전환
+            }
+            // 감옥 퀴즈 중이나 감옥 탈출 성공 시에는 턴 전환하지 않음 (감옥 매니저에서 처리)
         }
 
         // 현재 황금 열쇠 이벤트 저장 변수
@@ -2442,6 +3513,7 @@
 
         // 황금 열쇠 이벤트 표시 (간소화 버전)
         function showGoldenDiscoveryMessage() {
+            
             const event = goldenKeyEvents[Math.floor(Math.random() * goldenKeyEvents.length)];
             currentGoldenKeyEvent = event;
             
@@ -2456,7 +3528,6 @@
             
             // 신비한 상자 이벤트인 경우 결과 생성 및 표시
             if (event.name === "🎁 신비한 상자") {
-                const player = gameState.players.find(p => p.id === gameState.currentPlayer);
                 const results = [
                     { points: 500, message: "🎉 대박! 황금 보물을 발견했습니다! +500점!" },
                     { points: 0, message: "😅 빈 상자였습니다... 아무것도 얻지 못했습니다." },
@@ -2464,7 +3535,9 @@
                 ];
                 const randomResult = results[Math.floor(Math.random() * results.length)];
                 
-                // 점수 적용
+                // 결과를 이벤트에 저장 (확인 버튼을 누른 후 적용하기 위해)
+                event.effect = () => {
+                    const player = gameState.players.find(p => p.id === gameState.currentPlayer);
                 const oldScore = player.score;
                 player.score = Math.max(0, player.score + randomResult.points);
                 const actualChange = player.score - oldScore;
@@ -2474,35 +3547,43 @@
                 if (randomResult.points < 0 && actualChange > randomResult.points) {
                     resultMessage += ` (실제 변화: ${actualChange}점)`;
                 }
+                    
+                    showMessage(resultMessage);
+                    updateUI();
+                };
                 
                 // 결과 표시
-                mysteryBoxResultTextEl.textContent = resultMessage;
+                mysteryBoxResultTextEl.textContent = randomResult.message;
                 mysteryBoxResultEl.style.display = 'block';
-                
-                // UI 업데이트
-                updateUI();
             } else {
                 mysteryBoxResultEl.style.display = 'none';
             }
             
+            // 황금 열쇠 모드 클래스 추가
+            popup.classList.add('golden-key-mode');
+            
             // 팝업 표시
             popup.classList.add('show');
-            
-            // 신비한 상자 이벤트가 아닌 경우에만 자동 효과 적용
-            if (event.name !== "🎁 신비한 상자") {
-                setTimeout(() => {
-                    applyGoldenKeyEffect(event);
-                }, 1000);
-            }
         }
 
         // 통합된 황금 열쇠 팝업 닫기
         function closeGoldenDiscovery() {
             const popup = document.getElementById('goldenDiscoveryPopup');
             popup.classList.remove('show');
+            popup.classList.remove('golden-key-mode');
+            
+            // 황금 카드 효과 적용
+            if (currentGoldenKeyEvent && currentGoldenKeyEvent.effect) {
+                currentGoldenKeyEvent.effect();
+            }
+            
+            // 이벤트 초기화
+            currentGoldenKeyEvent = null;
             
             // 다음 플레이어로 턴 전환
+            setTimeout(() => {
             endTurn();
+            }, 1000);
         }
 
         // 황금 열쇠 이벤트 표시 (통합 버전 사용)
@@ -2522,55 +3603,225 @@
         function closeGoldenKey() {
             document.getElementById('goldenKeyPopup').classList.remove('show');
             
-            // 신비한 상자 이벤트인 경우 상자 열기 처리
-            if (currentGoldenKeyEvent && currentGoldenKeyEvent.name === "🎁 신비한 상자") {
-                setTimeout(() => {
+            // 황금 카드 효과 적용
+            if (currentGoldenKeyEvent && currentGoldenKeyEvent.effect) {
                     currentGoldenKeyEvent.effect();
-                    currentGoldenKeyEvent = null; // 이벤트 초기화
-                }, 500);
-            } else {
-                // 다른 이벤트들은 기존 방식대로 턴 전환
+            }
+            
+            // 이벤트 초기화
+            currentGoldenKeyEvent = null;
+            
+            // 다음 플레이어로 턴 전환
                 setTimeout(() => {
                     endTurn();
-                }, 1500); // 1.5초 후 자동 턴 전환
-            }
+            }, 1000);
         }
 
         // 턴 전환 알림 표시
         function showTurnNotification(message) {
+            try {
+                // DOM이 완전히 로드되었는지 확인
+                if (document.readyState !== 'complete') {
+                    console.warn('DOM이 완전히 로드되지 않았습니다. 잠시 후 다시 시도합니다.');
+                    setTimeout(() => showTurnNotification(message), 100);
+                    return;
+                }
+                
             const popup = document.getElementById('turnNotificationPopup');
-            const textEl = document.getElementById('turnNotificationText');
+                if (!popup) {
+                    console.error('턴 전환 알림 팝업을 찾을 수 없습니다');
+                    return;
+                }
+                
+                // 팝업 내부에서 요소를 찾기
+                const contentEl = popup.querySelector('.popup-content');
+                const titleEl = popup.querySelector('.popup-title');
+                const buttonEl = popup.querySelector('.popup-button');
+                
+                // 요소가 존재하지 않으면 에러 처리
+                if (!contentEl || !titleEl || !buttonEl) {
+                    console.error('턴 전환 알림 팝업 내부 요소를 찾을 수 없습니다:', { contentEl, titleEl, buttonEl });
+                    return;
+                }
+                
+                // 확인 버튼의 onclick 이벤트 명시적으로 설정
+                buttonEl.onclick = closeTurnNotification;
             
-            textEl.textContent = message;
+            // 슈퍼 점프 모드일 때는 제목과 메시지를 다르게 표시
+            if (gameState.superJumpMode) {
+                const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                const playerName = currentPlayer ? currentPlayer.name : `플레이어 ${gameState.currentPlayer}`;
+                    titleEl.innerHTML = '🚀 슈퍼 점프 도전!';
+                contentEl.innerHTML = `<p>${playerName} - 문제를 풀어 슈퍼 점프에 도전하세요!</p>`;
+                    popup.classList.add('super-jump-mode');
+            } else {
+                // 감옥에 갇힌 플레이어의 턴인지 확인
+                    const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                if (currentPlayer && currentPlayer.isInJail) {
+                    console.log('[DEBUG] 감옥 플레이어 턴 알림:', currentPlayer.name, '메시지:', message);
+                    titleEl.innerHTML = '🔒 감옥 탈출 도전!';
+                    contentEl.innerHTML = `<p>${currentPlayer.name}의 감옥 탈출 도전!</p>`;
+                    popup.classList.add('jail-mode');
+                    console.log('[DEBUG] 콘텐츠 요소 설정 후:', contentEl.innerHTML);
+                } else if (message && message.includes('도전 실패')) {
+                    const playerName = currentPlayer ? currentPlayer.name : `플레이어 ${gameState.currentPlayer}`;
+                    titleEl.innerHTML = '❌ 도전 실패!';
+                    contentEl.innerHTML = `<p>${playerName} - 주사위를 굴려 이동하세요.</p>`;
+                    popup.classList.remove('jail-mode');
+                } else {
+                    titleEl.innerHTML = '🎮 턴 전환';
+                    contentEl.innerHTML = `<p>${message || '턴이 전환되었습니다.'}</p>`;
+                    popup.classList.remove('jail-mode');
+                }
+                popup.classList.remove('super-jump-mode');
+            }
+                
+                popup.classList.add('show');
+            } catch (error) {
+                console.error('showTurnNotification 에러:', error);
+                // 에러 발생 시 기본 메시지 표시
+                const popup = document.getElementById('turnNotificationPopup');
+                if (popup) {
             popup.classList.add('show');
+                }
+            }
         }
 
         // 턴 전환 알림 닫기
         function closeTurnNotification() {
-            document.getElementById('turnNotificationPopup').classList.remove('show');
+            console.log('[DEBUG] closeTurnNotification 함수 호출됨');
+            const popup = document.getElementById('turnNotificationPopup');
+            popup.classList.remove('show');
+            
+            // 현재 플레이어가 감옥에 갇혀있는지 확인
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            console.log('[DEBUG] closeTurnNotification - 현재 플레이어:', currentPlayer?.name, '감옥 상태:', currentPlayer?.isInJail);
+            
+            if (currentPlayer && currentPlayer.isInJail) {
+                // 감옥에 갇힌 플레이어의 퀴즈 시작
+                console.log('[DEBUG] 감옥 플레이어 퀴즈 시작 시도:', currentPlayer.name);
+                try {
+                    jailManager.attemptJailEscape(currentPlayer.id);
+                    console.log('[DEBUG] attemptJailEscape 호출 완료');
+                } catch (error) {
+                    console.error('[DEBUG] attemptJailEscape 에러:', error);
+                }
+                return; // 감옥 퀴즈 시작 후 다른 로직 실행 방지
+            } else if (gameState.superJumpMode) {
+                showQuiz();
+            } else {
+                // 슈퍼 점프 모드가 아닐 때는 슈퍼 점프 모드 클래스 제거
+                popup.classList.remove('super-jump-mode');
+                
+                // 감옥에서 탈출한 플레이어가 턴 전환 알림을 확인한 경우
+                if (gameState.modes.jail.justEscaped) {
+                    // 플래그 초기화
+                    gameState.modes.jail.justEscaped = false;
+                    // 주사위 버튼 활성화
+                    diceButtonManager.updateFromGameState();
+                    // 턴 전환은 이미 endTurn()에서 완료되었으므로 UI만 업데이트
+                    updateUI();
+                    return;
+                }
+                
+                // 일반적인 턴 전환 알림 확인 시
+                diceButtonManager.updateFromGameState();
+                
+                if (gameState.superJumpFailed) {
+                    gameState.superJumpFailed = false;
+                }
+                
+                if (gameState.gamePhase !== 'waiting') {
+                    gameState.gamePhase = 'waiting';
+                }
+                
+                // UI 업데이트
+                updateUI();
+            }
         }
 
         // 턴 종료 (자동 턴 전환)
         function endTurn() {
+            try {
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            
+            // 슈퍼 점프 대기 상태인지 확인
+                if (currentPlayer && currentPlayer.isWaitJump) {
+                gameState.gamePhase = 'superJumping';
+                gameState.superJumpMode = true;
+                showMessage('문제를 맞춰 원하는 곳으로 이동하세요.');
+                showQuiz(); // 슈퍼 점프용 퀴즈
+                return; // 턴 전환하지 않음
+            }
+            
+            // 기존 턴 전환 로직
             const previousPlayer = gameState.currentPlayer;
             gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
-            gameState.gamePhase = 'rolling';
+            gameState.gamePhase = 'waiting';
             gameState.diceValue = 0;
 
+                console.log('🔍 [DEBUG] 턴 전환 완료 - 이전 플레이어:', previousPlayer, '→ 새 플레이어:', gameState.currentPlayer);
+
             // 물음표로 바꾸지 않고 현재 주사위 값 유지
-            document.getElementById('rollDiceBtn').disabled = false;
+                diceButtonManager.updateFromGameState();
 
-            // 턴 전환 팝업 표시
-            showTurnNotification(`플레이어 ${gameState.currentPlayer}의 차례입니다.`);
+            const newCurrentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                
+                if (!newCurrentPlayer) {
+                    console.error('newCurrentPlayer를 찾을 수 없습니다:', gameState.currentPlayer);
+                    return;
+                }
+                
+                // 감옥에 갇힌 플레이어의 턴 처리
+                if (newCurrentPlayer.isInJail) {
+                    showTurnNotification(`${newCurrentPlayer.name}의 감옥 탈출 도전!`);
+                    return;
+                }
+                
+                // 감옥에 갇힌 플레이어가 없으면 감옥 표시기 숨기기 (제거됨)
+                // if (!jailManager.hasJailedPlayers()) {
+                //     jailManager.hideJailIndicator();
+                // }
+                
+            if (newCurrentPlayer.hasSuperJumpChance) {
+                // 현재 위치가 슈퍼 점프 칸인지 확인
+                const currentSpace = boardSpaces.find(s => s.id === newCurrentPlayer.position);
+                if (currentSpace && currentSpace.name === '슈퍼 점프') {
+                    newCurrentPlayer.hasSuperJumpChance = false; // 기회 사용
+                    newCurrentPlayer.isWaitJump = true; // 슈퍼 점프 대기 상태로 설정
+                    gameState.gamePhase = 'superJumping';
+                    gameState.superJumpMode = true;
+                    
+                    // 턴 알림 팝업으로 슈퍼 점프 시작 알림
+                    showTurnNotification('슈퍼 점프 도전');
+                } else {
+                    newCurrentPlayer.hasSuperJumpChance = false; // 기회 취소
+                    showTurnNotification(`플레이어 ${gameState.currentPlayer}의 차례입니다.`);
+                }
+            } else {
+                // 일반 턴 전환 팝업 표시
+                showTurnNotification(`플레이어 ${gameState.currentPlayer}의 차례입니다.`);
+            }
 
+                // 턴 전환 완료 후 UI 업데이트
+                // updateUI()는 endTurn() 함수 끝에서 호출하지 않고, 호출하는 곳에서 처리
+            } catch (error) {
+                console.error('endTurn 함수 에러:', error);
+                // 에러 발생 시 기본 턴 전환 처리
+                gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
+                gameState.gamePhase = 'waiting';
             updateUI();
+            }
         }
 
         // UI 업데이트
         function updateUI() {
             // 플레이어 정보 업데이트
             gameState.players.forEach(player => {
-                document.getElementById(`score${player.id}`).textContent = player.score;
+                const scoreElement = document.getElementById(`score${player.id}`);
+                if (scoreElement) {
+                    scoreElement.textContent = player.score;
+                }
             });
 
             // 현재 플레이어 하이라이트
@@ -2586,15 +3837,43 @@
 
         // 플레이어 하이라이트 업데이트
         function updatePlayerHighlight() {
+            // 모든 플레이어 카드에서 active 클래스 제거 (항상 먼저 제거)
+            document.querySelectorAll('.player-info').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // 감옥에 갇힌 플레이어도 하이라이트 처리
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            
+            if (currentPlayer && currentPlayer.isInJail) {
+                updatePlayerHighlightForJail(currentPlayer);
+                return;
+            }
+
+            // 현재 플레이어 카드에 active 클래스 추가
+            const currentPlayerCard = document.getElementById(`player${gameState.currentPlayer}-info`);
+            
+            if (currentPlayerCard) {
+                currentPlayerCard.classList.add('active');
+            } else {
+                console.error('플레이어', gameState.currentPlayer, '카드를 찾을 수 없음');
+            }
+        }
+
+        // 감옥 퀴즈 중 플레이어 하이라이트 업데이트
+        function updatePlayerHighlightForJail(player) {
             // 모든 플레이어 카드에서 active 클래스 제거
             document.querySelectorAll('.player-info').forEach(card => {
                 card.classList.remove('active');
             });
 
-            // 현재 플레이어 카드에 active 클래스 추가
-            const currentPlayerCard = document.getElementById(`player${gameState.currentPlayer}-info`);
-            if (currentPlayerCard) {
-                currentPlayerCard.classList.add('active');
+            // 감옥에 갇힌 플레이어 카드에 active 클래스 추가
+            const playerCard = document.getElementById(`player${player.id}-info`);
+            
+            if (playerCard) {
+                playerCard.classList.add('active');
+            } else {
+                console.error('감옥 플레이어', player.id, '카드를 찾을 수 없음');
             }
         }
 
@@ -2606,10 +3885,122 @@
                 existingNotification.remove();
             }
 
+            // 슈퍼 점프 관련 메시지인지 확인
+            const isSuperJumpMessage = message.includes('슈퍼 점프') || 
+                                     message.includes('정답! 슈퍼 점프') || 
+                                     message.includes('문제를 맞춰 원하는 곳으로') ||
+                                     gameState.superJumpMode;
+
+            // 황금 카드 관련 메시지인지 확인
+            const isGoldenKeyMessage = message.includes('대박! 황금 보물을 발견했습니다!') ||
+                                     message.includes('빈 상자였습니다') ||
+                                     message.includes('함정이었습니다') ||
+                                     message.includes('로켓 부스터') ||
+                                     message.includes('복권 당첨') ||
+                                     message.includes('황금') ||
+                                     message.includes('보물') ||
+                                     message.includes('축하합니다!') ||
+                                     message.includes('획득했습니다!');
+
+            // 감옥 관련 메시지인지 확인 (성공 메시지는 제외)
+            const isJailMessage = (message.includes('감옥에 갇혔습니다') ||
+                                 message.includes('감옥에서 탈출') ||
+                                 message.includes('감옥 탈출') ||
+                                 message.includes('감옥에서 나갈 수 있습니다') ||
+                                 message.includes('틀렸습니다! 다음 턴에 다시 도전하세요') ||
+                                 (message.includes('정답!') && message.includes('문제 더 맞춰주세요'))) &&
+                                 !message.includes('감옥 탈출 성공') &&
+                                 !message.includes('감옥에서 탈출했습니다');
+
+            // 기부금 관련 메시지인지 확인
+            const isDonationMessage = message.includes('기부금') ||
+                                     message.includes('기부') ||
+                                     message.includes('모금') ||
+                                     message.includes('수령');
+
             // 새로운 알림 생성
             const notification = document.createElement('div');
             notification.className = 'game-notification';
             notification.textContent = message;
+            
+            if (isSuperJumpMessage) {
+                // 슈퍼 점프 관련 메시지 스타일
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #00BFFF, #00CED1, #9370DB);
+                    color: #fff;
+                    padding: 15px 25px;
+                    border-radius: 25px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border: 3px solid #00BFFF;
+                    box-shadow: 0 0 30px rgba(0, 191, 255, 0.6);
+                    z-index: 2000;
+                    animation: slideDown 0.3s ease-out;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                `;
+            } else if (isGoldenKeyMessage) {
+                // 황금 카드 관련 메시지 스타일
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #FFD700, #FFA500, #FF6347);
+                    color: #fff;
+                    padding: 15px 25px;
+                    border-radius: 25px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border: 3px solid #FFD700;
+                    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+                    z-index: 2000;
+                    animation: slideDown 0.3s ease-out;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                `;
+            } else if (isJailMessage) {
+                // 감옥 관련 메시지 스타일
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #424242, #616161, #757575);
+                    color: #fff;
+                    padding: 15px 25px;
+                    border-radius: 25px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border: 3px solid #424242;
+                    box-shadow: 0 0 30px rgba(66, 66, 66, 0.6);
+                    z-index: 2000;
+                    animation: slideDown 0.3s ease-out;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                `;
+            } else if (isDonationMessage) {
+                // 기부금 관련 메시지 스타일 (핫핑크 계열)
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #FF69B4, #FF1493, #FFB6C1);
+                    color: #fff;
+                    padding: 15px 25px;
+                    border-radius: 25px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border: 3px solid #FF69B4;
+                    box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+                    z-index: 2000;
+                    animation: slideDown 0.3s ease-out;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                `;
+            } else {
+                // 일반 메시지 스타일
             notification.style.cssText = `
                 position: fixed;
                 top: 20px;
@@ -2625,6 +4016,7 @@
                 z-index: 2000;
                 animation: slideDown 0.3s ease-out;
             `;
+            }
 
             // CSS 애니메이션 추가
             if (!document.querySelector('#notification-styles')) {
@@ -2662,12 +4054,120 @@
 
         // 칸 클릭 처리
         function handleSpaceClick(spaceId) {
-            // 칸 클릭 시 정보 표시 (선택사항)
+            // 슈퍼 점프 모드인지 확인
+            if (gameState.superJumpMode) {
+                if (spaceId === 6) {
+                    showMessage('슈퍼 점프 칸은 선택할 수 없습니다.');
+                    return;
+                }
+                // 슈퍼 점프 이동 처리
+                performSuperJump(spaceId);
+                return;
+            }
+            
+            // 일반 모드: 칸 클릭 시 정보 표시 (선택사항)
             const space = boardSpaces.find(s => s.id === spaceId);
             if (space) {
                 showMessage(`${space.name} (${space.type})`);
             }
         }
+
+        // 슈퍼 점프 모드 활성화
+        function enableSuperJumpMode() {
+            // 슈퍼 점프 모드 표시기 추가
+            showSuperJumpIndicator();
+            
+            // 슈퍼 점프 칸 제외한 모든 칸에 클릭 가능 표시
+            document.querySelectorAll('.board-space').forEach(cell => {
+                const spaceId = parseInt(cell.dataset.spaceId);
+                if (spaceId !== 6 && spaceId !== undefined) { // 슈퍼 점프 칸(6) 제외
+                    cell.classList.add('super-jump-target');
+                    cell.style.cursor = 'pointer';
+                }
+            });
+            
+            // 슈퍼 점프 칸 비활성화
+            const superJumpCell = document.querySelector('[data-space-id="6"]');
+            if (superJumpCell) {
+                superJumpCell.classList.add('super-jump-disabled');
+            }
+            
+            // 주사위 버튼 비활성화
+            diceButtonManager.setState('disabled');
+        }
+
+        // 슈퍼 점프 모드 비활성화
+        function disableSuperJumpMode() {
+            // 슈퍼 점프 모드 표시기 제거
+            hideSuperJumpIndicator();
+            
+            // 모든 슈퍼 점프 관련 클래스 제거
+            document.querySelectorAll('.board-space').forEach(cell => {
+                cell.classList.remove('super-jump-target', 'super-jump-disabled');
+                cell.style.cursor = '';
+            });
+            
+            // 주사위 버튼 활성화
+            diceButtonManager.updateFromGameState();
+        }
+
+        // 슈퍼 점프 실행
+        function performSuperJump(targetSpaceId) {
+            const player = gameState.players.find(p => p.id === gameState.currentPlayer);
+            const currentPosition = player.position;
+            const targetSpace = boardSpaces.find(s => s.id === targetSpaceId);
+            
+            if (!targetSpace) {
+                showMessage('잘못된 칸입니다.');
+                return;
+            }
+            
+            // 슈퍼 점프 모드 비활성화
+            disableSuperJumpMode();
+            
+            // 플레이어 이동
+            player.position = targetSpaceId;
+            
+            // 시작점을 돌았다면 추가 점수 부여
+            if (currentPosition > targetSpaceId) {
+                player.score += 200;
+                showMessage(`슈퍼 점프! 시작점을 돌아 +200점 보너스!`);
+            } else {
+                showMessage(`슈퍼 점프! ${targetSpace.name}으로 이동!`);
+            }
+            
+            // 슈퍼 점프 상태 초기화
+            player.isWaitJump = false;
+            gameState.superJumpMode = false;
+            gameState.gamePhase = 'waiting';
+            
+            // UI 업데이트
+            updatePlayerPieces();
+            updateUI();
+            
+            // 도착한 칸의 액션 처리
+            setTimeout(() => {
+                handleSpaceAction(targetSpaceId);
+            }, 1000);
+        }
+
+        // 슈퍼 점프 모드 표시기 표시
+        function showSuperJumpIndicator() {
+            const indicator = document.createElement('div');
+            indicator.id = 'superJumpIndicator';
+            indicator.className = 'super-jump-mode-indicator';
+            indicator.textContent = '🚀 슈퍼 점프 모드 - 원하는 칸을 클릭하세요!';
+            document.body.appendChild(indicator);
+        }
+
+        // 슈퍼 점프 모드 표시기 숨기기
+        function hideSuperJumpIndicator() {
+            const indicator = document.getElementById('superJumpIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
 
         // 전체화면 토글 함수
         function toggleFullscreen() {
@@ -3202,6 +4702,11 @@
             document.documentElement.style.setProperty('--color-center', palette.colors.center);
             document.documentElement.style.setProperty('--color-background', palette.colors.background);
             document.documentElement.style.setProperty('--color-normal', palette.colors.normal);
+            
+            // 특별 칸 고유 색상 유지 (팔레트 변경 시에도 고정)
+            document.documentElement.style.setProperty('--color-superjump', '#00BFFF');
+            document.documentElement.style.setProperty('--color-jail', '#616161');
+            document.documentElement.style.setProperty('--color-donation', '#FF69B4');
             
             // 팔레트별 플레이어 색상 CSS 변수 설정 (BoardColorTest.html과 동일)
             palette.playerColors.forEach((color, index) => {

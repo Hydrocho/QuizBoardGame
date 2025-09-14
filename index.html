@@ -32,7 +32,7 @@
             
             /* 특별 칸별 고유 색상 */
             --color-superjump: #00BFFF;
-            --color-jail: #616161;
+            --color-island: #616161;
             --color-donation: #FF69B4;
             
             /* 주사위 버튼 색상 시스템 */
@@ -375,19 +375,22 @@
         }
 
         .space-number {
-            font-size: clamp(8px, 2vw, 16px);
+            font-size: clamp(12px, 3vw, 24px);
             font-weight: bold;
             color: white;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            line-height: 1;
         }
 
         .space-name {
-            font-size: clamp(6px, 1.5vw, 12px);
+            font-size: clamp(8px, 2vw, 16px);
             color: white;
             text-align: center;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
             margin-top: 1px;
             line-height: 1;
+            font-weight: bold;
         }
 
         /* 특별 칸들의 글자 크기를 더 크게 */
@@ -440,16 +443,16 @@
             justify-content: center !important;
         }
 
-        /* 감옥 칸 텍스트 스타일 (어두운 회색 테마) */
+        /* 무인도 칸 텍스트 스타일 (어두운 회색 테마) */
         .corner-space[data-space-id="12"] .space-name {
             font-size: clamp(8px, 2.2vw, 16px) !important;
             font-weight: 900 !important;
             color: #FFFFFF !important;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
-            background: var(--color-jail) !important;
+            background: var(--color-island) !important;
             padding: 4px 6px !important;
             border-radius: 8px !important;
-            border: 2px solid var(--color-jail) !important;
+            border: 2px solid var(--color-island) !important;
             box-shadow: 0 2px 4px rgba(66, 66, 66, 0.4) !important;
             width: 90% !important;
             height: 80% !important;
@@ -1083,22 +1086,22 @@
         }
 
         .control-button {
-            background: linear-gradient(135deg, var(--dice-primary) 0%, var(--dice-secondary) 100%);
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             color: white;
-            border: none;
+            border: 2px solid #B8860B;
             padding: 15px 25px;
             border-radius: 25px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px var(--dice-glow);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
             transition: all 0.3s ease;
         }
 
         .control-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px var(--dice-glow-strong);
-            background: linear-gradient(135deg, var(--dice-secondary) 0%, var(--dice-dark) 100%);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.6);
+            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
         }
 
         .control-button:active {
@@ -1571,42 +1574,39 @@
 
         /* 주사위 버튼 활성화 효과 */
         .dice-button-active {
-            animation: diceButtonPulse 2s infinite;
-            box-shadow: 0 0 20px var(--dice-glow);
-            border: 3px solid var(--dice-primary);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            border: 3px solid #FFD700;
             transform: scale(1.05);
-            background: linear-gradient(135deg, var(--dice-primary), var(--dice-secondary));
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+
+        /* 황금 텍스트 효과 */
+        .dice-button-active #buttonText,
+        .dice-button-urgent #buttonText {
+            background: linear-gradient(90deg, 
+                #2F1B14, #5D4E37, #8B7355, #5D4E37, #2F1B14);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowText 2s ease-in-out infinite;
+            font-weight: bold;
+            text-shadow: none;
+        }
+
+        @keyframes rainbowText {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 0%; }
+            100% { background-position: 0% 0%; }
         }
 
         .dice-button-active:hover {
-            animation: diceButtonPulse 1s infinite;
-            box-shadow: 0 0 30px var(--dice-glow-urgent);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
             transform: scale(1.1);
-            background: linear-gradient(135deg, var(--dice-secondary), var(--dice-dark));
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
         }
 
-        @keyframes diceButtonPulse {
-            0%, 100% { 
-                box-shadow: 0 0 20px var(--dice-glow);
-                transform: scale(1.05);
-            }
-            50% { 
-                box-shadow: 0 0 30px var(--dice-glow-strong);
-                transform: scale(1.08);
-            }
-        }
 
-        /* 성능 최적화를 위한 will-change 속성 */
-        .dice-button-active,
-        .dice-button-urgent {
-            will-change: transform, box-shadow;
-        }
-
-        /* 애니메이션 완료 후 will-change 제거 */
-        .dice-button-active:not(:hover),
-        .dice-button-urgent:not(:hover) {
-            will-change: auto;
-        }
 
         /* 주사위 버튼 비활성화 상태 */
         .dice-button-disabled {
@@ -1619,22 +1619,11 @@
 
         /* 주사위 버튼 긴급 상태 (턴 대기) */
         .dice-button-urgent {
-            animation: diceButtonUrgent 1.5s infinite;
-            box-shadow: 0 0 25px var(--dice-glow-urgent);
-            border: 3px solid var(--dice-primary);
-            background: linear-gradient(135deg, var(--dice-primary), var(--dice-dark));
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+            border: 3px solid #FFD700;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
         }
 
-        @keyframes diceButtonUrgent {
-            0%, 100% { 
-                box-shadow: 0 0 25px var(--dice-glow-urgent);
-                transform: scale(1.05);
-            }
-            50% { 
-                box-shadow: 0 0 35px var(--dice-glow-max);
-                transform: scale(1.1);
-            }
-        }
 
         /* 슈퍼 점프 모드 팝업 스타일 */
         .super-jump-mode .popup-container {
@@ -1692,30 +1681,30 @@
             box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
         }
 
-        /* 감옥 모드 팝업 스타일 */
-        .jail-mode .popup-container {
+        /* 무인도 모드 팝업 스타일 */
+        .island-mode .popup-container {
             background: linear-gradient(135deg, #424242, #616161, #757575);
             border: 3px solid #424242;
             box-shadow: 0 0 30px rgba(66, 66, 66, 0.6);
         }
 
-        .jail-mode .popup-title {
+        .island-mode .popup-title {
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
-        .jail-mode .popup-content {
+        .island-mode .popup-content {
             color: #fff;
         }
 
-        .jail-mode .popup-button {
+        .island-mode .popup-button {
             background: linear-gradient(135deg, #616161, #757575);
             color: #fff;
             border: 2px solid #424242;
             box-shadow: 0 4px 15px rgba(97, 97, 97, 0.4);
         }
 
-        .jail-mode .popup-button:hover {
+        .island-mode .popup-button:hover {
             background: linear-gradient(135deg, #757575, #424242);
             box-shadow: 0 6px 20px rgba(66, 66, 66, 0.6);
         }
@@ -1748,9 +1737,9 @@
             box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
         }
 
-        /* 감옥 모드 표시기 (제거됨) */
+        /* 무인도 모드 표시기 (제거됨) */
         /*
-        .jail-mode-indicator {
+        .island-mode-indicator {
             position: fixed;
             top: 20px;
             left: 50%;
@@ -1764,11 +1753,11 @@
             border: 3px solid #8B0000;
             box-shadow: 0 0 30px rgba(139, 0, 0, 0.6);
             z-index: 1000;
-            animation: jailIndicatorPulse 2s infinite;
+            animation: islandIndicatorPulse 2s infinite;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
-        @keyframes jailIndicatorPulse {
+        @keyframes islandIndicatorPulse {
             0%, 100% { 
                 opacity: 1;
                 box-shadow: 0 0 30px rgba(139, 0, 0, 0.6);
@@ -1851,7 +1840,7 @@
         .space-special { background: var(--color-special); color: #fff; }
         .space-corner { background: var(--color-corner); color: #fff; }
         .space-finish { background: var(--color-start); color: #fff; }
-        .space-jail { background: var(--color-corner); color: #fff; }
+        .space-island { background: var(--color-corner); color: #fff; }
         .space-free { background: var(--color-corner); color: #fff; }
         .space-goto { background: var(--color-corner); color: #fff; }
         
@@ -1861,6 +1850,47 @@
             color: #FFD700;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
             margin-top: 2px;
+        }
+
+        /* 황금 열쇠 칸 스타일 */
+        .space-content {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 5px;
+            line-height: 1;
+        }
+
+        /* 땅 내용 래퍼 스타일 */
+        .space-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* 별 표시 스타일 */
+        .star-display {
+            font-size: clamp(11px, 2.8vw, 22px);
+            line-height: 1;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        /* 황금 열쇠 칸 텍스트 스타일 (슈퍼 점프와 동일한 글자체 및 크기) */
+        .board-space[data-space="3"] .space-name,
+        .board-space[data-space="9"] .space-name,
+        .board-space[data-space="15"] .space-name,
+        .board-space[data-space="21"] .space-name {
+            font-family: inherit !important;
+            font-size: clamp(8px, 2.2vw, 16px) !important;
+            font-weight: bold !important;
+            color: #8B4513 !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+            text-align: center !important;
+            line-height: 1.2 !important;
+            letter-spacing: 0.5px !important;
         }
     </style>
 </head>
@@ -1909,42 +1939,8 @@
             <!-- 중앙 UI 패널 -->
             <div class="center-panel">
             <!-- 플레이어 정보 -->
-            <div class="players-section">
-                <div class="player-info" id="player1-info">
-                    <div class="player-avatar" style="background: var(--player-color-1);">1</div>
-                    <div class="player-details">
-                        <div class="player-name">플레이어 1</div>
-                        <div class="player-score">점수: <span id="score1">0</span></div>
-                        <div class="player-lands">땅 소유: <span id="lands1">0</span>개</div>
-                    </div>
-                </div>
-                
-                <div class="player-info" id="player2-info">
-                    <div class="player-avatar" style="background: var(--player-color-2);">2</div>
-                    <div class="player-details">
-                        <div class="player-name">플레이어 2</div>
-                        <div class="player-score">점수: <span id="score2">0</span></div>
-                        <div class="player-lands">땅 소유: <span id="lands2">0</span>개</div>
-                        </div>
-                    </div>
-
-                    <div class="player-info" id="player3-info">
-                        <div class="player-avatar" style="background: var(--player-color-3);">3</div>
-                        <div class="player-details">
-                            <div class="player-name">플레이어 3</div>
-                            <div class="player-score">점수: <span id="score3">0</span></div>
-                            <div class="player-lands">땅 소유: <span id="lands3">0</span>개</div>
-                        </div>
-                    </div>
-
-                    <div class="player-info" id="player4-info">
-                        <div class="player-avatar" style="background: var(--player-color-4);">4</div>
-                        <div class="player-details">
-                            <div class="player-name">플레이어 4</div>
-                            <div class="player-score">점수: <span id="score4">0</span></div>
-                            <div class="player-lands">땅 소유: <span id="lands4">0</span>개</div>
-                    </div>
-                </div>
+            <div class="players-section" id="players-section">
+                <!-- 플레이어 카드들이 동적으로 생성됩니다 -->
             </div>
             
             <!-- 게임 컨트롤 -->
@@ -1957,7 +1953,7 @@
                             </svg>
                         </div>
                     <button class="control-button" id="rollDiceBtn" onclick="rollDice()">
-                            <span id="buttonText">주사위 굴리기</span>
+                            <span id="buttonText">Touch</span>
                     </button>
                 </div>
                 </div>
@@ -2020,15 +2016,20 @@
     <!-- 설정 관리 스크립트 -->
     
     <script>
+        // 숫자 포맷팅 유틸리티 함수
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
         // 게임 상태 관리 클래스
         class GameStateManager {
             constructor() {
                 this.state = {
             players: [
-                        { id: 1, name: '플레이어 1', color: '#1976D2', position: 0, score: 1000, isActive: true, isWaitJump: false, hasSuperJumpChance: false, isInJail: false, jailTurnCount: 0, jailQuizStreak: 0 },
-                        { id: 2, name: '플레이어 2', color: '#E65100', position: 0, score: 1000, isActive: false, isWaitJump: false, hasSuperJumpChance: false, isInJail: false, jailTurnCount: 0, jailQuizStreak: 0 },
-                        { id: 3, name: '플레이어 3', color: '#2E7D32', position: 0, score: 1000, isActive: false, isWaitJump: false, hasSuperJumpChance: false, isInJail: false, jailTurnCount: 0, jailQuizStreak: 0 },
-                        { id: 4, name: '플레이어 4', color: '#9C27B0', position: 0, score: 1000, isActive: false, isWaitJump: false, hasSuperJumpChance: false, isInJail: false, jailTurnCount: 0, jailQuizStreak: 0 }
+                        { id: 1, name: '플레이어 1', color: '#1976D2', position: 0, score: 1000, isActive: true, isWaitJump: false, hasSuperJumpChance: false, isOnIsland: false, islandTurnCount: 0, islandQuizStreak: 0 },
+                        { id: 2, name: '플레이어 2', color: '#E65100', position: 0, score: 1000, isActive: false, isWaitJump: false, hasSuperJumpChance: false, isOnIsland: false, islandTurnCount: 0, islandQuizStreak: 0 },
+                        { id: 3, name: '플레이어 3', color: '#388E3C', position: 0, score: 1000, isActive: false, isWaitJump: false, hasSuperJumpChance: false, isOnIsland: false, islandTurnCount: 0, islandQuizStreak: 0 },
+                        { id: 4, name: '플레이어 4', color: '#7B1FA2', position: 0, score: 1000, isActive: false, isWaitJump: false, hasSuperJumpChance: false, isOnIsland: false, islandTurnCount: 0, islandQuizStreak: 0 }
             ],
             currentPlayer: 1,
             gamePhase: 'waiting',
@@ -2038,7 +2039,7 @@
                     modes: {
                         superJump: { active: false, failed: false },
                         goldenKey: { active: false, event: null },
-                        jail: { active: false, escapePhase: null, justEscaped: false }
+                        island: { active: false, escapePhase: null, justEscaped: false }
                     }
                 };
             }
@@ -2235,10 +2236,10 @@
                 // 규칙 우선순위에 따라 실행
                 if (superJumpMode) {
                     this.stateRules.get('superJumpMode')();
-                } else if (currentPlayer && currentPlayer.isInJail) {
-                    this.setState('disabled'); // 감옥에 갇힌 플레이어는 주사위 비활성화
-                } else if (modes.jail.justEscaped) {
-                    this.setState('active'); // 감옥에서 방금 탈출한 플레이어는 주사위 활성화
+                } else if (currentPlayer && currentPlayer.isOnIsland) {
+                    this.setState('disabled'); // 무인도에 갇힌 플레이어는 주사위 비활성화
+                } else if (modes.island.justEscaped) {
+                    this.setState('active'); // 무인도에서 방금 탈출한 플레이어는 주사위 활성화
                 } else if (superJumpFailed) {
                     this.stateRules.get('superJumpFailed')();
                 } else if (gamePhase === 'waiting') {
@@ -2262,87 +2263,279 @@
         // 주사위 버튼 매니저 인스턴스
         const diceButtonManager = new DiceButtonManager();
 
-        // 감옥 관리 클래스
-        class JailManager {
+        // 게임 상태 모니터링 시스템
+        class GameStateMonitor {
             constructor() {
-                this.jailIndicator = null;
+                this.lastActionTime = Date.now();
+                this.monitorInterval = null;
+                this.isMonitoring = false;
+                this.stuckThreshold = 5000; // 5초
+                this.warningTime = 3000; // 3초 경고
             }
 
-            // 감옥에 플레이어 투입
-            putPlayerInJail(playerId) {
+            // 모니터링 시작
+            startMonitoring() {
+                if (this.monitorInterval) return;
+                
+                this.isMonitoring = true;
+                this.lastActionTime = Date.now();
+                
+                this.monitorInterval = setInterval(() => {
+                    this.checkGameState();
+                }, 1000); // 1초마다 체크
+            }
+
+            // 모니터링 중지
+            stopMonitoring() {
+                if (this.monitorInterval) {
+                    clearInterval(this.monitorInterval);
+                    this.monitorInterval = null;
+                }
+                this.isMonitoring = false;
+            }
+
+            // 게임 액션 발생 시 호출
+            recordAction() {
+                this.lastActionTime = Date.now();
+            }
+
+            // 게임 상태 체크
+            checkGameState() {
+                if (!this.isMonitoring) return;
+
+                const currentTime = Date.now();
+                const timeSinceLastAction = currentTime - this.lastActionTime;
+
+                // 5초 이상 게임이 멈춰있고, 주사위 버튼이 비활성화된 경우
+                if (timeSinceLastAction >= this.stuckThreshold) {
+                    const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                    const isStuck = this.isGameStuck(currentPlayer);
+                    
+                    if (isStuck) {
+                        this.showAutoResetWarning();
+                    }
+                }
+            }
+
+            // 게임이 멈춰있는지 확인
+            isGameStuck(currentPlayer) {
+                // 주사위 버튼이 비활성화되어 있고
+                const diceButton = document.getElementById('rollDiceBtn');
+                if (!diceButton || diceButton.disabled) {
+                    // 슈퍼 점프 모드가 아니고
+                    if (!gameState.superJumpMode) {
+                        // 무인도에 갇힌 플레이어가 아니거나 3턴째 이상인 경우
+                        if (!currentPlayer?.isOnIsland || currentPlayer.islandTurnCount >= 3) {
+                            // 게임 페이즈가 waiting이 아닌 경우
+                            if (gameState.gamePhase !== 'waiting') {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+
+            // 자동 활성화 경고 표시
+            showAutoResetWarning() {
+                // 이미 경고가 표시 중이면 중복 표시하지 않음
+                if (document.querySelector('.auto-reset-warning')) return;
+
+                const warningDiv = document.createElement('div');
+                warningDiv.className = 'auto-reset-warning';
+                warningDiv.innerHTML = `
+                    <div class="warning-content">
+                        <h3>⚠️ 게임이 멈춰있습니다</h3>
+                        <p>게임을 다시 활성화합니다...</p>
+                        <div class="countdown">3</div>
+                    </div>
+                `;
+
+                // 스타일 적용
+                warningDiv.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+                    color: white;
+                    padding: 30px;
+                    border-radius: 15px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                    z-index: 10000;
+                    text-align: center;
+                    font-family: inherit;
+                `;
+
+                warningDiv.querySelector('.warning-content h3').style.cssText = `
+                    margin: 0 0 15px 0;
+                    font-size: 1.5em;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                `;
+
+                warningDiv.querySelector('.warning-content p').style.cssText = `
+                    margin: 0 0 20px 0;
+                    font-size: 1.1em;
+                `;
+
+                warningDiv.querySelector('.countdown').style.cssText = `
+                    font-size: 3em;
+                    font-weight: bold;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                    animation: countdownPulse 1s ease-in-out infinite;
+                `;
+
+                document.body.appendChild(warningDiv);
+
+                // 카운트다운 애니메이션
+                let countdown = 3;
+                const countdownElement = warningDiv.querySelector('.countdown');
+                const countdownInterval = setInterval(() => {
+                    countdown--;
+                    if (countdown > 0) {
+                        countdownElement.textContent = countdown;
+                    } else {
+                        clearInterval(countdownInterval);
+                        this.performAutoReset();
+                        warningDiv.remove();
+                    }
+                }, 1000);
+
+                // CSS 애니메이션 추가
+                if (!document.querySelector('#countdown-animation')) {
+                    const style = document.createElement('style');
+                    style.id = 'countdown-animation';
+                    style.textContent = `
+                        @keyframes countdownPulse {
+                            0%, 100% { transform: scale(1); }
+                            50% { transform: scale(1.2); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+            }
+
+            // 자동 활성화 실행
+            performAutoReset() {
+                console.log('🔄 자동 게임 상태 활성화 실행');
+                
+                // 게임 상태 강제 활성화
+                gameState.gamePhase = 'waiting';
+                gameState.superJumpMode = false;
+                gameState.superJumpFailed = false;
+                
+                // 모든 모드 플래그 활성화
+                gameState.modes.superJump.active = false;
+                gameState.modes.superJump.failed = false;
+                gameState.modes.island.justEscaped = false;
+                
+                // 주사위 버튼 상태 업데이트
+                diceButtonManager.updateFromGameState();
+                
+                // UI 업데이트
+                updateUI();
+                
+                // 액션 기록 (모니터링 재시작)
+                this.recordAction();
+                
+                // 알림 메시지
+                showMessage('게임이 다시 활성화되었습니다.');
+            }
+        }
+
+        // 게임 상태 모니터 인스턴스
+        const gameStateMonitor = new GameStateMonitor();
+
+        // 무인도 관리 클래스
+        class IslandManager {
+            constructor() {
+                this.islandIndicator = null;
+            }
+
+            // 무인도에 플레이어 투입
+            putPlayerOnIsland(playerId) {
                 const player = gameState.players.find(p => p.id === playerId);
                 if (!player) return;
 
-                player.isInJail = true;
-                player.jailTurnCount = 0;
-                player.jailQuizStreak = 0;
-                player.position = 12; // 감옥 위치 (12번 칸)
+                player.isOnIsland = true;
+                player.islandTurnCount = 0; // 무인도 투입 시 0으로 시작
+                player.islandQuizStreak = 0;
+                player.position = 12; // 무인도 위치 (12번 칸)
 
-                gameState.modes.jail.active = true;
-                gameState.modes.jail.escapePhase = 'first';
+                gameState.modes.island.active = true;
+                gameState.modes.island.escapePhase = 'first';
 
-                // this.showJailIndicator(); // 감옥 모드 배너 제거
-                showMessage(`${player.name}이 감옥에 갇혔습니다!`);
+                // this.showIslandIndicator(); // 무인도 모드 배너 제거
+                showIslandPopup(player.name);
                 updatePlayerPieces();
             }
 
-            // 감옥 탈출 시도
-            attemptJailEscape(playerId) {
+            // 무인도 탈출 시도
+            attemptIslandEscape(playerId) {
                 const player = gameState.players.find(p => p.id === playerId);
-                console.log('[DEBUG] attemptJailEscape 호출됨 - 플레이어:', player?.name, '감옥 상태:', player?.isInJail);
-                if (!player || !player.isInJail) {
-                    console.log('[DEBUG] attemptJailEscape 종료 - 플레이어가 감옥에 없음');
+                if (!player || !player.isOnIsland) {
                     return;
                 }
 
-                player.jailTurnCount++;
-                console.log('[DEBUG] 감옥 턴 카운트 증가:', player.jailTurnCount);
+                // 턴 카운트 증가 (한 바퀴 돌아서 자기 차례가 되었을 때)
+                player.islandTurnCount++;
 
-                if (player.jailTurnCount === 1) {
+                if (player.islandTurnCount === 1) {
                     // 첫 번째 턴: 2문제 연속 정답 필요
                     console.log('[DEBUG] 첫 번째 턴 - 2문제 연속 정답 필요');
-                    gameState.modes.jail.escapePhase = 'first';
-                    this.showJailQuiz(player, 2);
-                } else if (player.jailTurnCount === 2) {
+                    gameState.modes.island.escapePhase = 'first';
+                    this.showIslandQuiz(player, 2);
+                } else if (player.islandTurnCount === 2) {
                     // 두 번째 턴: 1문제 정답 필요
-                    gameState.modes.jail.escapePhase = 'second';
-                    this.showJailQuiz(player, 1);
-                } else if (player.jailTurnCount >= 3) {
-                    // 세 번째 턴: 자동 탈출
-                    this.autoEscape(player);
+                    console.log('[DEBUG] 두 번째 턴 - 1문제 정답 필요');
+                    gameState.modes.island.escapePhase = 'second';
+                    this.showIslandQuiz(player, 1);
+                } else if (player.islandTurnCount >= 3) {
+                    // 세 번째 턴 이상: 주사위로 탈출
+                    console.log('[DEBUG] 세 번째 턴 - 주사위로 탈출');
+                    this.diceEscape(player);
+                } else {
+                    // 예상치 못한 상황
+                    console.error('[DEBUG] 예상치 못한 무인도 턴 카운트:', player.islandTurnCount);
                 }
             }
 
-            // 감옥 퀴즈 표시
-            showJailQuiz(player, requiredStreak) {
-                console.log('[DEBUG] showJailQuiz 호출됨 - 플레이어:', player.name, '필요 연속 정답:', requiredStreak);
-                // 퀴즈 시작 (showQuiz 함수가 감옥 모드를 자동으로 인식함)
-                showQuiz();
-                console.log('[DEBUG] showQuiz 호출 완료');
+            // 무인도 퀴즈 표시
+            showIslandQuiz(player, requiredStreak) {
+                console.log('[DEBUG] showIslandQuiz 호출됨 - 플레이어:', player.name, '필요 연속 정답:', requiredStreak);
+                
+                // 퀴즈 시작 (showQuiz 함수가 무인도 모드를 자동으로 인식함)
+                try {
+                    showQuiz();
+                    console.log('[DEBUG] showQuiz 호출 완료');
+                } catch (error) {
+                    console.error('[DEBUG] showQuiz 호출 에러:', error);
+                }
             }
 
             // 퀴즈 정답 처리
-            handleJailQuizAnswer(playerId, isCorrect) {
+            handleIslandQuizAnswer(playerId, isCorrect) {
                 const player = gameState.players.find(p => p.id === playerId);
-                if (!player || !player.isInJail) return;
+                if (!player || !player.isOnIsland) return;
 
                 if (isCorrect) {
-                    player.jailQuizStreak++;
+                    player.islandQuizStreak++;
                     
-                    if (player.jailTurnCount === 1 && player.jailQuizStreak >= 2) {
+                    if (player.islandTurnCount === 1 && player.islandQuizStreak >= 2) {
                         // 첫 번째 턴에서 2문제 연속 정답
                         this.successfulEscape(player);
-                    } else if (player.jailTurnCount === 2 && player.jailQuizStreak >= 1) {
+                    } else if (player.islandTurnCount === 2 && player.islandQuizStreak >= 1) {
                         // 두 번째 턴에서 1문제 정답
                         this.successfulEscape(player);
-                    } else if (player.jailTurnCount === 1 && player.jailQuizStreak < 2) {
+                    } else if (player.islandTurnCount === 1 && player.islandQuizStreak < 2) {
                         // 첫 번째 턴에서 아직 2문제 미달성
-                        showMessage(`정답! ${2 - player.jailQuizStreak}문제 더 맞춰주세요!`);
+                        showMessage(`정답! ${2 - player.islandQuizStreak}문제 더 맞춰주세요!`);
                         setTimeout(() => showQuiz(), 1000);
                     }
                 } else {
-                    // 오답 시 연속 정답 초기화
-                    player.jailQuizStreak = 0;
+                    // 오답 시 연속 정답 활성화 (턴 카운트는 attemptIslandEscape에서 증가)
+                    player.islandQuizStreak = 0;
+                    console.log('[DEBUG] 퀴즈 실패 - 연속 정답 활성화');
                     showMessage('틀렸습니다! 다음 턴에 다시 도전하세요.');
                     closeQuiz();
                     
@@ -2355,88 +2548,88 @@
 
             // 성공적인 탈출
             successfulEscape(player) {
-                player.isInJail = false;
-                player.jailTurnCount = 0;
-                player.jailQuizStreak = 0;
+                player.isOnIsland = false;
+                player.islandTurnCount = 0;
+                player.islandQuizStreak = 0;
                 
-                gameState.modes.jail.active = false;
-                gameState.modes.jail.escapePhase = null;
-                gameState.modes.jail.justEscaped = true; // 감옥에서 방금 탈출했음을 표시
+                gameState.modes.island.active = false;
+                gameState.modes.island.escapePhase = null;
+                gameState.modes.island.justEscaped = true; // 무인도에서 방금 탈출했음을 표시
 
-                // this.hideJailIndicator(); // 감옥 모드 배너 제거
+                // this.hideIslandIndicator(); // 무인도 모드 배너 제거
                 closeQuiz();
 
                 // 탈출 성공 안내 팝업 표시
-                showJailEscapeSuccessPopup(player);
+                showIslandEscapeSuccessPopup(player);
             }
 
-            // 자동 탈출 (3턴째)
-            autoEscape(player) {
-                player.isInJail = false;
-                player.jailTurnCount = 0;
-                player.jailQuizStreak = 0;
+            // 주사위 탈출 (3턴째 이상)
+            diceEscape(player) {
+                player.isOnIsland = false;
+                player.islandTurnCount = 0;
+                player.islandQuizStreak = 0;
                 
-                gameState.modes.jail.active = false;
-                gameState.modes.jail.escapePhase = null;
-                gameState.modes.jail.justEscaped = true; // 감옥에서 방금 탈출했음을 표시
+                gameState.modes.island.active = false;
+                gameState.modes.island.escapePhase = null;
+                gameState.modes.island.justEscaped = true; // 무인도에서 방금 탈출했음을 표시
 
-                // this.hideJailIndicator(); // 감옥 모드 배너 제거
+                // this.hideIslandIndicator(); // 무인도 모드 배너 제거
                 
-                // 자동 탈출 성공 안내 팝업 표시
-                showJailAutoEscapeSuccessPopup(player);
+                // 주사위 탈출 성공 안내 팝업 표시
+                showIslandDiceEscapeSuccessPopup(player);
             }
 
-            // 감옥 표시기 표시
-            showJailIndicator() {
+            // 무인도 표시기 표시
+            showIslandIndicator() {
                 if (this.jailIndicator) return;
                 
-                // 감옥에 갇힌 플레이어가 있는지 확인
-                if (!this.hasJailedPlayers()) return;
+                // 무인도에 갇힌 플레이어가 있는지 확인
+                if (!this.hasIslandPlayers()) return;
 
                 this.jailIndicator = document.createElement('div');
-                this.jailIndicator.className = 'jail-mode-indicator';
-                this.jailIndicator.textContent = '🔒 감옥 모드';
+                this.jailIndicator.className = 'island-mode-indicator';
+                this.jailIndicator.textContent = '🏝️ 무인도 모드';
                 document.body.appendChild(this.jailIndicator);
             }
 
-            // 감옥 표시기 숨기기
-            hideJailIndicator() {
+            // 무인도 표시기 숨기기
+            hideIslandIndicator() {
                 if (this.jailIndicator) {
                     this.jailIndicator.remove();
                     this.jailIndicator = null;
                 }
             }
 
-            // 감옥에 갇힌 플레이어가 있는지 확인
-            hasJailedPlayers() {
-                return gameState.players.some(player => player.isInJail);
+                // 무인도에 갇힌 플레이어가 있는지 확인
+            hasIslandPlayers() {
+                return gameState.players.some(player => player.isOnIsland);
             }
 
-            // 현재 플레이어가 감옥에 있는지 확인
-            isCurrentPlayerInJail() {
+            // 현재 플레이어가 무인도에 있는지 확인
+            isCurrentPlayerOnIsland() {
                 const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
-                return currentPlayer && currentPlayer.isInJail;
+                return currentPlayer && currentPlayer.isOnIsland;
             }
         }
 
-        // 감옥 매니저 인스턴스
-        const jailManager = new JailManager();
+        // 무인도 매니저 인스턴스
+        const islandManager = new IslandManager();
 
-        // 감옥 탈출 성공 팝업 표시
-        function showJailEscapeSuccessPopup(player) {
+        // 무인도 탈출 성공 팝업 표시
+        function showIslandEscapeSuccessPopup(player) {
             const popup = document.getElementById('turnNotificationPopup');
             const titleEl = popup.querySelector('.popup-title');
             const contentEl = popup.querySelector('.popup-content');
             const buttonEl = popup.querySelector('.popup-button');
 
-            titleEl.textContent = '🎉 감옥 탈출 성공!';
-            contentEl.innerHTML = `<p>${player.name}이 감옥에서 탈출했습니다!</p><p>주사위를 굴려 이동하세요.</p>`;
+            titleEl.textContent = '🎉 무인도 탈출 성공!';
+            contentEl.innerHTML = `<p>${player.name}이 무인도에서 탈출했습니다!</p><p>주사위를 굴려 이동하세요.</p>`;
             buttonEl.textContent = '확인';
             buttonEl.onclick = () => {
-                closeJailEscapeSuccessPopup();
+                closeIslandEscapeSuccessPopup();
             };
-            // 감옥 색상 테마 제거 (성공 메시지는 일반 색상 사용)
-            popup.classList.remove('jail-mode');
+            // 무인도 색상 테마 제거 (성공 메시지는 일반 색상 사용)
+            popup.classList.remove('island-mode');
             popup.classList.add('show');
         }
 
@@ -2449,10 +2642,10 @@
 
             if (donationAmount > 0) {
                 titleEl.textContent = '💕 기부금 모금!';
-                contentEl.innerHTML = `<p>기부금 모금에 ${donationAmount}점을 기부했습니다!</p><p>총 모금액: ${totalFund}점</p>`;
+                contentEl.innerHTML = `<p>기부금 모금에 ${formatNumber(donationAmount)}점을 기부했습니다!</p><p>총 모금액: ${formatNumber(totalFund)}점</p>`;
             } else {
                 titleEl.textContent = '💔 기부금 모금';
-                contentEl.innerHTML = `<p>점수가 부족하여 기부할 수 없습니다.</p><p>총 모금액: ${totalFund}점</p>`;
+                contentEl.innerHTML = `<p>점수가 부족하여 기부할 수 없습니다.</p><p>총 모금액: ${formatNumber(totalFund)}점</p>`;
             }
             
             buttonEl.textContent = '확인';
@@ -2478,35 +2671,137 @@
                 } catch (error) {
                     console.error('기부금 팝업 후 endTurn 에러:', error);
                     // 에러 발생 시 기본 턴 전환 처리
-                    gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
+                    const currentPlayerIndex = gameState.players.findIndex(p => p.id === gameState.currentPlayer);
+                    if (currentPlayerIndex === -1) {
+                        console.error('기부금 팝업 에러 처리 중 현재 플레이어를 찾을 수 없습니다:', gameState.currentPlayer);
+                        return;
+                    }
+                    const nextPlayerIndex = (currentPlayerIndex + 1) % gameState.players.length;
+                    gameState.currentPlayer = gameState.players[nextPlayerIndex].id;
                     gameState.gamePhase = 'waiting';
                     updateUI();
                 }
             }, 500); // 0.5초 후 턴 전환
         }
 
-        // 감옥 탈출 성공 팝업 닫기
-        function closeJailEscapeSuccessPopup() {
-            const popup = document.getElementById('turnNotificationPopup');
-            popup.classList.remove('show');
-            
-            // 게임 상태를 waiting으로 설정하고 주사위 버튼 활성화
-            gameState.gamePhase = 'waiting';
-            diceButtonManager.updateFromGameState();
-        }
-
-        // 감옥 자동 탈출 성공 팝업 표시
-        function showJailAutoEscapeSuccessPopup(player) {
+        // 무인도 전용 팝업 표시
+        function showIslandPopup(playerName) {
             const popup = document.getElementById('turnNotificationPopup');
             const titleEl = popup.querySelector('.popup-title');
             const contentEl = popup.querySelector('.popup-content');
             const buttonEl = popup.querySelector('.popup-button');
 
-            titleEl.textContent = '🔓 감옥에서 나가기!';
-            contentEl.innerHTML = `<p>${player.name}는 이제 감옥에서 나갈 수 있습니다.</p><p>주사위를 굴려 이동하세요.</p>`;
+            titleEl.textContent = '🏝️ 무인도에 갇혔습니다!';
+            contentEl.innerHTML = `<p>${playerName}이 무인도에 갇혔습니다!</p><p>무인도에서 탈출하려면 퀴즈를 맞춰야 합니다.</p>`;
+            
             buttonEl.textContent = '확인';
             buttonEl.onclick = () => {
-                closeJailEscapeSuccessPopup();
+                closeIslandPopup();
+            };
+            
+            // 무인도 색상 테마 적용
+            popup.classList.add('island-mode');
+            popup.classList.add('show');
+        }
+
+        // 무인도 팝업 닫기
+        function closeIslandPopup() {
+            const popup = document.getElementById('turnNotificationPopup');
+            popup.classList.remove('island-mode');
+            popup.classList.remove('show');
+            
+            // 무인도 팝업 확인 후 턴 전환
+            setTimeout(() => {
+                try {
+                    endTurn();
+                } catch (error) {
+                    console.error('무인도 팝업 후 endTurn 에러:', error);
+                    // 에러 발생 시 기본 턴 전환 처리
+                    const currentPlayerIndex = gameState.players.findIndex(p => p.id === gameState.currentPlayer);
+                    if (currentPlayerIndex === -1) {
+                        console.error('무인도 팝업 에러 처리 중 현재 플레이어를 찾을 수 없습니다:', gameState.currentPlayer);
+                        return;
+                    }
+                    const nextPlayerIndex = (currentPlayerIndex + 1) % gameState.players.length;
+                    gameState.currentPlayer = gameState.players[nextPlayerIndex].id;
+                    gameState.gamePhase = 'waiting';
+                    updateUI();
+                }
+            }, 500); // 0.5초 후 턴 전환
+        }
+
+        // 슈퍼 점프 전용 팝업 표시
+        function showSuperJumpPopup(playerName) {
+            const popup = document.getElementById('turnNotificationPopup');
+            const titleEl = popup.querySelector('.popup-title');
+            const contentEl = popup.querySelector('.popup-content');
+            const buttonEl = popup.querySelector('.popup-button');
+
+            titleEl.textContent = '⚡ 슈퍼 점프!';
+            contentEl.innerHTML = `<p>${playerName}이 슈퍼 점프 칸에 도착했습니다!</p><p>다음 차례에 퀴즈를 맞춰 원하는 곳으로 이동할 수 있습니다.</p>`;
+            
+            buttonEl.textContent = '확인';
+            buttonEl.onclick = () => {
+                closeSuperJumpPopup();
+            };
+            
+            // 슈퍼 점프 색상 테마 적용
+            popup.classList.add('super-jump-mode');
+            popup.classList.add('show');
+        }
+
+        // 슈퍼 점프 팝업 닫기
+        function closeSuperJumpPopup() {
+            const popup = document.getElementById('turnNotificationPopup');
+            popup.classList.remove('super-jump-mode');
+            popup.classList.remove('show');
+            
+            // 슈퍼 점프 팝업 확인 후 턴 전환
+            setTimeout(() => {
+                try {
+                    endTurn();
+                } catch (error) {
+                    console.error('슈퍼 점프 팝업 후 endTurn 에러:', error);
+                    // 에러 발생 시 기본 턴 전환 처리
+                    const currentPlayerIndex = gameState.players.findIndex(p => p.id === gameState.currentPlayer);
+                    if (currentPlayerIndex === -1) {
+                        console.error('슈퍼 점프 팝업 에러 처리 중 현재 플레이어를 찾을 수 없습니다:', gameState.currentPlayer);
+                        return;
+                    }
+                    const nextPlayerIndex = (currentPlayerIndex + 1) % gameState.players.length;
+                    gameState.currentPlayer = gameState.players[nextPlayerIndex].id;
+                    gameState.gamePhase = 'waiting';
+                    updateUI();
+                }
+            }, 500); // 0.5초 후 턴 전환
+        }
+
+        // 무인도 탈출 성공 팝업 닫기
+        function closeIslandEscapeSuccessPopup() {
+            const popup = document.getElementById('turnNotificationPopup');
+            popup.classList.remove('show');
+            
+            // 무인도 탈출 플래그 활성화 (주사위 굴린 후 턴 전환을 위해)
+            gameState.modes.island.justEscaped = false;
+            
+            // 무인도에서 탈출한 플레이어는 바로 주사위를 굴릴 수 있도록 설정
+            gameState.gamePhase = 'waiting';
+            diceButtonManager.updateFromGameState();
+            updateUI();
+        }
+
+        // 무인도 주사위 탈출 성공 팝업 표시
+        function showIslandDiceEscapeSuccessPopup(player) {
+            const popup = document.getElementById('turnNotificationPopup');
+            const titleEl = popup.querySelector('.popup-title');
+            const contentEl = popup.querySelector('.popup-content');
+            const buttonEl = popup.querySelector('.popup-button');
+
+            titleEl.textContent = '🎲 무인도에서 주사위 탈출!';
+            contentEl.innerHTML = `<p>${player.name}이 무인도에서 주사위로 탈출했습니다!</p><p>주사위를 굴려 이동하세요.</p>`;
+            buttonEl.textContent = '확인';
+            buttonEl.onclick = () => {
+                closeIslandEscapeSuccessPopup();
             };
 
             popup.classList.add('show');
@@ -2527,13 +2822,16 @@
         window.addEventListener('load', setViewportHeight);
         
         // 페이지 로드 시 즉시 실행
-        document.addEventListener('DOMContentLoaded', setViewportHeight);
+        document.addEventListener('DOMContentLoaded', function() {
+            setViewportHeight();
+            createPlayerCards(); // 플레이어 카드 생성
+        });
 
         // 기부금 모금 표시 업데이트 함수
         function updateDonationDisplay() {
             const donationElement = document.getElementById('donationAmount');
             if (donationElement) {
-                donationElement.textContent = `${gameState.donationFund}점`;
+                donationElement.textContent = `${formatNumber(gameState.donationFund)}점`;
             }
         }
 
@@ -2545,32 +2843,32 @@
             // 시작점 (0) - 우하단
             { id: 0, name: '시작', type: 'start', color: 'space-start' },
             // 하단 변 (1-5) - 오른쪽에서 왼쪽으로
-            { id: 1, name: '1', type: 'quiz', color: 'space-quiz' },
-            { id: 2, name: '2', type: 'quiz', color: 'space-quiz' },
+            { id: 1, name: '사랑(1)', type: 'quiz', color: 'space-quiz' },
+            { id: 2, name: '존중(2)', type: 'quiz', color: 'space-quiz' },
             { id: 3, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 4, name: '4', type: 'quiz', color: 'space-quiz' },
-            { id: 5, name: '5', type: 'quiz', color: 'space-quiz' },
+            { id: 4, name: '화합(4)', type: 'quiz', color: 'space-quiz' },
+            { id: 5, name: '나눔(5)', type: 'quiz', color: 'space-quiz' },
             // 좌측 변 (7-11) - 아래에서 위로
-            { id: 7, name: '7', type: 'quiz', color: 'space-quiz' },
-            { id: 8, name: '8', type: 'quiz', color: 'space-quiz' },
+            { id: 7, name: '배려(7)', type: 'quiz', color: 'space-quiz' },
+            { id: 8, name: '용기(8)', type: 'quiz', color: 'space-quiz' },
             { id: 9, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 10, name: '10', type: 'quiz', color: 'space-quiz' },
-            { id: 11, name: '11', type: 'quiz', color: 'space-quiz' },
+            { id: 10, name: '소통(10)', type: 'quiz', color: 'space-quiz' },
+            { id: 11, name: '감사(11)', type: 'quiz', color: 'space-quiz' },
             // 상단 변 (13-17) - 왼쪽에서 오른쪽으로
-            { id: 13, name: '13', type: 'quiz', color: 'space-quiz' },
-            { id: 14, name: '14', type: 'quiz', color: 'space-quiz' },
+            { id: 13, name: '협력(13)', type: 'quiz', color: 'space-quiz' },
+            { id: 14, name: '열정(14)', type: 'quiz', color: 'space-quiz' },
             { id: 15, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 16, name: '16', type: 'quiz', color: 'space-quiz' },
-            { id: 17, name: '17', type: 'quiz', color: 'space-quiz' },
+            { id: 16, name: '성실(16)', type: 'quiz', color: 'space-quiz' },
+            { id: 17, name: '친절(17)', type: 'quiz', color: 'space-quiz' },
             // 우측 변 (19-23) - 위에서 아래로
-            { id: 19, name: '19', type: 'quiz', color: 'space-quiz' },
-            { id: 20, name: '20', type: 'quiz', color: 'space-quiz' },
+            { id: 19, name: '신뢰(19)', type: 'quiz', color: 'space-quiz' },
+            { id: 20, name: '정직(20)', type: 'quiz', color: 'space-quiz' },
             { id: 21, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 22, name: '22', type: 'quiz', color: 'space-quiz' },
-            { id: 23, name: '23', type: 'quiz', color: 'space-quiz' },
+            { id: 22, name: '노력(22)', type: 'quiz', color: 'space-quiz' },
+            { id: 23, name: '겸손(23)', type: 'quiz', color: 'space-quiz' },
             // 특별 칸들 (모서리) - BoardColorTest.html과 동일하게 corner 타입으로 변경
             { id: 6, name: '슈퍼 점프', type: 'corner', color: 'space-corner' },
-            { id: 12, name: '감옥', type: 'corner', color: 'space-corner' },
+            { id: 12, name: '무인도', type: 'corner', color: 'space-corner' },
             { id: 18, name: '기부금 모금', type: 'corner', color: 'space-corner' },
             { id: 24, name: '특별칸', type: 'special', color: 'space-special' }
         ];
@@ -2619,7 +2917,7 @@
                     player.position = 0;
                     player.score += 400;
                     
-                    // 워프 이동으로 인해 슈퍼 점프 기회 취소 (감옥 상태는 유지)
+                    // 워프 이동으로 인해 슈퍼 점프 기회 취소 (무인도 상태는 유지)
                     if (player.hasSuperJumpChance) {
                         player.hasSuperJumpChance = false;
                     }
@@ -2644,22 +2942,21 @@
                     gameState.players.forEach(player => {
                         // 현재 플레이어(황금 열쇠에 도착한 플레이어)는 제외
                         if (player.id !== currentPlayerId) {
-                            // 감옥에 있는 플레이어는 토네이도로 이동하지 않음
-                            if (player.isInJail) {
-                                console.log(`[DEBUG] 토네이도 - ${player.name}은 감옥에 있어서 이동하지 않음`);
+                            // 무인도에 있는 플레이어는 토네이도로 이동하지 않음
+                            if (player.isOnIsland) {
                                 return;
                             }
                             
-                            // 토네이도로 랜덤 위치 이동 (감옥 제외)
+                            // 토네이도로 랜덤 위치 이동 (무인도 제외)
                             let newPosition;
                             do {
                                 newPosition = Math.floor(Math.random() * 24);
-                            } while (newPosition === 12); // 감옥(12번 칸) 제외
+                            } while (newPosition === 12); // 무인도(12번 칸) 제외
                             
                             player.position = newPosition;
                             player.score = Math.max(0, player.score - 50);
                             
-                            // 토네이도로 인해 이동한 경우 슈퍼 점프 기회 취소 (감옥 상태는 유지)
+                            // 토네이도로 인해 이동한 경우 슈퍼 점프 기회 취소 (무인도 상태는 유지)
                             if (player.hasSuperJumpChance) {
                                 player.hasSuperJumpChance = false;
                             }
@@ -2695,29 +2992,57 @@
             }
         ];
 
-        // 게임 초기화
+        // 플레이어 카드 동적 생성 함수
+        function createPlayerCards() {
+            const playersSection = document.getElementById('players-section');
+            if (!playersSection) return;
+            
+            // 기존 플레이어 카드 제거
+            playersSection.innerHTML = '';
+            
+            // 현재 게임 상태의 플레이어 수만큼 카드 생성
+            const gameState = gameStateManager.state;
+            gameState.players.forEach(player => {
+                const playerCard = document.createElement('div');
+                playerCard.className = 'player-info';
+                playerCard.id = `player${player.id}-info`;
+                
+                playerCard.innerHTML = `
+                    <div class="player-avatar" style="background: ${player.color};">${player.id}</div>
+                    <div class="player-details">
+                        <div class="player-name">${player.name}</div>
+                        <div class="player-score">점수: <span id="score${player.id}">${player.score}</span></div>
+                        <div class="player-lands">땅 소유: <span id="lands${player.id}">0</span>개</div>
+                    </div>
+                `;
+                
+                playersSection.appendChild(playerCard);
+            });
+        }
+
+        // 게임 활성화
         function initGame() {
             // 뷰포트 높이 설정
             setViewportHeight();
             
-            // 슈퍼 점프 관련 상태 초기화
+            // 슈퍼 점프 관련 상태 활성화
             gameState.superJumpMode = false;
             gameState.superJumpFailed = false;
             gameState.players.forEach(player => {
                 player.isWaitJump = false;
                 player.hasSuperJumpChance = false;
-                player.isInJail = false;
-                player.jailTurnCount = 0;
-                player.jailQuizStreak = 0;
+                player.isOnIsland = false;
+                player.islandTurnCount = 0;
+                player.islandQuizStreak = 0;
             });
             
-            // 감옥 모드 초기화
-            gameState.modes.jail.active = false;
-            gameState.modes.jail.escapePhase = null;
-            gameState.modes.jail.justEscaped = false;
+            // 무인도 모드 활성화
+            gameState.modes.island.active = false;
+            gameState.modes.island.escapePhase = null;
+            gameState.modes.island.justEscaped = false;
             
-            // 감옥 표시기 숨기기 (제거됨)
-            // jailManager.hideJailIndicator();
+            // 무인도 표시기 숨기기 (제거됨)
+            // islandManager.hideIslandIndicator();
             
             
             // 기본 팔레트(오션 톤) 적용
@@ -2735,7 +3060,7 @@
             
             // 특별 칸 고유 색상 유지
             document.documentElement.style.setProperty('--color-superjump', '#00BFFF');
-            document.documentElement.style.setProperty('--color-jail', '#616161');
+            document.documentElement.style.setProperty('--color-island', '#616161');
             document.documentElement.style.setProperty('--color-donation', '#FF69B4');
             
             // 팔레트별 플레이어 색상 CSS 변수 설정
@@ -2750,24 +3075,32 @@
                 }
             });
             
+            // 플레이어 카드 생성
+            createPlayerCards();
+            
             // 보드 생성
             createBoard();
             
-            // 초기 주사위 값 설정 (1로 시작)
-            gameState.diceValue = 1;
-            updateDiceIcon(1);
+            // 초기 주사위 값 설정 (5로 시작하여 주사위가 사라지지 않게 함)
+            gameState.diceValue = 5;
+            updateDiceIcon(5);
             updateUI();
             
             // 주사위 버튼 초기 상태 설정
             diceButtonManager.updateFromGameState();
             
-            // 소유권 초기화 및 띠지 색상 설정
+            // 게임 상태 모니터링 시작
+            gameStateMonitor.startMonitoring();
+            
+            // 소유권 활성화 및 띠지 색상 설정
             resetSpaceOwners();
-            // 보드 생성 후 띠지 색상 초기화
+            // 보드 생성 후 띠지 색상 활성화
             setTimeout(() => {
                 updateRibbonColors();
-                updateLandOwnershipDisplay(); // 땅 소유 표시 초기화
-                updateDonationDisplay(); // 기부금 모금 표시 초기화
+                updateLandOwnershipDisplay(); // 땅 소유 표시 활성화
+                updateDonationDisplay(); // 기부금 모금 표시 활성화
+                updateStarDisplay(); // 별 표시 활성화
+                addLandClickHandlers(); // 땅 클릭 이벤트 추가
             }, 100);
         }
 
@@ -2789,12 +3122,12 @@
                         cell.classList.add('corner-space');
                         
                         if (row === 0 && col === 0) {
-                            // 감옥 - special 타입
+                            // 무인도 - special 타입
                             const space = boardSpaces.find(s => s.id === 12);
                             if (space) {
                                 cell.className = `board-space corner-space ${space.color}`;
                             }
-                            cell.innerHTML = '<div class="space-name">   감  옥   </div>';
+                            cell.innerHTML = '<div class="space-name">   무  인  도   </div>';
                             cell.dataset.spaceId = 12;
                             cell.onclick = () => handleSpaceClick(12);
                         } else if (row === 0 && col === 6) {
@@ -2850,10 +3183,19 @@
                             if (space) {
                                 cell.className = `board-space ${space.color}`;
                                 cell.dataset.space = spaceIndex; // 띠지 시스템을 위한 data-space 속성 추가
+                                // 황금 열쇠 칸인 경우 특별 처리
+                                if (space.type === 'golden') {
+                                    cell.innerHTML = `
+                                        <div class="space-name">황금 열쇠</div>
+                                        <div class="space-content">🔑</div>
+                                    `;
+                                } else {
                                 cell.innerHTML = `
-                                    <div class="space-number">${space.id}</div>
-                                    <div class="space-name">${space.name}</div>
+                                    <div class="space-content-wrapper">
+                                        <div class="space-name">${space.name}</div>
+                                    </div>
                                 `;
+                                }
                                 
                                 // 중앙 패널과 겹치는 영역의 칸들은 클릭 이벤트 제거
                                 if ((row >= 2 && row <= 4) && (col >= 2 && col <= 4)) {
@@ -2950,7 +3292,7 @@
                             }
                             
                             piece.style.right = rightPosition;
-                            piece.style.left = 'auto'; // left 속성 초기화
+                            piece.style.left = 'auto'; // left 속성 활성화
                             spaceElement.appendChild(piece);
                         });
                     }
@@ -2962,7 +3304,7 @@
         function getGridPosition(spaceIndex) {
             if (spaceIndex === 0) return { row: 6, col: 6 }; // 시작 (우하단)
             if (spaceIndex === 6) return { row: 6, col: 0 }; // 슈퍼 점프 (좌하단)
-            if (spaceIndex === 12) return { row: 0, col: 0 }; // 감옥 (좌상단)
+            if (spaceIndex === 12) return { row: 0, col: 0 }; // 무인도 (좌상단)
             if (spaceIndex === 18) return { row: 0, col: 6 }; // 기부금 모금 (우상단)
             
             // 상단 변 (13-17) - 왼쪽에서 오른쪽으로
@@ -2999,6 +3341,22 @@
             19: null, 20: null, 22: null, 23: null   // 4번 지역
         };
 
+        // 별 개수 시스템 (땅별 별 개수 저장)
+        let spaceStars = {
+            1: 0, 2: 0, 4: 0, 5: 0,      // 1번 지역
+            7: 0, 8: 0, 10: 0, 11: 0,    // 2번 지역
+            13: 0, 14: 0, 16: 0, 17: 0,  // 3번 지역
+            19: 0, 20: 0, 22: 0, 23: 0   // 4번 지역
+        };
+
+        // 통행세 기준 (1성 기준)
+        const tollRates = {
+            1: 100, 2: 100, 4: 100, 5: 100,      // 1번 지역
+            7: 200, 8: 200, 10: 200, 11: 200,    // 2번 지역
+            13: 300, 14: 300, 16: 300, 17: 300,  // 3번 지역
+            19: 300, 20: 300, 22: 300, 23: 300   // 4번 지역
+        };
+
 
         // 띠지 색상 업데이트 함수 (동적 플레이어 색상 사용)
         function updateRibbonColors() {
@@ -3023,7 +3381,7 @@
             });
         }
 
-        // 소유권 초기화 함수
+        // 소유권 활성화 함수
         function resetSpaceOwners() {
             spaceOwners = {
                 1: null, 2: null, 4: null, 5: null,      // 1번 지역
@@ -3031,15 +3389,188 @@
                 13: null, 14: null, 16: null, 17: null,  // 3번 지역
                 19: null, 20: null, 22: null, 23: null   // 4번 지역
             };
+            
+            // 별 개수도 초기화
+            spaceStars = {
+                1: 0, 2: 0, 4: 0, 5: 0,      // 1번 지역
+                7: 0, 8: 0, 10: 0, 11: 0,    // 2번 지역
+                13: 0, 14: 0, 16: 0, 17: 0,  // 3번 지역
+                19: 0, 20: 0, 22: 0, 23: 0   // 4번 지역
+            };
         }
 
         // 칸 구매 함수 (문제를 맞췄을 때 호출)
         function buySpace(playerIndex, spaceNumber) {
             if (spaceOwners[spaceNumber] === null) {
                 spaceOwners[spaceNumber] = playerIndex;
+                spaceStars[spaceNumber] = 1; // 첫 구매 시 1성
                 updateRibbonColors();
                 updateLandOwnershipDisplay(); // 땅 소유 표시 업데이트
+                updateStarDisplay(); // 별 표시 업데이트
             }
+        }
+
+        // 별 개수 증가 함수
+        function increaseStar(spaceNumber) {
+            if (spaceStars[spaceNumber] < 5) {
+                spaceStars[spaceNumber]++;
+                updateStarDisplay();
+            }
+        }
+
+        // 별 개수 감소 함수
+        function decreaseStar(spaceNumber) {
+            if (spaceStars[spaceNumber] > 0) {
+                spaceStars[spaceNumber]--;
+                updateStarDisplay();
+                
+                // 별이 0개가 되면 소유권도 제거
+                if (spaceStars[spaceNumber] === 0) {
+                    spaceOwners[spaceNumber] = null;
+                    updateRibbonColors();
+                    updateLandOwnershipDisplay();
+                }
+            }
+        }
+
+        // 통행세 계산 함수
+        function calculateToll(spaceNumber) {
+            const baseRate = tollRates[spaceNumber] || 0;
+            const starCount = spaceStars[spaceNumber] || 0;
+            return baseRate * starCount;
+        }
+
+        // 별 표시 업데이트 함수
+        function updateStarDisplay() {
+            const spaces = document.querySelectorAll('.board-space[data-space]');
+            spaces.forEach(space => {
+                const spaceNumber = parseInt(space.dataset.space);
+                const starCount = spaceStars[spaceNumber] || 0;
+                
+                // 기존 별 표시 제거
+                const existingStars = space.querySelector('.star-display');
+                if (existingStars) {
+                    existingStars.remove();
+                }
+                
+                // 별이 있으면 숫자와 함께 표시
+                if (starCount > 0) {
+                    const wrapper = space.querySelector('.space-content-wrapper');
+                    if (wrapper) {
+                        const starDisplay = document.createElement('div');
+                        starDisplay.className = 'star-display';
+                        starDisplay.innerHTML = '⭐'.repeat(starCount);
+                        wrapper.appendChild(starDisplay);
+                    }
+                }
+            });
+        }
+
+        // 땅 퀴즈 처리 함수
+        function handleLandQuiz(position) {
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            const ownerIndex = spaceOwners[position];
+            const starCount = spaceStars[position] || 0;
+            const space = boardSpaces.find(s => s.id === position);
+            const landName = space ? space.name : `${position}번`;
+            
+            // 무소유 땅인 경우
+            if (ownerIndex === null) {
+                showMessage(`${landName} 땅에 도착했습니다! 퀴즈를 맞춰 땅을 소유하세요!`);
+                setTimeout(() => {
+                    showQuiz();
+                }, 1500);
+                return;
+            }
+            
+            // 본인 땅인 경우
+            if (ownerIndex === currentPlayer.id - 1) {
+                if (starCount >= 5) {
+                    showMessage(`${landName} 땅에 도착했습니다! 퀴즈를 맞춰 1,000점을 획득하세요!`);
+                } else {
+                    showMessage(`${landName} 땅에 도착했습니다! 퀴즈를 맞춰 별을 증가시키세요!`);
+                }
+                setTimeout(() => {
+                    showQuiz();
+                }, 1500);
+                return;
+            }
+            
+            // 다른 사람 땅인 경우 - 통행세 지불
+            const toll = calculateToll(position);
+            const owner = gameState.players[ownerIndex];
+            
+            if (toll > 0) {
+                currentPlayer.score -= toll;
+                owner.score += toll;
+                
+                showMessage(`${owner.name}의 ${landName} 땅에 도착! 통행세 ${formatNumber(toll)}점 지불!`);
+                
+                setTimeout(() => {
+                    showMessage('통행세 지불 후 퀴즈를 맞춰 별을 감소시킬 수 있습니다!');
+                    setTimeout(() => {
+                        showQuiz();
+                    }, 1500);
+                }, 1500);
+            } else {
+                showMessage(`${owner.name}의 ${landName} 땅에 도착했습니다!`);
+                setTimeout(() => {
+                    showQuiz();
+                }, 1500);
+            }
+        }
+
+        // 땅 퀴즈 답변 처리 함수
+        function handleLandQuizAnswer(selected, correct, points, spaceNumber) {
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            const ownerIndex = spaceOwners[spaceNumber];
+            const starCount = spaceStars[spaceNumber] || 0;
+            const space = boardSpaces.find(s => s.id === spaceNumber);
+            const landName = space ? space.name : `${spaceNumber}번`;
+            
+            // 시간 초과 처리
+            if (selected === -1) {
+                showMessage('시간 초과! 점수 없음');
+                closeQuiz();
+                return;
+            }
+            
+            // 정답인 경우
+            if (selected === correct) {
+                // 기본 점수 부여 (500점 또는 5성 땅은 1000점)
+                const bonusPoints = starCount >= 5 ? 1000 : 500;
+                currentPlayer.score += bonusPoints;
+                
+                // 무소유 땅인 경우 - 땅 구매
+                if (ownerIndex === null) {
+                    buySpace(currentPlayer.id - 1, spaceNumber);
+                    showMessage(`정답! +${formatNumber(bonusPoints)}점 획득! ${landName} 땅을 소유했습니다!`);
+                }
+                // 본인 땅인 경우 - 별 증가
+                else if (ownerIndex === currentPlayer.id - 1) {
+                    if (starCount < 5) {
+                        increaseStar(spaceNumber);
+                        showMessage(`정답! +${formatNumber(bonusPoints)}점 획득! ${landName} 땅의 별이 증가했습니다!`);
+                    } else {
+                        showMessage(`정답! +${formatNumber(bonusPoints)}점 획득!`);
+                    }
+                }
+                // 다른 사람 땅인 경우 - 별 감소
+                else {
+                    if (starCount > 0) {
+                        decreaseStar(spaceNumber);
+                        showMessage(`정답! +${formatNumber(bonusPoints)}점 획득! ${landName} 땅의 별이 감소했습니다!`);
+                    } else {
+                        showMessage(`정답! +${formatNumber(bonusPoints)}점 획득!`);
+                    }
+                }
+            } else {
+                // 오답인 경우
+                showMessage('틀렸습니다! 점수 없음');
+            }
+            
+            closeQuiz();
+            updateUI();
         }
 
         // 땅 소유 개수 계산 함수
@@ -3062,6 +3593,60 @@
                     landElement.textContent = landCount;
                 }
             }
+        }
+
+        // 땅 클릭 이벤트 핸들러 추가
+        function addLandClickHandlers() {
+            const spaces = document.querySelectorAll('.board-space[data-space]');
+            spaces.forEach(space => {
+                const spaceNumber = parseInt(space.dataset.space);
+                // 땅 칸만 클릭 이벤트 추가 (특별 칸 제외)
+                if (spaceOwners[spaceNumber] !== undefined) {
+                    space.style.cursor = 'pointer';
+                    space.addEventListener('click', () => {
+                        showLandInfoPopup(spaceNumber);
+                    });
+                }
+            });
+        }
+
+        // 땅 정보 팝업 표시
+        function showLandInfoPopup(spaceNumber) {
+            const ownerIndex = spaceOwners[spaceNumber];
+            const starCount = spaceStars[spaceNumber] || 0;
+            const toll = calculateToll(spaceNumber);
+            const space = boardSpaces.find(s => s.id === spaceNumber);
+            const landName = space ? space.name : `${spaceNumber}번`;
+            
+            let content = `<h3>${landName} 땅 정보</h3>`;
+            
+            if (ownerIndex === null) {
+                content += `<p>소유자: 없음</p>`;
+                content += `<p>별 개수: 0개</p>`;
+                content += `<p>통행세: 없음</p>`;
+            } else {
+                const owner = gameState.players[ownerIndex];
+                content += `<p>소유자: ${owner.name}</p>`;
+                content += `<p>별 개수: ${starCount}개</p>`;
+                content += `<p>통행세: ${formatNumber(toll)}점</p>`;
+            }
+            
+            // 팝업 생성
+            const popup = document.createElement('div');
+            popup.className = 'popup land-info-popup';
+            popup.innerHTML = `
+                <div class="popup-content">
+                    ${content}
+                    <button onclick="this.parentElement.parentElement.remove()">확인</button>
+                </div>
+            `;
+            
+            document.body.appendChild(popup);
+            
+            // 팝업 표시
+            setTimeout(() => {
+                popup.classList.add('show');
+            }, 10);
         }
 
         // 주사위 아이콘 SVG 패턴들 (흰색 배경)
@@ -3116,6 +3701,15 @@
             }
             if (gameState.superJumpMode) return; // 슈퍼 점프 모드일 때는 주사위 비활성화
             
+            // 무인도에 갇힌 플레이어는 3턴째부터만 주사위를 굴릴 수 있음
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            if (currentPlayer && currentPlayer.isOnIsland && currentPlayer.islandTurnCount < 3) {
+                return;
+            }
+
+            // 게임 액션 기록
+            gameStateMonitor.recordAction();
+            
 
             const diceIcon = document.getElementById('diceIcon');
             const rollBtn = document.getElementById('rollDiceBtn');
@@ -3130,7 +3724,7 @@
             diceButtonManager.setState('disabled');
             // 버튼 텍스트는 그대로 유지 (크기 변화 방지)
 
-            // 랜덤 주사위 값 생성 (1-6)
+            // 랜덤 주사위 값 생성
             const finalValue = Math.floor(Math.random() * 6) + 1;
             
             // 애니메이션 효과를 위한 여러 번 값 변경
@@ -3239,23 +3833,22 @@
                     // 시작점은 이미 통과 보너스로 처리됨
                     break;
                 case 'quiz':
-                    showQuiz();
+                    handleLandQuiz(position);
                     return;
                 case 'golden':
                     showGoldenKeyEvent();
                     return;
                 case 'corner':
                     // corner 타입 칸들의 이름에 따라 다른 액션 수행
-                    if (space.name === '감옥') {
+                    if (space.name === '무인도') {
                         const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
-                        jailManager.putPlayerInJail(currentPlayer.id);
-                        shouldAutoEndTurn = true; // 감옥 처리 후 턴 전환
+                        islandManager.putPlayerOnIsland(currentPlayer.id);
+                        shouldAutoEndTurn = false; // 무인도 팝업은 사용자 확인 후 턴 전환
                     } else if (space.name === '슈퍼 점프') {
                         const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
                         currentPlayer.hasSuperJumpChance = true; // 슈퍼 점프 기회 플래그 설정
-                        showMessage('다음 차례에 슈퍼 점프에 도전합니다.');
-                        
-                        // 일반적인 턴 전환 (자동 턴 전환 허용)
+                        showSuperJumpPopup(currentPlayer.name);
+                        shouldAutoEndTurn = false; // 슈퍼 점프 팝업은 사용자 확인 후 턴 전환
                     } else if (space.name === '기부금 모금') {
                         const donationPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
                         
@@ -3287,13 +3880,13 @@
             }
 
             // 자동으로 턴 전환 (턴 종료 버튼 제거)
-            if (shouldAutoEndTurn && !gameState.modes.jail.justEscaped) {
+            if (shouldAutoEndTurn && !gameState.modes.island.justEscaped) {
                 setTimeout(() => {
                     endTurn();
                 }, 2000); // 2초 후 자동 턴 전환
-            } else if (gameState.modes.jail.justEscaped) {
-                // 감옥에서 방금 탈출한 플레이어의 경우 이벤트 처리 완료 후 턴 전환
-                // 플래그는 턴 전환 알림 팝업을 표시한 후 초기화
+            } else if (gameState.modes.island.justEscaped) {
+                // 무인도에서 방금 탈출한 플레이어의 경우 이벤트 처리 완료 후 턴 전환
+                // 플래그는 턴 전환 알림 팝업을 표시한 후 활성화
                 setTimeout(() => {
                     try {
                         endTurn();
@@ -3301,7 +3894,13 @@
                     } catch (error) {
                         console.error('endTurn 에러:', error);
                         // 에러 발생 시 기본 턴 전환 처리
-                        gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
+                        const currentPlayerIndex = gameState.players.findIndex(p => p.id === gameState.currentPlayer);
+                        if (currentPlayerIndex === -1) {
+                            console.error('endTurn 에러 처리 중 현재 플레이어를 찾을 수 없습니다:', gameState.currentPlayer);
+                            return;
+                        }
+                        const nextPlayerIndex = (currentPlayerIndex + 1) % gameState.players.length;
+                        gameState.currentPlayer = gameState.players[nextPlayerIndex].id;
                         gameState.gamePhase = 'waiting';
                         updateUI();
                     }
@@ -3332,15 +3931,15 @@
                 if (gameState.superJumpMode) {
                     titleEl.textContent = `🚀 ${playerName} - 슈퍼 점프 퀴즈!`;
                     popup.classList.add('super-jump-mode');
-                } else if (currentPlayer && currentPlayer.isInJail) {
-                    // 감옥 퀴즈인 경우
-                    const requiredStreak = currentPlayer.jailTurnCount === 1 ? 2 : 1;
-                    titleEl.textContent = `🔒 ${playerName} - 감옥 탈출 퀴즈!`;
-                    popup.classList.add('jail-mode');
+                } else if (currentPlayer && currentPlayer.isOnIsland) {
+                    // 무인도 퀴즈인 경우
+                    const requiredStreak = currentPlayer.islandTurnCount === 1 ? 2 : 1;
+                    titleEl.textContent = `🏝️ ${playerName} - 무인도 탈출 퀴즈!`;
+                    popup.classList.add('island-mode');
                 } else {
                     titleEl.textContent = `🧠 ${playerName} - 퀴즈 도전!`;
                     popup.classList.remove('super-jump-mode');
-                    popup.classList.remove('jail-mode');
+                    popup.classList.remove('island-mode');
                 }
                 }
 
@@ -3355,14 +3954,14 @@
                 optionsEl.appendChild(button);
             });
 
-            // 감옥 퀴즈인 경우 진행 상황 표시
-            if (currentPlayer && currentPlayer.isInJail) {
-                const requiredStreak = currentPlayer.jailTurnCount === 1 ? 2 : 1;
+            // 무인도 퀴즈인 경우 진행 상황 표시
+            if (currentPlayer && currentPlayer.isOnIsland) {
+                const requiredStreak = currentPlayer.islandTurnCount === 1 ? 2 : 1;
                 const progressEl = document.createElement('div');
                 progressEl.style.cssText = 'margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; text-align: center;';
                 progressEl.innerHTML = `
                     <p style="margin: 5px 0; font-size: 14px;">문제를 ${requiredStreak}개 연속으로 맞춰 탈출하세요!</p>
-                    <p style="margin: 5px 0; font-size: 16px; font-weight: bold;">현재 연속 정답: ${currentPlayer.jailQuizStreak}/${requiredStreak}</p>
+                    <p style="margin: 5px 0; font-size: 16px; font-weight: bold;">현재 연속 정답: ${currentPlayer.islandQuizStreak}/${requiredStreak}</p>
                 `;
                 optionsEl.appendChild(progressEl);
             }
@@ -3370,9 +3969,9 @@
             popup.classList.add('show');
             startQuizTimer();
             
-            // 감옥 퀴즈인 경우 현재 플레이어 하이라이트 설정
-            if (currentPlayer && currentPlayer.isInJail) {
-                updatePlayerHighlightForJail(currentPlayer);
+            // 무인도 퀴즈인 경우 현재 플레이어 하이라이트 설정
+            if (currentPlayer && currentPlayer.isOnIsland) {
+                updatePlayerHighlightForIsland(currentPlayer);
             }
             } catch (error) {
                 showMessage('퀴즈를 불러올 수 없습니다.');
@@ -3414,10 +4013,10 @@
             const player = gameState.players.find(p => p.id === gameState.currentPlayer);
             const currentSpace = player.position;
             
-            // 감옥 퀴즈인지 확인
-            if (player.isInJail) {
+            // 무인도 퀴즈인지 확인
+            if (player.isOnIsland) {
                 const isCorrect = selected === correct;
-                jailManager.handleJailQuizAnswer(player.id, isCorrect);
+                islandManager.handleIslandQuizAnswer(player.id, isCorrect);
                 return;
             }
             
@@ -3447,6 +4046,12 @@
                 return;
             }
             
+            // 땅 퀴즈 처리
+            if (spaceOwners[currentSpace] !== undefined) {
+                handleLandQuizAnswer(selected, correct, points, currentSpace);
+                return;
+            }
+            
             // 일반 퀴즈 처리
             // 시간 초과 처리
             if (selected === -1) {
@@ -3460,9 +4065,9 @@
                     // 플레이어 ID를 0부터 시작하는 인덱스로 변환 (1->0, 2->1, 3->2, 4->3)
                     const playerIndex = gameState.currentPlayer - 1;
                     buySpace(playerIndex, currentSpace);
-                    showMessage(`정답! +${points}점 획득! 칸 ${currentSpace}을 구매했습니다!`);
+                    showMessage(`정답! +${formatNumber(points)}점 획득! 칸 ${currentSpace}을 구매했습니다!`);
                 } else {
-                    showMessage(`정답! +${points}점 획득!`);
+                    showMessage(`정답! +${formatNumber(points)}점 획득!`);
                 }
             } else {
                 showMessage('틀렸습니다! 점수 없음');
@@ -3487,25 +4092,31 @@
                 popup.classList.remove('super-jump-mode');
             }
             
-            // 감옥 모드 클래스 제거
-            popup.classList.remove('jail-mode');
+            // 무인도 모드 클래스 제거
+            popup.classList.remove('island-mode');
             
-            // 슈퍼 점프 모드가 아니고 슈퍼 점프 실패가 아니고 감옥 모드가 아니고 감옥 탈출 성공이 아닐 때만 턴 전환
+            // 슈퍼 점프 모드가 아니고 슈퍼 점프 실패가 아니고 무인도 모드가 아니고 무인도 탈출 성공이 아닐 때만 턴 전환
             const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
-            if (!gameState.superJumpMode && !gameState.superJumpFailed && !(currentPlayer && currentPlayer.isInJail) && !gameState.modes.jail.justEscaped) {
+            if (!gameState.superJumpMode && !gameState.superJumpFailed && !(currentPlayer && currentPlayer.isOnIsland) && !gameState.modes.island.justEscaped) {
                 setTimeout(() => {
                     try {
                     endTurn();
                     } catch (error) {
                         console.error('closeQuiz에서 endTurn 에러:', error);
                         // 에러 발생 시 기본 턴 전환 처리
-                        gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
+                        const currentPlayerIndex = gameState.players.findIndex(p => p.id === gameState.currentPlayer);
+                        if (currentPlayerIndex === -1) {
+                            console.error('closeQuiz 에러 처리 중 현재 플레이어를 찾을 수 없습니다:', gameState.currentPlayer);
+                            return;
+                        }
+                        const nextPlayerIndex = (currentPlayerIndex + 1) % gameState.players.length;
+                        gameState.currentPlayer = gameState.players[nextPlayerIndex].id;
                         gameState.gamePhase = 'waiting';
                         updateUI();
                     }
                 }, 1500); // 1.5초 후 자동 턴 전환
             }
-            // 감옥 퀴즈 중이나 감옥 탈출 성공 시에는 턴 전환하지 않음 (감옥 매니저에서 처리)
+            // 무인도 퀴즈 중이나 무인도 탈출 성공 시에는 턴 전환하지 않음 (무인도 매니저에서 처리)
         }
 
         // 현재 황금 열쇠 이벤트 저장 변수
@@ -3542,14 +4153,8 @@
                 player.score = Math.max(0, player.score + randomResult.points);
                 const actualChange = player.score - oldScore;
                 
-                // 결과 메시지 생성
-                let resultMessage = randomResult.message;
-                if (randomResult.points < 0 && actualChange > randomResult.points) {
-                    resultMessage += ` (실제 변화: ${actualChange}점)`;
-                }
-                    
-                    showMessage(resultMessage);
-                    updateUI();
+                // 점수만 업데이트 (메시지는 팝업 내부에 이미 표시됨)
+                updateUI();
                 };
                 
                 // 결과 표시
@@ -3577,7 +4182,7 @@
                 currentGoldenKeyEvent.effect();
             }
             
-            // 이벤트 초기화
+            // 이벤트 활성화
             currentGoldenKeyEvent = null;
             
             // 다음 플레이어로 턴 전환
@@ -3608,7 +4213,7 @@
                     currentGoldenKeyEvent.effect();
             }
             
-            // 이벤트 초기화
+            // 이벤트 활성화
             currentGoldenKeyEvent = null;
             
             // 다음 플레이어로 턴 전환
@@ -3655,23 +4260,22 @@
                 contentEl.innerHTML = `<p>${playerName} - 문제를 풀어 슈퍼 점프에 도전하세요!</p>`;
                     popup.classList.add('super-jump-mode');
             } else {
-                // 감옥에 갇힌 플레이어의 턴인지 확인
+                // 무인도에 갇힌 플레이어의 턴인지 확인
                     const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
-                if (currentPlayer && currentPlayer.isInJail) {
-                    console.log('[DEBUG] 감옥 플레이어 턴 알림:', currentPlayer.name, '메시지:', message);
-                    titleEl.innerHTML = '🔒 감옥 탈출 도전!';
-                    contentEl.innerHTML = `<p>${currentPlayer.name}의 감옥 탈출 도전!</p>`;
-                    popup.classList.add('jail-mode');
+                if (currentPlayer && currentPlayer.isOnIsland) {
+                    titleEl.innerHTML = '🏝️ 무인도 탈출 도전!';
+                    contentEl.innerHTML = `<p>${currentPlayer.name}의 무인도 탈출 도전!</p>`;
+                    popup.classList.add('island-mode');
                     console.log('[DEBUG] 콘텐츠 요소 설정 후:', contentEl.innerHTML);
                 } else if (message && message.includes('도전 실패')) {
                     const playerName = currentPlayer ? currentPlayer.name : `플레이어 ${gameState.currentPlayer}`;
                     titleEl.innerHTML = '❌ 도전 실패!';
                     contentEl.innerHTML = `<p>${playerName} - 주사위를 굴려 이동하세요.</p>`;
-                    popup.classList.remove('jail-mode');
+                    popup.classList.remove('island-mode');
                 } else {
                     titleEl.innerHTML = '🎮 턴 전환';
                     contentEl.innerHTML = `<p>${message || '턴이 전환되었습니다.'}</p>`;
-                    popup.classList.remove('jail-mode');
+                    popup.classList.remove('island-mode');
                 }
                 popup.classList.remove('super-jump-mode');
             }
@@ -3693,34 +4297,46 @@
             const popup = document.getElementById('turnNotificationPopup');
             popup.classList.remove('show');
             
-            // 현재 플레이어가 감옥에 갇혀있는지 확인
-            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
-            console.log('[DEBUG] closeTurnNotification - 현재 플레이어:', currentPlayer?.name, '감옥 상태:', currentPlayer?.isInJail);
+            // 게임 액션 기록
+            gameStateMonitor.recordAction();
             
-            if (currentPlayer && currentPlayer.isInJail) {
-                // 감옥에 갇힌 플레이어의 퀴즈 시작
-                console.log('[DEBUG] 감옥 플레이어 퀴즈 시작 시도:', currentPlayer.name);
+            // 현재 플레이어가 무인도에 갇혀있는지 확인
+            const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+            
+            if (currentPlayer && currentPlayer.isOnIsland) {
+                // 무인도에 갇힌 플레이어의 퀴즈 시작
                 try {
-                    jailManager.attemptJailEscape(currentPlayer.id);
-                    console.log('[DEBUG] attemptJailEscape 호출 완료');
+                    islandManager.attemptIslandEscape(currentPlayer.id);
+                    console.log('[DEBUG] attemptIslandEscape 호출 완료');
                 } catch (error) {
-                    console.error('[DEBUG] attemptJailEscape 에러:', error);
+                    console.error('[DEBUG] attemptIslandEscape 에러:', error);
                 }
-                return; // 감옥 퀴즈 시작 후 다른 로직 실행 방지
+                return; // 무인도 퀴즈 시작 후 다른 로직 실행 방지
             } else if (gameState.superJumpMode) {
                 showQuiz();
             } else {
                 // 슈퍼 점프 모드가 아닐 때는 슈퍼 점프 모드 클래스 제거
                 popup.classList.remove('super-jump-mode');
                 
-                // 감옥에서 탈출한 플레이어가 턴 전환 알림을 확인한 경우
-                if (gameState.modes.jail.justEscaped) {
-                    // 플래그 초기화
-                    gameState.modes.jail.justEscaped = false;
+                // 무인도에서 탈출한 플레이어가 턴 전환 알림을 확인한 경우
+                if (gameState.modes.island.justEscaped) {
+                    // 플래그 활성화
+                    gameState.modes.island.justEscaped = false;
                     // 주사위 버튼 활성화
                     diceButtonManager.updateFromGameState();
                     // 턴 전환은 이미 endTurn()에서 완료되었으므로 UI만 업데이트
                     updateUI();
+                    return;
+                }
+                
+                // 무인도에 갇힌 플레이어의 턴 전환 알림 확인 시
+                const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
+                if (currentPlayer && currentPlayer.isOnIsland) {
+                    try {
+                        islandManager.attemptIslandEscape(currentPlayer.id);
+                    } catch (error) {
+                        console.error('[DEBUG] 무인도 탈출 로직 에러:', error);
+                    }
                     return;
                 }
                 
@@ -3754,9 +4370,22 @@
                 return; // 턴 전환하지 않음
             }
             
-            // 기존 턴 전환 로직
+            // 게임 액션 기록
+            gameStateMonitor.recordAction();
+            
+            // 동적 턴 전환 로직 (플레이어 수에 따라 자동 조정)
             const previousPlayer = gameState.currentPlayer;
-            gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
+            const currentPlayerIndex = gameState.players.findIndex(p => p.id === gameState.currentPlayer);
+            
+            // 현재 플레이어를 찾지 못한 경우 에러 처리
+            if (currentPlayerIndex === -1) {
+                console.error('현재 플레이어를 찾을 수 없습니다:', gameState.currentPlayer);
+                console.error('사용 가능한 플레이어들:', gameState.players.map(p => p.id));
+                return;
+            }
+            
+            const nextPlayerIndex = (currentPlayerIndex + 1) % gameState.players.length;
+            gameState.currentPlayer = gameState.players[nextPlayerIndex].id;
             gameState.gamePhase = 'waiting';
             gameState.diceValue = 0;
 
@@ -3772,15 +4401,17 @@
                     return;
                 }
                 
-                // 감옥에 갇힌 플레이어의 턴 처리
-                if (newCurrentPlayer.isInJail) {
-                    showTurnNotification(`${newCurrentPlayer.name}의 감옥 탈출 도전!`);
+                // 무인도에 갇힌 플레이어의 턴 처리
+                if (newCurrentPlayer.isOnIsland) {
+                    
+                    // 무인도에 갇힌 플레이어에게도 턴 전환 메시지 표시
+                    showTurnNotification(`${newCurrentPlayer.name}의 차례입니다.`);
                     return;
                 }
                 
-                // 감옥에 갇힌 플레이어가 없으면 감옥 표시기 숨기기 (제거됨)
-                // if (!jailManager.hasJailedPlayers()) {
-                //     jailManager.hideJailIndicator();
+                // 무인도에 갇힌 플레이어가 없으면 무인도 표시기 숨기기 (제거됨)
+                // if (!islandManager.hasIslandPlayers()) {
+                //     islandManager.hideIslandIndicator();
                 // }
                 
             if (newCurrentPlayer.hasSuperJumpChance) {
@@ -3808,7 +4439,13 @@
             } catch (error) {
                 console.error('endTurn 함수 에러:', error);
                 // 에러 발생 시 기본 턴 전환 처리
-                gameState.currentPlayer = gameState.currentPlayer === 4 ? 1 : gameState.currentPlayer + 1;
+                const currentPlayerIndex = gameState.players.findIndex(p => p.id === gameState.currentPlayer);
+                if (currentPlayerIndex === -1) {
+                    console.error('endTurn 함수 에러 처리 중 현재 플레이어를 찾을 수 없습니다:', gameState.currentPlayer);
+                    return;
+                }
+                const nextPlayerIndex = (currentPlayerIndex + 1) % gameState.players.length;
+                gameState.currentPlayer = gameState.players[nextPlayerIndex].id;
                 gameState.gamePhase = 'waiting';
             updateUI();
             }
@@ -3820,7 +4457,7 @@
             gameState.players.forEach(player => {
                 const scoreElement = document.getElementById(`score${player.id}`);
                 if (scoreElement) {
-                    scoreElement.textContent = player.score;
+                    scoreElement.textContent = formatNumber(player.score);
                 }
             });
 
@@ -3842,11 +4479,11 @@
                 card.classList.remove('active');
             });
 
-            // 감옥에 갇힌 플레이어도 하이라이트 처리
+            // 무인도에 갇힌 플레이어도 하이라이트 처리
             const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
             
-            if (currentPlayer && currentPlayer.isInJail) {
-                updatePlayerHighlightForJail(currentPlayer);
+            if (currentPlayer && currentPlayer.isOnIsland) {
+                updatePlayerHighlightForIsland(currentPlayer);
                 return;
             }
 
@@ -3860,20 +4497,20 @@
             }
         }
 
-        // 감옥 퀴즈 중 플레이어 하이라이트 업데이트
-        function updatePlayerHighlightForJail(player) {
+        // 무인도 퀴즈 중 플레이어 하이라이트 업데이트
+        function updatePlayerHighlightForIsland(player) {
             // 모든 플레이어 카드에서 active 클래스 제거
             document.querySelectorAll('.player-info').forEach(card => {
                 card.classList.remove('active');
             });
 
-            // 감옥에 갇힌 플레이어 카드에 active 클래스 추가
+            // 무인도에 갇힌 플레이어 카드에 active 클래스 추가
             const playerCard = document.getElementById(`player${player.id}-info`);
             
             if (playerCard) {
                 playerCard.classList.add('active');
             } else {
-                console.error('감옥 플레이어', player.id, '카드를 찾을 수 없음');
+                console.error('무인도 플레이어', player.id, '카드를 찾을 수 없음');
             }
         }
 
@@ -3902,15 +4539,15 @@
                                      message.includes('축하합니다!') ||
                                      message.includes('획득했습니다!');
 
-            // 감옥 관련 메시지인지 확인 (성공 메시지는 제외)
-            const isJailMessage = (message.includes('감옥에 갇혔습니다') ||
-                                 message.includes('감옥에서 탈출') ||
-                                 message.includes('감옥 탈출') ||
-                                 message.includes('감옥에서 나갈 수 있습니다') ||
+            // 무인도 관련 메시지인지 확인 (성공 메시지는 제외)
+            const isIslandMessage = (message.includes('무인도에 갇혔습니다') ||
+                                 message.includes('무인도에서 탈출') ||
+                                 message.includes('무인도 탈출') ||
+                                 message.includes('무인도에서 나갈 수 있습니다') ||
                                  message.includes('틀렸습니다! 다음 턴에 다시 도전하세요') ||
                                  (message.includes('정답!') && message.includes('문제 더 맞춰주세요'))) &&
-                                 !message.includes('감옥 탈출 성공') &&
-                                 !message.includes('감옥에서 탈출했습니다');
+                                 !message.includes('무인도 탈출 성공') &&
+                                 !message.includes('무인도에서 탈출했습니다');
 
             // 기부금 관련 메시지인지 확인
             const isDonationMessage = message.includes('기부금') ||
@@ -3961,8 +4598,8 @@
                     animation: slideDown 0.3s ease-out;
                     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
                 `;
-            } else if (isJailMessage) {
-                // 감옥 관련 메시지 스타일
+            } else if (isIslandMessage) {
+                // 무인도 관련 메시지 스타일
                 notification.style.cssText = `
                     position: fixed;
                     top: 20px;
@@ -4136,7 +4773,7 @@
                 showMessage(`슈퍼 점프! ${targetSpace.name}으로 이동!`);
             }
             
-            // 슈퍼 점프 상태 초기화
+            // 슈퍼 점프 상태 활성화
             player.isWaitJump = false;
             gameState.superJumpMode = false;
             gameState.gamePhase = 'waiting';
@@ -4705,7 +5342,7 @@
             
             // 특별 칸 고유 색상 유지 (팔레트 변경 시에도 고정)
             document.documentElement.style.setProperty('--color-superjump', '#00BFFF');
-            document.documentElement.style.setProperty('--color-jail', '#616161');
+            document.documentElement.style.setProperty('--color-island', '#616161');
             document.documentElement.style.setProperty('--color-donation', '#FF69B4');
             
             // 팔레트별 플레이어 색상 CSS 변수 설정 (BoardColorTest.html과 동일)

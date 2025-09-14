@@ -3875,21 +3875,51 @@
                     if (spaceData && spaceData.type === 'quiz' && spaceOwners[spaceNumber] !== undefined) {
                         space.style.cursor = 'pointer';
                         space.addEventListener('click', () => {
-                            showLandInfoPopup(spaceNumber);
+                            // 슈퍼 점프 모드인지 확인
+                            if (gameState.superJumpMode) {
+                                // 슈퍼 점프 칸(6)은 선택할 수 없음
+                                if (spaceNumber === 6) {
+                                    showMessage('슈퍼 점프 칸은 선택할 수 없습니다.');
+                                    return;
+                                }
+                                performSuperJump(spaceNumber);
+                            } else {
+                                showLandInfoPopup(spaceNumber);
+                            }
                         });
                     }
                     // 특별 칸 클릭 이벤트 추가
                     else if (spaceData && (spaceData.type === 'corner' || spaceData.type === 'start')) {
                         space.style.cursor = 'pointer';
                         space.addEventListener('click', () => {
-                            showSpecialSpaceInfoPopup(spaceNumber);
+                            // 슈퍼 점프 모드인지 확인
+                            if (gameState.superJumpMode) {
+                                // 슈퍼 점프 칸(6)은 선택할 수 없음
+                                if (spaceNumber === 6) {
+                                    showMessage('슈퍼 점프 칸은 선택할 수 없습니다.');
+                                    return;
+                                }
+                                performSuperJump(spaceNumber);
+                            } else {
+                                showSpecialSpaceInfoPopup(spaceNumber);
+                            }
                         });
                     }
                     // 황금 열쇠 칸 클릭 이벤트 추가
                     else if (spaceData && spaceData.type === 'golden') {
                         space.style.cursor = 'pointer';
                         space.addEventListener('click', () => {
-                            showGoldenKeyInfoPopup(spaceNumber);
+                            // 슈퍼 점프 모드인지 확인
+                            if (gameState.superJumpMode) {
+                                // 슈퍼 점프 칸(6)은 선택할 수 없음
+                                if (spaceNumber === 6) {
+                                    showMessage('슈퍼 점프 칸은 선택할 수 없습니다.');
+                                    return;
+                                }
+                                performSuperJump(spaceNumber);
+                            } else {
+                                showGoldenKeyInfoPopup(spaceNumber);
+                            }
                         });
                     }
                 }
@@ -3903,7 +3933,17 @@
                     if (spaceData && (spaceData.type === 'corner' || spaceData.type === 'start')) {
                         space.style.cursor = 'pointer';
                         space.addEventListener('click', () => {
-                            showSpecialSpaceInfoPopup(spaceNumber);
+                            // 슈퍼 점프 모드인지 확인
+                            if (gameState.superJumpMode) {
+                                // 슈퍼 점프 칸(6)은 선택할 수 없음
+                                if (spaceNumber === 6) {
+                                    showMessage('슈퍼 점프 칸은 선택할 수 없습니다.');
+                                    return;
+                                }
+                                performSuperJump(spaceNumber);
+                            } else {
+                                showSpecialSpaceInfoPopup(spaceNumber);
+                            }
                         });
                     }
                 }

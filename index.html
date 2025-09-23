@@ -110,9 +110,9 @@
         .players-section {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            flex-wrap: nowrap;
             justify-content: flex-start;
-            align-items: stretch;
+            gap: 8px;
             width: 100%;
             margin-bottom: 8px;
         }
@@ -157,7 +157,10 @@
             padding: 3px 3.5px;
             border-radius: 15px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex: none;
             width: 100%;
+            max-width: none;
+            min-width: auto;
             border: 2px solid transparent;
             transition: all 0.3s ease;
         }
@@ -510,7 +513,22 @@
             padding: 0;
         }
 
-        /* 세로가 긴 화면 (모바일 세로 모드) - 플레이어 패널을 보드 아래로 이동 */
+        /* 세로 화면: 태블릿/모바일 공통 – 2열 강제 */
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            .player-panel .players-section {              /* 특이성 ↑ */
+                display: flex;
+                flex-direction: row !important;            /* column 강제 규칙 무력화 */
+                flex-wrap: wrap !important;
+                justify-content: space-around;
+                gap: 8px;
+            }
+            .player-panel .player-info {                  /* 폭 2열 */
+                flex: 0 0 calc(48% - 4px);
+                max-width: calc(48% - 4px);
+            }
+        }
+
+        /* 태블릿 세로 (768px 이하, 세로 비율) */
         @media (max-aspect-ratio: 1/1) and (max-width: 768px) {
             .game-container {
                 display: flex;
@@ -537,21 +555,8 @@
                 margin-top: 5px;
             }
             
-            .players-section {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 8px;
-            }
             
-            .player-info {
-                flex: 1 1 calc(50% - 4px);
-                max-width: calc(50% - 4px);
-                min-width: 140px;
-            }
-            
-            /* 세로 화면에서 버튼들 스타일 조정 */
+            /* 태블릿 세로에서 버튼들 스타일 조정 */
             .test-mode-container {
                 justify-content: center;
                 margin-bottom: 12px;
@@ -589,25 +594,74 @@
             }
         }
 
-        /* 플레이어 패널 반응형 너비 조정 */
-        @media (max-width: 1200px) {
+        /* 태블릿 가로 (768px~1200px, 가로 비율) */
+        @media (max-width: 1200px) and (min-aspect-ratio: 1/1) {
             .player-panel {
                 width: clamp(180px, 18vw, 240px);
                 min-width: 180px;
                 max-width: 240px;
             }
+            
+            .players-section {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                gap: 8px;
+            }
+            
+            .player-info {
+                flex: none;
+                width: 100%;
+                max-width: none;
+                min-width: auto;
+            }
         }
 
-        @media (max-width: 900px) {
+        /* 태블릿 가로 (900px 이하, 가로 비율) */
+        @media (max-width: 900px) and (min-aspect-ratio: 1/1) {
             .player-panel {
                 width: clamp(160px, 16vw, 200px);
                 min-width: 160px;
                 max-width: 200px;
                 padding: 12px;
             }
+            
+            .players-section {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                gap: 8px;
+            }
+            
+            .player-info {
+                flex: none;
+                width: 100%;
+                max-width: none;
+                min-width: auto;
+            }
         }
 
-        /* 모바일 우선 레이아웃 */
+        /* 모바일 가로 (768px 이하, 가로 비율) */
+        @media (max-width: 768px) and (min-aspect-ratio: 1/1) {
+            .players-section {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                gap: 8px;
+            }
+            
+            .player-info {
+                flex: none;
+                width: 100%;
+                max-width: none;
+                min-width: auto;
+            }
+        }
+
+        /* 모바일 가로 (768px 이하, 가로 비율) - 레이아웃 조정 */
         @media (max-width: 768px) {
             .game-container {
                 display: flex !important;
@@ -630,12 +684,14 @@
             
             .player-panel {
                 width: 100vw !important;
+                min-width: auto !important;
+                max-width: none !important;
                 order: 2 !important;
                 height: auto !important;
                 min-height: auto !important;
                 max-height: none !important;
                 overflow: visible !important;
-                padding: 10px !important;
+                padding: 8px 2px !important;
             }
             
             .game-board {
@@ -676,7 +732,7 @@
             }
         }
 
-        /* 매우 작은 세로 화면 - 플레이어 정보를 1줄로 배치 */
+        /* 모바일 세로 (480px 이하, 세로 비율) */
         @media (max-aspect-ratio: 1/1) and (max-width: 480px) {
             .game-container {
                 display: flex;
@@ -703,20 +759,8 @@
                 margin-top: 3px;
             }
             
-            .players-section {
-                display: flex;
-                flex-direction: column;
-                gap: 6px;
-            }
             
-            .player-info {
-                flex: none;
-                width: 100%;
-                max-width: none;
-                min-width: auto;
-            }
-            
-            /* 매우 작은 세로 화면에서 버튼들 스타일 조정 */
+            /* 모바일 세로에서 버튼들 스타일 조정 */
             .test-mode-container {
                 justify-content: center;
                 margin-bottom: 10px;
@@ -760,15 +804,8 @@
             }
         }
 
-        @media (max-width: 600px) and (min-aspect-ratio: 1/1) {
-            .player-panel {
-                width: clamp(140px, 14vw, 180px);
-                min-width: 140px;
-                max-width: 180px;
-                padding: 10px;
-            }
-        }
 
+        /* 모바일 가로 (480px 이하, 가로 비율) - 루트 변수 */
         @media (max-width: 480px) {
             :root { /* 우측 버튼(30px) + 테두리(3px*2) + 우측 여백(5px) */
                 --side-ui-gap: 41px;
@@ -1488,7 +1525,7 @@
             background: #e0e0e0;
         }
 
-        /* 모바일 반응형 */
+        /* 모바일 가로 (768px 이하, 가로 비율) - 설정 컨테이너 */
         @media (max-width: 768px) {
             .settings-container {
                 width: 95%;
@@ -1771,7 +1808,7 @@
 
         /* 반응형 디자인 */
         
-        /* 전체화면 버튼 반응형 - 가로 화면에서만 적용 */
+        /* 모바일 가로 (768px 이하, 가로 비율) - 전체화면 버튼 */
         @media (max-width: 768px) and (min-aspect-ratio: 1/1) {
             .fullscreen-button {
                 width: 35px;
@@ -1789,6 +1826,7 @@
             }
         }
 
+        /* 모바일 가로 (480px 이하, 가로 비율) - 전체화면 버튼 */
         @media (max-width: 480px) and (min-aspect-ratio: 1/1) {
             .fullscreen-button {
                 width: 30px;
@@ -1806,7 +1844,7 @@
             }
         }
         
-        /* 중간 크기 화면 - 2줄 배치 (2x2) */
+        /* 태블릿 가로 (900px 이하, 가로 비율) - 센터 패널 */
         @media (max-width: 900px) {
             .center-panel {
                 padding: 15px 20px;
@@ -1817,27 +1855,6 @@
                 box-sizing: border-box;
             }
             
-            .players-section {
-                gap: 8px;
-                flex-wrap: nowrap;
-                flex-direction: column;
-                justify-content: flex-start;
-            }
-            
-            .player-info {
-                min-width: 180px;
-                padding: 10px 12px;
-                gap: 10px;
-                flex: none;
-                width: 100%;
-                max-width: none;
-            }
-            
-            .player-avatar {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
             
             .player-name {
                 font-size: 13px;
@@ -1862,7 +1879,7 @@
             }
         }
 
-        /* 태블릿 크기 - 2줄 배치 유지 */
+        /* 모바일 가로 (768px 이하, 가로 비율) - 센터 패널 */
         @media (max-width: 768px) {
             .center-panel {
                 padding: 15px 18px;
@@ -1873,27 +1890,6 @@
                 box-sizing: border-box;
             }
             
-            .players-section {
-                gap: 6px;
-                flex-wrap: nowrap;
-                flex-direction: column;
-                justify-content: flex-start;
-            }
-            
-            .player-info {
-                min-width: 160px;
-                padding: 8px 10px;
-                gap: 8px;
-                flex: none;
-                width: 100%;
-                max-width: none;
-            }
-            
-            .player-avatar {
-                width: 36px;
-                height: 36px;
-                font-size: 15px;
-            }
             
             .player-name {
                 font-size: 12px;
@@ -1918,58 +1914,7 @@
             }
         }
 
-        /* 작은 화면 - 4줄 배치 (세로) */
-        @media (max-width: 600px) {
-            .center-panel {
-                padding: 12px 15px;
-                gap: 8px;
-                width: calc(100% * 4.5 / 7);
-                max-width: calc(100% * 4.5 / 7);
-                min-width: calc(100% * 4.5 / 7);
-                box-sizing: border-box;
-            }
-            
-            .players-section {
-                gap: 6px;
-                flex-wrap: nowrap;
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .player-info {
-                min-width: 220px;
-                padding: 8px 12px;
-                gap: 10px;
-                flex: none;
-                width: 100%;
-                max-width: 250px;
-            }
-            
-            .player-avatar {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
-            }
-            
-            .player-name {
-                font-size: 12px;
-            }
-            
-            .player-score {
-                font-size: 11px;
-            }
-            
-            .controls-section {
-                gap: 8px;
-            }
-            
-            .game-board {
-                width: 100%;
-                height: 100%;
-                aspect-ratio: 1 / 1;
-            }
-        }
-
+        /* 모바일 가로 (480px 이하, 가로 비율) - 센터 패널 */
         @media (max-width: 480px) {
             .center-panel {
                 padding: 10px 12px;
@@ -1980,27 +1925,6 @@
                 box-sizing: border-box;
             }
             
-            .players-section {
-                gap: 4px;
-                flex-wrap: nowrap;
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .player-info {
-                min-width: 200px;
-                padding: 6px 10px;
-                gap: 8px;
-                flex: none;
-                width: 100%;
-                max-width: 230px;
-            }
-            
-            .player-avatar {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
-            }
             
             .player-name {
                 font-size: 11px;

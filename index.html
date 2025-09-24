@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>모바일 보드게임</title>
+    <title>명인 마블</title>
     <meta name="description" content="친구들과 함께 즐기는 재미있는 모바일 보드게임">
     <meta name="theme-color" content="#4CAF50">
     <style>
@@ -28,6 +28,10 @@
             --color-corner: #4682B4;
             --color-center: #F8F9FA;
             --color-background: #FAFAFA;
+            
+            /* 그리드 관련 CSS 변수 */
+            --board-size: 6;
+            --center-panel-ratio: 3.5;
             --color-normal: #E3F2FD;
             /* 우측 UI(설정/전체화면) 영역 폭을 기준으로 좌우 여백을 동일하게 맞추는 간격 */
             --side-ui-gap: 66px;
@@ -374,70 +378,6 @@
 
         .fullscreen-mode .center-dice-controls {
             display: flex !important;
-        }
-
-        /* 모바일 전체화면 모드 */
-        .mobile-fullscreen {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            z-index: 9999 !important;
-            background: var(--color-background) !important;
-            overflow: hidden !important;
-        }
-
-        .mobile-fullscreen .player-panel {
-            display: none !important;
-        }
-
-        .mobile-fullscreen .game-container {
-            display: flex !important;
-            flex-direction: column !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            padding: 0 !important;
-            gap: 0 !important;
-        }
-
-        .mobile-fullscreen .board-container {
-            width: 100vw !important;
-            height: 100vw !important;
-            max-height: 100vh !important;
-            order: 1 !important;
-        }
-
-        /* 모바일 전체화면 안내 메시지 */
-        .mobile-fullscreen-guide {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            z-index: 10000;
-            max-width: 90vw;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .mobile-fullscreen-guide button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 15px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .mobile-fullscreen-guide button:hover {
-            background: #0056b3;
         }
 
         .player-details {
@@ -859,8 +799,8 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            grid-template-rows: repeat(7, 1fr);
+            grid-template-columns: repeat(var(--board-size), 1fr);
+            grid-template-rows: repeat(var(--board-size), 1fr);
             gap: 0px;
             padding: 0px;
             overflow: visible;
@@ -994,13 +934,13 @@
         }
 
         /* 슈퍼 점프 칸 스타일 (전기 파란색 테마, 둥근 모서리) */
-        .corner-space[data-space-id="6"] {
+        .corner-space[data-space-id="5"] {
             background: var(--color-superjump) !important;
             border-radius: 12px !important;
             border: 3px solid #0080CC !important; /* 입체감 있는 진한 파란색 테두리 */
         }
 
-        .corner-space[data-space-id="6"] .space-name {
+        .corner-space[data-space-id="5"] .space-name {
             font-size: clamp(8px, 2.2vw, 16px) !important;
             font-weight: 900 !important;
             color: #FFFFFF !important;
@@ -1019,13 +959,13 @@
         }
 
         /* 무인도 칸 스타일 (어두운 회색 테마, 둥근 모서리) */
-        .corner-space[data-space-id="12"] {
+        .corner-space[data-space-id="10"] {
             background: var(--color-island) !important;
             border-radius: 12px !important;
             border: 3px solid #404040 !important; /* 입체감 있는 진한 회색 테두리 */
         }
 
-        .corner-space[data-space-id="12"] .space-name {
+        .corner-space[data-space-id="10"] .space-name {
             font-size: clamp(8px, 2.2vw, 16px) !important;
             font-weight: 900 !important;
             color: #FFFFFF !important;
@@ -1044,13 +984,13 @@
         }
 
         /* 기부 천사 칸 스타일 (핫핑크 테마, 둥근 모서리) */
-        .corner-space[data-space-id="18"] {
+        .corner-space[data-space-id="15"] {
             background: var(--color-donation) !important;
             border-radius: 12px !important;
             border: 3px solid #E6458B !important; /* 입체감 있는 진한 핑크색 테두리 */
         }
 
-        .corner-space[data-space-id="18"] .space-name {
+        .corner-space[data-space-id="15"] .space-name {
             font-size: clamp(8px, 2.2vw, 16px) !important;
             font-weight: 900 !important;
             color: #FFFFFF !important;
@@ -1173,7 +1113,7 @@
         }
 
         /* 슈퍼 점프 칸 텍스트 스타일 (전기 파란색 테마) */
-        .corner-space[data-space-id="6"] .space-name {
+        .corner-space[data-space-id="5"] .space-name {
             font-size: clamp(8px, 2.2vw, 16px) !important;
             font-weight: 900 !important;
             color: #FFFFFF !important;
@@ -1189,7 +1129,7 @@
         }
 
         /* 무인도 칸 텍스트 스타일 (어두운 회색 테마) */
-        .corner-space[data-space-id="12"] .space-name {
+        .corner-space[data-space-id="10"] .space-name {
             font-size: clamp(8px, 2.2vw, 16px) !important;
             font-weight: 900 !important;
             color: #FFFFFF !important;
@@ -1205,7 +1145,7 @@
         }
 
         /* 기부 천사 칸 텍스트 스타일 (핫핑크 테마) */
-        .corner-space[data-space-id="18"] .space-name {
+        .corner-space[data-space-id="15"] .space-name {
             font-size: clamp(8px, 2.2vw, 16px) !important;
             font-weight: 900 !important;
             color: #FFFFFF !important;
@@ -1451,88 +1391,6 @@
 
 
 
-        .mini-board-container {
-            background: white;
-            border-radius: 6px;
-            padding: 8px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .mini-board {
-            width: 200px;
-            height: 150px;
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            grid-template-rows: repeat(7, 1fr);
-            gap: 1px;
-            background: #333;
-            border-radius: 6px;
-            padding: 2px;
-        }
-
-        .mini-space {
-            background: #fff;
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-
-
-        .color-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-        }
-
-        .color-swatch {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-
-        .preview-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .btn-apply, .btn-cancel {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .btn-apply {
-            background: #2196f3;
-            color: white;
-        }
-
-        .btn-apply:hover {
-            background: #1976d2;
-        }
-
-        .btn-cancel {
-            background: #f5f5f5;
-            color: #666;
-        }
-
-        .btn-cancel:hover {
-            background: #e0e0e0;
-        }
 
         /* 모바일 가로 (768px 이하, 가로 비율) - 설정 컨테이너 */
         @media (max-width: 768px) {
@@ -1574,15 +1432,6 @@
                 flex-direction: column;
             }
             
-            .palette-preview {
-                width: 100%;
-                min-width: auto;
-            }
-            
-            .mini-board {
-                width: 150px;
-                height: 120px;
-            }
         }
 
         .fullscreen-button:active {
@@ -1657,9 +1506,9 @@
         }
 
         .fullscreen-mode .center-panel {
-            width: calc(95vw * 4.5 / 7);
-            max-width: calc(95vw * 4.5 / 7);
-            min-width: calc(95vw * 4.5 / 7);
+            width: calc(95vw * var(--center-panel-ratio) / var(--board-size));
+            max-width: calc(95vw * var(--center-panel-ratio) / var(--board-size));
+            min-width: calc(95vw * var(--center-panel-ratio) / var(--board-size));
             box-sizing: border-box;
         }
 
@@ -1858,9 +1707,9 @@
             .center-panel {
                 padding: 15px 20px;
                 gap: 12px;
-                width: calc(100% * 4.5 / 7);
-                max-width: calc(100% * 4.5 / 7);
-                min-width: calc(100% * 4.5 / 7);
+                width: calc(100% * var(--center-panel-ratio) / var(--board-size));
+                max-width: calc(100% * var(--center-panel-ratio) / var(--board-size));
+                min-width: calc(100% * var(--center-panel-ratio) / var(--board-size));
                 box-sizing: border-box;
             }
             
@@ -1893,9 +1742,9 @@
             .center-panel {
                 padding: 15px 18px;
                 gap: 10px;
-                width: calc(100% * 4.5 / 7);
-                max-width: calc(100% * 4.5 / 7);
-                min-width: calc(100% * 4.5 / 7);
+                width: calc(100% * var(--center-panel-ratio) / var(--board-size));
+                max-width: calc(100% * var(--center-panel-ratio) / var(--board-size));
+                min-width: calc(100% * var(--center-panel-ratio) / var(--board-size));
                 box-sizing: border-box;
             }
             
@@ -1928,9 +1777,9 @@
             .center-panel {
                 padding: 10px 12px;
                 gap: 6px;
-                width: calc(100% * 4.5 / 7);
-                max-width: calc(100% * 4.5 / 7);
-                min-width: calc(100% * 4.5 / 7);
+                width: calc(100% * var(--center-panel-ratio) / var(--board-size));
+                max-width: calc(100% * var(--center-panel-ratio) / var(--board-size));
+                min-width: calc(100% * var(--center-panel-ratio) / var(--board-size));
                 box-sizing: border-box;
             }
             
@@ -3435,7 +3284,7 @@
                 player.isOnIsland = true;
                 player.islandTurnCount = 0; // 무인도 투입 시 0으로 시작
                 player.islandQuizStreak = 0;
-                player.position = 12; // 무인도 위치 (12번 칸)
+                player.position = BOARD_CONSTANTS.SPACES.ISLAND; // 무인도 위치
 
                 gameState.modes.island.active = true;
                 gameState.modes.island.escapePhase = 'first';
@@ -3786,6 +3635,7 @@
         // 페이지 로드 시 즉시 실행
         document.addEventListener('DOMContentLoaded', function() {
             setViewportHeight();
+            setBoardCSSVariables(); // CSS 변수 설정
             createPlayerCards(); // 플레이어 카드 생성
         });
 
@@ -3793,39 +3643,129 @@
 
 
 
-        // 7x7 보드 칸 데이터 (스크린샷 기준)
+        // 보드 게임 상수 정의
+        const BOARD_CONSTANTS = {
+            // 보드 크기
+            TOTAL_SPACES: 20,
+            BOARD_SIZE: 6, // 6x6 그리드
+            
+            // 그리드 관련 상수
+            GRID: {
+                ROWS: 6,
+                COLS: 6,
+                LAST_ROW: 5,
+                LAST_COL: 5,
+                CENTER_START: 1,
+                CENTER_END: 4
+            },
+            
+            // 중앙 패널 비율
+            CENTER_PANEL_RATIO: 3.5,
+            
+            // 특별 칸 번호
+            SPACES: {
+                START: 0,
+                SUPER_JUMP: 5,
+                ISLAND: 10,
+                DONATION: 15,
+                SPECIAL: 20
+            },
+            
+            // 황금 열쇠 칸 번호
+            GOLDEN_KEY_SPACES: [3, 8, 13, 18],
+            
+            // 그리드 위치 매핑
+            GRID_POSITIONS: {
+                0: { row: 5, col: 5 }, // 시작
+                5: { row: 5, col: 0 }, // 슈퍼 점프
+                10: { row: 0, col: 0 }, // 무인도
+                15: { row: 0, col: 5 }  // 기부 천사
+            }
+        };
+
+        // 보드 게임 유틸리티 함수들
+        function isGoldenKeySpace(position) {
+            return BOARD_CONSTANTS.GOLDEN_KEY_SPACES.includes(position);
+        }
+
+        function isSpecialSpace(position) {
+            return Object.values(BOARD_CONSTANTS.SPACES).includes(position);
+        }
+
+        function getBoardSize() {
+            return BOARD_CONSTANTS.TOTAL_SPACES;
+        }
+
+        function wrapPosition(position) {
+            return position % getBoardSize();
+        }
+
+        // 그리드 관련 유틸리티 함수들
+        function isCornerCell(row, col) {
+            return (row === 0 && col === 0) || 
+                   (row === 0 && col === BOARD_CONSTANTS.GRID.LAST_COL) || 
+                   (row === BOARD_CONSTANTS.GRID.LAST_ROW && col === 0) || 
+                   (row === BOARD_CONSTANTS.GRID.LAST_ROW && col === BOARD_CONSTANTS.GRID.LAST_COL);
+        }
+
+        function isEdgeCell(row, col) {
+            return (row === 0 && col >= BOARD_CONSTANTS.GRID.CENTER_START && col <= BOARD_CONSTANTS.GRID.CENTER_END) ||
+                   (col === BOARD_CONSTANTS.GRID.LAST_COL && row >= BOARD_CONSTANTS.GRID.CENTER_START && row <= BOARD_CONSTANTS.GRID.CENTER_END) ||
+                   (row === BOARD_CONSTANTS.GRID.LAST_ROW && col >= BOARD_CONSTANTS.GRID.CENTER_START && col <= BOARD_CONSTANTS.GRID.CENTER_END) ||
+                   (col === 0 && row >= BOARD_CONSTANTS.GRID.CENTER_START && row <= BOARD_CONSTANTS.GRID.CENTER_END);
+        }
+
+        function getCellIndex(row, col) {
+            return row * BOARD_CONSTANTS.GRID.COLS + col;
+        }
+
+        function getBoardDimensions() {
+            return {
+                rows: BOARD_CONSTANTS.GRID.ROWS,
+                cols: BOARD_CONSTANTS.GRID.COLS,
+                lastRow: BOARD_CONSTANTS.GRID.LAST_ROW,
+                lastCol: BOARD_CONSTANTS.GRID.LAST_COL,
+                centerStart: BOARD_CONSTANTS.GRID.CENTER_START,
+                centerEnd: BOARD_CONSTANTS.GRID.CENTER_END
+            };
+        }
+
+        // CSS 변수를 동적으로 설정
+        function setBoardCSSVariables() {
+            const root = document.documentElement;
+            root.style.setProperty('--board-size', BOARD_CONSTANTS.GRID.ROWS);
+            root.style.setProperty('--center-panel-ratio', BOARD_CONSTANTS.CENTER_PANEL_RATIO);
+        }
+
+        // 6x6 보드 칸 데이터
         const boardSpaces = [
-            // 시작점 (0) - 우하단
-            { id: 0, name: '시작', type: 'start', color: 'space-start' },
-            // 하단 변 (1-5) - 오른쪽에서 왼쪽으로
+            // 시작점 - 우하단
+            { id: BOARD_CONSTANTS.SPACES.START, name: '시작', type: 'start', color: 'space-start' },
+            // 하단 변 (1-4) - 오른쪽에서 왼쪽으로
             { id: 1, name: '겸손(1)', type: 'quiz', color: 'space-quiz' },
             { id: 2, name: '노력(2)', type: 'quiz', color: 'space-quiz' },
             { id: 3, name: '황금열쇠', type: 'golden', color: 'space-golden' },
             { id: 4, name: '정직(4)', type: 'quiz', color: 'space-quiz' },
-            { id: 5, name: '신뢰(5)', type: 'quiz', color: 'space-quiz' },
-            // 좌측 변 (7-11) - 아래에서 위로
-            { id: 7, name: '친절(7)', type: 'quiz', color: 'space-quiz' },
-            { id: 8, name: '성실(8)', type: 'quiz', color: 'space-quiz' },
-            { id: 9, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 10, name: '열정(10)', type: 'quiz', color: 'space-quiz' },
-            { id: 11, name: '협력(11)', type: 'quiz', color: 'space-quiz' },
-            // 상단 변 (13-17) - 왼쪽에서 오른쪽으로
-            { id: 13, name: '감사(13)', type: 'quiz', color: 'space-quiz' },
-            { id: 14, name: '소통(14)', type: 'quiz', color: 'space-quiz' },
-            { id: 15, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 16, name: '용기(16)', type: 'quiz', color: 'space-quiz' },
-            { id: 17, name: '배려(17)', type: 'quiz', color: 'space-quiz' },
-            // 우측 변 (19-23) - 위에서 아래로
-            { id: 19, name: '나눔(19)', type: 'quiz', color: 'space-quiz' },
-            { id: 20, name: '화합(20)', type: 'quiz', color: 'space-quiz' },
-            { id: 21, name: '황금열쇠', type: 'golden', color: 'space-golden' },
-            { id: 22, name: '존중(22)', type: 'quiz', color: 'space-quiz' },
-            { id: 23, name: '사랑(23)', type: 'quiz', color: 'space-quiz' },
-            // 특별 칸들 (모서리) - BoardColorTest.html과 동일하게 corner 타입으로 변경
-            { id: 6, name: '슈퍼 점프', type: 'corner', color: 'space-corner' },
-            { id: 12, name: '무인도', type: 'corner', color: 'space-corner' },
-            { id: 18, name: '기부 천사', type: 'corner', color: 'space-corner' },
-            { id: 24, name: '특별칸', type: 'special', color: 'space-special' }
+            // 좌측 변 (6-9) - 아래에서 위로
+            { id: 6, name: '친절(6)', type: 'quiz', color: 'space-quiz' },
+            { id: 7, name: '성실(7)', type: 'quiz', color: 'space-quiz' },
+            { id: 8, name: '황금열쇠', type: 'golden', color: 'space-golden' },
+            { id: 9, name: '협력(9)', type: 'quiz', color: 'space-quiz' },
+            // 상단 변 (11-14) - 왼쪽에서 오른쪽으로
+            { id: 11, name: '감사(11)', type: 'quiz', color: 'space-quiz' },
+            { id: 12, name: '소통(12)', type: 'quiz', color: 'space-quiz' },
+            { id: 13, name: '황금열쇠', type: 'golden', color: 'space-golden' },
+            { id: 14, name: '배려(14)', type: 'quiz', color: 'space-quiz' },
+            // 우측 변 (16-19) - 위에서 아래로
+            { id: 16, name: '나눔(16)', type: 'quiz', color: 'space-quiz' },
+            { id: 17, name: '화합(17)', type: 'quiz', color: 'space-quiz' },
+            { id: 18, name: '황금열쇠', type: 'golden', color: 'space-golden' },
+            { id: 19, name: '존중(19)', type: 'quiz', color: 'space-quiz' },
+            // 특별 칸들 (모서리)
+            { id: BOARD_CONSTANTS.SPACES.SUPER_JUMP, name: '슈퍼 점프', type: 'corner', color: 'space-corner' },
+            { id: BOARD_CONSTANTS.SPACES.ISLAND, name: '무인도', type: 'corner', color: 'space-corner' },
+            { id: BOARD_CONSTANTS.SPACES.DONATION, name: '기부 천사', type: 'corner', color: 'space-corner' },
+            { id: BOARD_CONSTANTS.SPACES.SPECIAL, name: '특별칸', type: 'special', color: 'space-special' }
         ];
 
         // 퀴즈 데이터
@@ -3869,7 +3809,7 @@
                 description: "즉시 출발지로 워프 이동! 통과 보너스 400점 획득!",
                 effect: () => {
                     const player = gameState.players.find(p => p.id === gameState.currentPlayer);
-                    player.position = 0;
+                    player.position = BOARD_CONSTANTS.SPACES.START;
                     player.score += 400;
                     
                     // 워프 이동으로 인해 슈퍼 점프 기회 취소 (무인도 상태는 유지)
@@ -3905,8 +3845,8 @@
                             // 토네이도로 랜덤 위치 이동 (무인도 제외)
                             let newPosition;
                             do {
-                                newPosition = Math.floor(Math.random() * 24);
-                            } while (newPosition === 12); // 무인도(12번 칸) 제외
+                                newPosition = Math.floor(Math.random() * BOARD_CONSTANTS.TOTAL_SPACES);
+                            } while (newPosition === BOARD_CONSTANTS.SPACES.ISLAND); // 무인도 칸 제외
                             
                             player.position = newPosition;
                             player.score = Math.max(0, player.score - 50);
@@ -3937,10 +3877,10 @@
                 effect: () => {
                     const player = gameState.players.find(p => p.id === gameState.currentPlayer);
                     const currentPosition = player.position;
-                    const newPosition = (currentPosition + 10) % 24; // 24칸 보드
+                    const newPosition = (currentPosition + 10) % BOARD_CONSTANTS.TOTAL_SPACES; // 보드 크기
                     
                     // 슈퍼 점프 대기 중인 플레이어를 다른 곳으로 이동시키는 경우
-                    if (player.isWaitJump && newPosition !== 6) {
+                    if (player.isWaitJump && newPosition !== BOARD_CONSTANTS.SPACES.SUPER_JUMP) {
                         player.isWaitJump = false; // 슈퍼 점프 대기 상태 해제
                         showMessage(`⚡ 번개 이동! ${player.name}의 슈퍼 점프 대기 상태가 해제되었습니다.`);
                     }
@@ -4044,8 +3984,8 @@
                 description: "대홍수가 발생했습니다! 모든 플레이어가 시작점으로 이동!",
                 effect: () => {
                     gameState.players.forEach(player => {
-                        // 모든 플레이어를 시작점(0번)으로 이동
-                        player.position = 0;
+                        // 모든 플레이어를 시작점으로 이동
+                        player.position = BOARD_CONSTANTS.SPACES.START;
                         
                         // 특수 상태 초기화
                         player.isOnIsland = false;
@@ -4076,10 +4016,10 @@
                 effect: () => {
                     const player = gameState.players.find(p => p.id === gameState.currentPlayer);
                     const currentPosition = player.position;
-                    const newPosition = (currentPosition + 8) % 24; // 24칸 보드
+                    const newPosition = (currentPosition + 8) % BOARD_CONSTANTS.TOTAL_SPACES; // 보드 크기
                     
                     // 슈퍼 점프 대기 중인 플레이어를 다른 곳으로 이동시키는 경우
-                    if (player.isWaitJump && newPosition !== 6) {
+                    if (player.isWaitJump && newPosition !== BOARD_CONSTANTS.SPACES.SUPER_JUMP) {
                         player.isWaitJump = false; // 슈퍼 점프 대기 상태 해제
                         showMessage(`🚂 기차표! ${player.name}의 슈퍼 점프 대기 상태가 해제되었습니다.`);
                     }
@@ -4296,62 +4236,63 @@
             const board = document.getElementById('gameBoard');
             board.innerHTML = '';
 
-            // 7x7 그리드 생성
-            for (let row = 0; row < 7; row++) {
-                for (let col = 0; col < 7; col++) {
+            // 그리드 생성
+            for (let row = 0; row < BOARD_CONSTANTS.GRID.ROWS; row++) {
+                for (let col = 0; col < BOARD_CONSTANTS.GRID.COLS; col++) {
                     const cell = document.createElement('div');
                     cell.className = 'board-space';
                     
                     // 모서리 칸들
-                    if ((row === 0 && col === 0) || (row === 0 && col === 6) || 
-                        (row === 6 && col === 0) || (row === 6 && col === 6)) {
+                    if (isCornerCell(row, col)) {
                         cell.classList.add('corner-space');
                         
                         if (row === 0 && col === 0) {
                             // 무인도 - special 타입
-                            const space = boardSpaces.find(s => s.id === 12);
+                            const space = boardSpaces.find(s => s.id === BOARD_CONSTANTS.SPACES.ISLAND);
                             if (space) {
                                 cell.className = `board-space corner-space ${space.color}`;
                             }
                             cell.innerHTML = '<div class="space-name">   무  인  도   </div>';
-                            cell.dataset.spaceId = 12;
+                            cell.dataset.spaceId = BOARD_CONSTANTS.SPACES.ISLAND;
                             // onclick 이벤트 제거 - addLandClickHandlers에서 처리
-                        } else if (row === 0 && col === 6) {
+                        } else if (row === 0 && col === BOARD_CONSTANTS.GRID.LAST_COL) {
                             // 기부 천사 - special 타입
-                            const space = boardSpaces.find(s => s.id === 18);
+                            const space = boardSpaces.find(s => s.id === BOARD_CONSTANTS.SPACES.DONATION);
                             if (space) {
                                 cell.className = `board-space corner-space ${space.color}`;
                             }
                             cell.innerHTML = '<div class="space-name">기부 천사</div>';
-                            cell.dataset.spaceId = 18;
+                            cell.dataset.spaceId = BOARD_CONSTANTS.SPACES.DONATION;
                             // onclick 이벤트 제거 - addLandClickHandlers에서 처리
-                        } else if (row === 6 && col === 0) {
+                        } else if (row === BOARD_CONSTANTS.GRID.LAST_ROW && col === 0) {
                             // 슈퍼 점프 - special 타입
-                            const space = boardSpaces.find(s => s.id === 6);
+                            const space = boardSpaces.find(s => s.id === BOARD_CONSTANTS.SPACES.SUPER_JUMP);
                             if (space) {
                                 cell.className = `board-space corner-space ${space.color}`;
                             }
                             cell.innerHTML = '<div class="space-name">슈퍼 점프</div>';
-                            cell.dataset.spaceId = 6;
+                            cell.dataset.spaceId = BOARD_CONSTANTS.SPACES.SUPER_JUMP;
                             // onclick 이벤트 제거 - addLandClickHandlers에서 처리
-                        } else if (row === 6 && col === 6) {
+                        } else if (row === BOARD_CONSTANTS.GRID.LAST_ROW && col === BOARD_CONSTANTS.GRID.LAST_COL) {
                             // 시작 - start 타입
-                            const space = boardSpaces.find(s => s.id === 0);
+                            const space = boardSpaces.find(s => s.id === BOARD_CONSTANTS.SPACES.START);
                             if (space) {
                                 cell.className = `board-space corner-space ${space.color}`;
                             }
                             cell.innerHTML = '<div class="space-name">START</div>';
-                            cell.dataset.spaceId = 0;
+                            cell.dataset.spaceId = BOARD_CONSTANTS.SPACES.START;
                             // onclick 이벤트 제거 - addLandClickHandlers에서 처리
                         }
                         
                         // 중앙 패널과 겹치는 모서리 칸들은 호버 효과 비활성화
-                        if ((row >= 2 && row <= 4) && (col >= 2 && col <= 4)) {
+                        if ((row >= BOARD_CONSTANTS.GRID.CENTER_START + 1 && row <= BOARD_CONSTANTS.GRID.CENTER_END - 1) && 
+                            (col >= BOARD_CONSTANTS.GRID.CENTER_START + 1 && col <= BOARD_CONSTANTS.GRID.CENTER_END - 1)) {
                             cell.className += ' center-background';
                         }
                     }
-                    // 내부 5x5 그리드 (빈칸들)
-                    else if (row >= 1 && row <= 5 && col >= 1 && col <= 5) {
+                    // 내부 그리드 (빈칸들)
+                    else if (row >= BOARD_CONSTANTS.GRID.CENTER_START && row <= BOARD_CONSTANTS.GRID.CENTER_END && 
+                             col >= BOARD_CONSTANTS.GRID.CENTER_START && col <= BOARD_CONSTANTS.GRID.CENTER_END) {
                         // 빈칸들 (퀴즈, 마블 글씨 제거)
                         cell.style.background = 'var(--color-center)';
                         cell.style.border = 'none';
@@ -4415,21 +4356,21 @@
 
         // 그리드 위치를 보드 칸 인덱스로 변환 (스크린샷 기준)
         function getSpaceIndex(row, col) {
-            // 상단 변 (13-17) - 왼쪽에서 오른쪽으로
-            if (row === 0 && col >= 1 && col <= 5) {
-                return 12 + col; // 13, 14, 15, 16, 17
+            // 상단 변 (11-14) - 왼쪽에서 오른쪽으로
+            if (row === 0 && col >= BOARD_CONSTANTS.GRID.CENTER_START && col <= BOARD_CONSTANTS.GRID.CENTER_END) {
+                return 10 + col; // 11, 12, 13, 14
             }
-            // 우측 변 (19-23) - 위에서 아래로
-            else if (col === 6 && row >= 1 && row <= 5) {
-                return 18 + row; // 19, 20, 21, 22, 23
+            // 우측 변 (16-19) - 위에서 아래로
+            else if (col === BOARD_CONSTANTS.GRID.LAST_COL && row >= BOARD_CONSTANTS.GRID.CENTER_START && row <= BOARD_CONSTANTS.GRID.CENTER_END) {
+                return 15 + row; // 16, 17, 18, 19
             }
-            // 하단 변 (1-5) - 오른쪽에서 왼쪽으로
-            else if (row === 6 && col >= 1 && col <= 5) {
-                return 6 - col; // 5, 4, 3, 2, 1
+            // 하단 변 (1-4) - 오른쪽에서 왼쪽으로
+            else if (row === BOARD_CONSTANTS.GRID.LAST_ROW && col >= BOARD_CONSTANTS.GRID.CENTER_START && col <= BOARD_CONSTANTS.GRID.CENTER_END) {
+                return 5 - col; // 4, 3, 2, 1
             }
-            // 좌측 변 (7-11) - 아래에서 위로
-            else if (col === 0 && row >= 1 && row <= 5) {
-                return 12 - row; // 11, 10, 9, 8, 7
+            // 좌측 변 (6-9) - 아래에서 위로
+            else if (col === 0 && row >= BOARD_CONSTANTS.GRID.CENTER_START && row <= BOARD_CONSTANTS.GRID.CENTER_END) {
+                return 10 - row; // 9, 8, 7, 6
             }
             return -1;
         }
@@ -4442,7 +4383,7 @@
             // 각 칸별로 플레이어들을 그룹화
             const playersByPosition = {};
             gameState.players.forEach(player => {
-                if (player.position >= 0 && player.position < boardSpaces.length) {
+                if (player.position >= 0 && player.position < BOARD_CONSTANTS.TOTAL_SPACES) {
                     if (!playersByPosition[player.position]) {
                         playersByPosition[player.position] = [];
                     }
@@ -4456,7 +4397,7 @@
                 const gridPos = getGridPosition(parseInt(position));
                 
                 if (gridPos) {
-                    const cellIndex = gridPos.row * 7 + gridPos.col;
+                    const cellIndex = getCellIndex(gridPos.row, gridPos.col);
                         const spaceElement = document.querySelectorAll('.board-space')[cellIndex];
                     
                         if (spaceElement) {
@@ -4491,26 +4432,26 @@
 
         // 보드 칸 인덱스를 그리드 위치로 변환 (스크린샷 기준)
         function getGridPosition(spaceIndex) {
-            if (spaceIndex === 0) return { row: 6, col: 6 }; // 시작 (우하단)
-            if (spaceIndex === 6) return { row: 6, col: 0 }; // 슈퍼 점프 (좌하단)
-            if (spaceIndex === 12) return { row: 0, col: 0 }; // 무인도 (좌상단)
-            if (spaceIndex === 18) return { row: 0, col: 6 }; // 기부 천사 (우상단)
+            // 상수에서 미리 정의된 위치 확인
+            if (BOARD_CONSTANTS.GRID_POSITIONS[spaceIndex]) {
+                return BOARD_CONSTANTS.GRID_POSITIONS[spaceIndex];
+            }
             
-            // 상단 변 (13-17) - 왼쪽에서 오른쪽으로
-            if (spaceIndex >= 13 && spaceIndex <= 17) {
-                return { row: 0, col: spaceIndex - 12 };
+            // 상단 변 (11-14) - 왼쪽에서 오른쪽으로
+            if (spaceIndex >= 11 && spaceIndex <= 14) {
+                return { row: 0, col: spaceIndex - 10 };
             }
-            // 우측 변 (19-23) - 위에서 아래로
-            else if (spaceIndex >= 19 && spaceIndex <= 23) {
-                return { row: spaceIndex - 18, col: 6 };
+            // 우측 변 (16-19) - 위에서 아래로
+            else if (spaceIndex >= 16 && spaceIndex <= 19) {
+                return { row: spaceIndex - 15, col: BOARD_CONSTANTS.GRID.LAST_COL };
             }
-            // 하단 변 (1-5) - 오른쪽에서 왼쪽으로
-            else if (spaceIndex >= 1 && spaceIndex <= 5) {
-                return { row: 6, col: 6 - spaceIndex };
+            // 하단 변 (1-4) - 오른쪽에서 왼쪽으로
+            else if (spaceIndex >= 1 && spaceIndex <= 4) {
+                return { row: BOARD_CONSTANTS.GRID.LAST_ROW, col: 5 - spaceIndex };
             }
-            // 좌측 변 (7-11) - 아래에서 위로
-            else if (spaceIndex >= 7 && spaceIndex <= 11) {
-                return { row: 12 - spaceIndex, col: 0 };
+            // 좌측 변 (6-9) - 아래에서 위로
+            else if (spaceIndex >= 6 && spaceIndex <= 9) {
+                return { row: 10 - spaceIndex, col: 0 };
             }
             
             return null;
@@ -4524,26 +4465,26 @@
 
         // 소유권 시스템
         let spaceOwners = {
-            1: null, 2: null, 4: null, 5: null,      // 1번 지역
-            7: null, 8: null, 10: null, 11: null,    // 2번 지역
-            13: null, 14: null, 16: null, 17: null,  // 3번 지역
-            19: null, 20: null, 22: null, 23: null   // 4번 지역
+            1: null, 2: null, 3: null, 4: null,      // 1번 지역
+            6: null, 7: null, 8: null, 9: null,      // 2번 지역
+            11: null, 12: null, 13: null, 14: null,  // 3번 지역
+            16: null, 17: null, 18: null, 19: null   // 4번 지역
         };
 
         // 별 개수 시스템 (땅별 별 개수 저장)
         let spaceStars = {
-            1: 0, 2: 0, 4: 0, 5: 0,      // 1번 지역
-            7: 0, 8: 0, 10: 0, 11: 0,    // 2번 지역
-            13: 0, 14: 0, 16: 0, 17: 0,  // 3번 지역
-            19: 0, 20: 0, 22: 0, 23: 0   // 4번 지역
+            1: 0, 2: 0, 3: 0, 4: 0,      // 1번 지역
+            6: 0, 7: 0, 8: 0, 9: 0,      // 2번 지역
+            11: 0, 12: 0, 13: 0, 14: 0,  // 3번 지역
+            16: 0, 17: 0, 18: 0, 19: 0   // 4번 지역
         };
 
         // 통행세 기준 (1성 기준)
         const tollRates = {
-            1: 100, 2: 100, 4: 100, 5: 100,      // 1번 지역
-            7: 200, 8: 200, 10: 200, 11: 200,    // 2번 지역
-            13: 300, 14: 300, 16: 300, 17: 300,  // 3번 지역
-            19: 300, 20: 300, 22: 300, 23: 300   // 4번 지역
+            1: 100, 2: 100, 3: 100, 4: 100,      // 1번 지역
+            6: 200, 7: 200, 8: 200, 9: 200,      // 2번 지역
+            11: 300, 12: 300, 13: 300, 14: 300,  // 3번 지역
+            16: 300, 17: 300, 18: 300, 19: 300   // 4번 지역
         };
 
 
@@ -4578,18 +4519,18 @@
         // 소유권 활성화 함수
         function resetSpaceOwners() {
             spaceOwners = {
-                1: null, 2: null, 4: null, 5: null,      // 1번 지역
-                7: null, 8: null, 10: null, 11: null,    // 2번 지역
-                13: null, 14: null, 16: null, 17: null,  // 3번 지역
-                19: null, 20: null, 22: null, 23: null   // 4번 지역
+                1: null, 2: null, 3: null, 4: null,      // 1번 지역
+                6: null, 7: null, 8: null, 9: null,      // 2번 지역
+                11: null, 12: null, 13: null, 14: null,  // 3번 지역
+                16: null, 17: null, 18: null, 19: null   // 4번 지역
             };
             
             // 별 개수도 초기화
             spaceStars = {
-                1: 0, 2: 0, 4: 0, 5: 0,      // 1번 지역
-                7: 0, 8: 0, 10: 0, 11: 0,    // 2번 지역
-                13: 0, 14: 0, 16: 0, 17: 0,  // 3번 지역
-                19: 0, 20: 0, 22: 0, 23: 0   // 4번 지역
+                1: 0, 2: 0, 3: 0, 4: 0,      // 1번 지역
+                6: 0, 7: 0, 8: 0, 9: 0,      // 2번 지역
+                11: 0, 12: 0, 13: 0, 14: 0,  // 3번 지역
+                16: 0, 17: 0, 18: 0, 19: 0   // 4번 지역
             };
         }
 
@@ -4932,7 +4873,7 @@
                             // 슈퍼 점프 모드인지 확인
                             if (gameState.superJumpMode) {
                                 // 슈퍼 점프 칸(6)은 선택할 수 없음
-                                if (spaceNumber === 6) {
+                                if (spaceNumber === BOARD_CONSTANTS.SPACES.SUPER_JUMP) {
                                     showMessage('슈퍼 점프 칸은 선택할 수 없습니다.');
                                     return;
                                 }
@@ -4956,7 +4897,7 @@
                             // 슈퍼 점프 모드인지 확인
                             if (gameState.superJumpMode) {
                                 // 슈퍼 점프 칸(6)은 선택할 수 없음
-                                if (spaceNumber === 6) {
+                                if (spaceNumber === BOARD_CONSTANTS.SPACES.SUPER_JUMP) {
                                     showMessage('슈퍼 점프 칸은 선택할 수 없습니다.');
                                     return;
                                 }
@@ -4980,7 +4921,7 @@
                             // 슈퍼 점프 모드인지 확인
                             if (gameState.superJumpMode) {
                                 // 슈퍼 점프 칸(6)은 선택할 수 없음
-                                if (spaceNumber === 6) {
+                                if (spaceNumber === BOARD_CONSTANTS.SPACES.SUPER_JUMP) {
                                     showMessage('슈퍼 점프 칸은 선택할 수 없습니다.');
                                     return;
                                 }
@@ -5011,7 +4952,7 @@
                             // 슈퍼 점프 모드인지 확인
                             if (gameState.superJumpMode) {
                                 // 슈퍼 점프 칸(6)은 선택할 수 없음
-                                if (spaceNumber === 6) {
+                                if (spaceNumber === BOARD_CONSTANTS.SPACES.SUPER_JUMP) {
                                     showMessage('슈퍼 점프 칸은 선택할 수 없습니다.');
                                     return;
                                 }
@@ -5029,20 +4970,20 @@
         const landQuotes = {
             1: { quote: "겸손은 진정한 위대함의 기초이다.", author: "윌리엄 셰익스피어" },
             2: { quote: "노력은 결코 배신하지 않는다.", author: "나폴레옹 힐" },
+            3: { quote: "황금은 모든 것을 사지 못한다.", author: "토마스 풀러" },
             4: { quote: "정직은 최고의 정책이다.", author: "벤저민 프랭클린" },
-            5: { quote: "신뢰는 모든 인간관계의 기초이다.", author: "스티븐 코비" },
-            7: { quote: "친절함은 언어를 이해하지 못하는 사람도 이해할 수 있는 언어이다.", author: "마더 테레사" },
-            8: { quote: "성실함은 가장 위대한 지혜이다.", author: "토마스 제퍼슨" },
-            10: { quote: "열정 없이는 위대한 일이 이루어지지 않는다.", author: "랄프 왈도 에머슨" },
-            11: { quote: "협력은 모든 성공의 열쇠이다.", author: "헨리 포드" },
-            13: { quote: "감사는 마음의 기억이다.", author: "장 밥티스트 마시용" },
-            14: { quote: "소통은 인간관계의 생명선이다.", author: "존 파월" },
-            16: { quote: "용기는 공포를 극복하는 것이지, 공포가 없는 것이 아니다.", author: "마크 트웨인" },
-            17: { quote: "배려는 사랑의 가장 아름다운 표현이다.", author: "마더 테레사" },
-            19: { quote: "나눔은 사랑의 시작이다.", author: "마더 테레사" },
-            20: { quote: "화합은 힘이다.", author: "마하트마 간디" },
-            22: { quote: "존중은 상대방을 인정하는 마음이다.", author: "스티븐 코비" },
-            23: { quote: "사랑은 모든 것을 이긴다.", author: "베르길리우스" }
+            6: { quote: "친절함은 언어를 이해하지 못하는 사람도 이해할 수 있는 언어이다.", author: "마더 테레사" },
+            7: { quote: "성실함은 가장 위대한 지혜이다.", author: "토마스 제퍼슨" },
+            8: { quote: "황금은 모든 것을 사지 못한다.", author: "토마스 풀러" },
+            9: { quote: "협력은 모든 성공의 열쇠이다.", author: "헨리 포드" },
+            11: { quote: "감사는 마음의 기억이다.", author: "장 밥티스트 마시용" },
+            12: { quote: "소통은 인간관계의 생명선이다.", author: "존 파월" },
+            13: { quote: "황금은 모든 것을 사지 못한다.", author: "토마스 풀러" },
+            14: { quote: "배려는 사랑의 가장 아름다운 표현이다.", author: "마더 테레사" },
+            16: { quote: "나눔은 사랑의 시작이다.", author: "마더 테레사" },
+            17: { quote: "화합은 힘이다.", author: "마하트마 간디" },
+            18: { quote: "황금은 모든 것을 사지 못한다.", author: "토마스 풀러" },
+            19: { quote: "존중은 상대방을 인정하는 마음이다.", author: "스티븐 코비" }
         };
 
         // 땅 정보 팝업 표시
@@ -5487,9 +5428,9 @@
                     currentStep++;
                     let tempPosition = startPosition + currentStep;
             
-            // 보드를 한 바퀴 돌면 시작점 통과 보너스 (24칸 보드)
-                    if (tempPosition >= 24) {
-                        tempPosition = tempPosition - 24;
+            // 보드를 한 바퀴 돌면 시작점 통과 보너스
+                    if (tempPosition >= BOARD_CONSTANTS.TOTAL_SPACES) {
+                        tempPosition = tempPosition - BOARD_CONSTANTS.TOTAL_SPACES;
                         if (currentStep === steps) { // 마지막 단계에서만 보너스 적용
                 player.score += 200;
                 showMessage('시작점 통과 보너스! +200점');
@@ -5992,7 +5933,7 @@
                 currentPlayer.isOnIsland = true;
                 currentPlayer.islandTurnCount = 0;
                 currentPlayer.islandQuizStreak = 0;
-                currentPlayer.position = 12; // 무인도 위치
+                currentPlayer.position = BOARD_CONSTANTS.SPACES.ISLAND; // 무인도 위치
                 
                 // 무인도 모드 활성화
                 gameState.modes.island.active = true;
@@ -6016,11 +5957,11 @@
                 showMessage(`${currentPlayer.name}과(와) ${targetPlayer.name}의 위치가 바뀌었습니다!`);
                 
                 // 슈퍼 점프 대기 중인 플레이어를 다른 곳으로 이동시키는 경우 상태 해제
-                if (currentPlayer.isWaitJump && currentPlayer.position !== 6) {
+                if (currentPlayer.isWaitJump && currentPlayer.position !== BOARD_CONSTANTS.SPACES.SUPER_JUMP) {
                     currentPlayer.isWaitJump = false;
                     showMessage(`🔄 위치 교환! ${currentPlayer.name}의 슈퍼 점프 대기 상태가 해제되었습니다.`);
                 }
-                if (targetPlayer.isWaitJump && targetPlayer.position !== 6) {
+                if (targetPlayer.isWaitJump && targetPlayer.position !== BOARD_CONSTANTS.SPACES.SUPER_JUMP) {
                     targetPlayer.isWaitJump = false;
                     showMessage(`🔄 위치 교환! ${targetPlayer.name}의 슈퍼 점프 대기 상태가 해제되었습니다.`);
                 }
@@ -6811,7 +6752,7 @@
             });
             
             // 슈퍼 점프 칸 비활성화
-            const superJumpCell = document.querySelector('[data-space-id="6"]');
+            const superJumpCell = document.querySelector(`[data-space-id="${BOARD_CONSTANTS.SPACES.SUPER_JUMP}"]`);
             if (superJumpCell) {
                 superJumpCell.classList.add('super-jump-disabled');
             }
@@ -6943,118 +6884,26 @@
         }
 
 
-        // 모바일 감지 함수
-        function isMobile() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-
-        // 브라우저별 전체화면 API 지원 확인
-        function getFullscreenAPI() {
-            const element = document.documentElement;
-            
-            if (element.requestFullscreen) {
-                return {
-                    request: () => element.requestFullscreen(),
-                    exit: () => document.exitFullscreen(),
-                    element: () => document.fullscreenElement
-                };
-            } else if (element.webkitRequestFullscreen) { // Safari
-                return {
-                    request: () => element.webkitRequestFullscreen(),
-                    exit: () => document.webkitExitFullscreen(),
-                    element: () => document.webkitFullscreenElement
-                };
-            } else if (element.mozRequestFullScreen) { // Firefox
-                return {
-                    request: () => element.mozRequestFullScreen(),
-                    exit: () => document.mozCancelFullScreen(),
-                    element: () => document.mozFullScreenElement
-                };
-            } else if (element.msRequestFullscreen) { // IE/Edge
-                return {
-                    request: () => element.msRequestFullscreen(),
-                    exit: () => document.msExitFullscreen(),
-                    element: () => document.msFullscreenElement
-                };
-            }
-            return null;
-        }
-
-        // 모바일 전체화면 안내 메시지 표시
-        function showMobileFullscreenGuide() {
-            const guide = document.createElement('div');
-            guide.className = 'mobile-fullscreen-guide';
-            guide.innerHTML = `
-                <div>
-                    <strong>📱 모바일 전체화면 안내</strong><br><br>
-                    모바일에서는 브라우저의 전체화면 기능을 사용해주세요:<br><br>
-                    <strong>Android:</strong><br>
-                    주소창 옆 메뉴 → "전체화면"<br><br>
-                    <strong>iOS:</strong><br>
-                    Safari 하단 공유 버튼 → "화면에 추가"<br><br>
-                    또는 홈 버튼을 두 번 빠르게 누르고 위로 스와이프
-                </div>
-                <button onclick="this.parentElement.parentElement.remove()">확인</button>
-            `;
-            document.body.appendChild(guide);
-            
-            // 5초 후 자동 제거
-            setTimeout(() => {
-                if (guide.parentElement) {
-                    guide.remove();
-                }
-            }, 5000);
-        }
-
-        // 전체화면 토글 함수 (개선된 버전)
+        // 전체화면 토글 함수
         function toggleFullscreen() {
-            if (isMobile()) {
-                // 모바일에서는 CSS 기반 전체화면 모드 토글
-                const isMobileFullscreen = document.body.classList.contains('mobile-fullscreen');
-                
-                if (isMobileFullscreen) {
-                    // 모바일 전체화면 해제
-                    document.body.classList.remove('mobile-fullscreen');
-                    document.getElementById('fullscreenIcon').classList.remove('minimize');
-                    document.getElementById('fullscreenBtn').title = '전체화면 토글';
-                } else {
-                    // 모바일 전체화면 진입
-                    document.body.classList.add('mobile-fullscreen');
+            if (!document.fullscreenElement) {
+                // 전체화면 진입
+                document.documentElement.requestFullscreen().then(() => {
+                    document.body.classList.add('fullscreen-mode');
                     document.getElementById('fullscreenIcon').classList.add('minimize');
                     document.getElementById('fullscreenBtn').title = '전체화면 해제';
-                    
-                    // 안내 메시지 표시
-                    showMobileFullscreenGuide();
-                }
+                }).catch(err => {
+                    // 전체화면 진입 실패
+                });
             } else {
-                // 데스크톱에서는 브라우저 전체화면 API 사용
-                const fullscreenAPI = getFullscreenAPI();
-                
-                if (!fullscreenAPI) {
-                    alert('이 브라우저는 전체화면 기능을 지원하지 않습니다.');
-                    return;
-                }
-                
-                if (!fullscreenAPI.element()) {
-                    // 전체화면 진입
-                    fullscreenAPI.request().then(() => {
-                        document.body.classList.add('fullscreen-mode');
-                        document.getElementById('fullscreenIcon').classList.add('minimize');
-                        document.getElementById('fullscreenBtn').title = '전체화면 해제';
-                    }).catch(err => {
-                        console.log('전체화면 진입 실패:', err);
-                        alert('전체화면 진입에 실패했습니다.');
-                    });
-                } else {
-                    // 전체화면 해제
-                    fullscreenAPI.exit().then(() => {
-                        document.body.classList.remove('fullscreen-mode');
-                        document.getElementById('fullscreenIcon').classList.remove('minimize');
-                        document.getElementById('fullscreenBtn').title = '전체화면 토글';
-                    }).catch(err => {
-                        console.log('전체화면 해제 실패:', err);
-                    });
-                }
+                // 전체화면 해제
+                document.exitFullscreen().then(() => {
+                    document.body.classList.remove('fullscreen-mode');
+                    document.getElementById('fullscreenIcon').classList.remove('minimize');
+                    document.getElementById('fullscreenBtn').title = '전체화면 토글';
+                }).catch(err => {
+                    // 전체화면 해제 실패
+                });
             }
         }
 
@@ -7163,32 +7012,14 @@
 
 
 
-        // 전체화면 상태 변화 감지 (ESC 키 등으로 해제될 때) - 브라우저별 지원
-        function addFullscreenEventListeners() {
-            const events = [
-                'fullscreenchange',
-                'webkitfullscreenchange',
-                'mozfullscreenchange',
-                'MSFullscreenChange'
-            ];
-            
-            events.forEach(event => {
-                document.addEventListener(event, () => {
-                    const fullscreenAPI = getFullscreenAPI();
-                    if (fullscreenAPI && !fullscreenAPI.element()) {
-                        document.body.classList.remove('fullscreen-mode');
-                        document.body.classList.remove('mobile-fullscreen');
-                        const icon = document.getElementById('fullscreenIcon');
-                        const btn = document.getElementById('fullscreenBtn');
-                        if (icon) icon.classList.remove('minimize');
-                        if (btn) btn.title = '전체화면 토글';
-                    }
-                });
-            });
-        }
-        
-        // 전체화면 이벤트 리스너 등록
-        addFullscreenEventListeners();
+        // 전체화면 상태 변화 감지 (ESC 키 등으로 해제될 때)
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                document.body.classList.remove('fullscreen-mode');
+                document.getElementById('fullscreenIcon').classList.remove('minimize');
+                document.getElementById('fullscreenBtn').title = '전체화면 토글';
+            }
+        });
 
         // F11 키 지원 (선택사항)
         document.addEventListener('keydown', (event) => {
@@ -7200,6 +7031,7 @@
 
         // 게임 시작
         window.onload = function() {
+            setBoardCSSVariables(); // CSS 변수 설정
             initGame();
         };
     </script>

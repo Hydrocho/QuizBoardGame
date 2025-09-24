@@ -51,7 +51,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, var(--color-background) 0%, var(--color-normal) 100%);
             min-height: calc(var(--vh, 1vh) * 100);
-            overflow: auto; /* 자동 스크롤바 활성화 */
+            overflow: auto; /*자동 스크롤바 활성화 */
         }
 
         /* 메인 게임 컨테이너 (데스크톱: 그리드로 보드 좌측 영역 가운데 정렬 + 패널 우측 고정) */
@@ -117,11 +117,6 @@
             margin-bottom: 8px;
         }
 
-        .player-panel .players-section {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
 
         /* 중앙 주사위 컨트롤 */
         .center-dice-controls {
@@ -381,6 +376,70 @@
             display: flex !important;
         }
 
+        /* 모바일 전체화면 모드 */
+        .mobile-fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+            background: var(--color-background) !important;
+            overflow: hidden !important;
+        }
+
+        .mobile-fullscreen .player-panel {
+            display: none !important;
+        }
+
+        .mobile-fullscreen .game-container {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            padding: 0 !important;
+            gap: 0 !important;
+        }
+
+        .mobile-fullscreen .board-container {
+            width: 100vw !important;
+            height: 100vw !important;
+            max-height: 100vh !important;
+            order: 1 !important;
+        }
+
+        /* 모바일 전체화면 안내 메시지 */
+        .mobile-fullscreen-guide {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 10000;
+            max-width: 90vw;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .mobile-fullscreen-guide button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .mobile-fullscreen-guide button:hover {
+            background: #0056b3;
+        }
+
         .player-details {
             display: flex;
             flex-direction: column;
@@ -601,21 +660,6 @@
                 min-width: 180px;
                 max-width: 240px;
             }
-            
-            .players-section {
-                display: flex;
-                flex-direction: column;
-                flex-wrap: nowrap;
-                justify-content: flex-start;
-                gap: 8px;
-            }
-            
-            .player-info {
-                flex: none;
-                width: 100%;
-                max-width: none;
-                min-width: auto;
-            }
         }
 
         /* 태블릿 가로 (900px 이하, 가로 비율) */
@@ -626,40 +670,8 @@
                 max-width: 200px;
                 padding: 12px;
             }
-            
-            .players-section {
-                display: flex;
-                flex-direction: column;
-                flex-wrap: nowrap;
-                justify-content: flex-start;
-                gap: 8px;
-            }
-            
-            .player-info {
-                flex: none;
-                width: 100%;
-                max-width: none;
-                min-width: auto;
-            }
         }
 
-        /* 모바일 가로 (768px 이하, 가로 비율) */
-        @media (max-width: 768px) and (min-aspect-ratio: 1/1) {
-            .players-section {
-                display: flex;
-                flex-direction: column;
-                flex-wrap: nowrap;
-                justify-content: flex-start;
-                gap: 8px;
-            }
-            
-            .player-info {
-                flex: none;
-                width: 100%;
-                max-width: none;
-                min-width: auto;
-            }
-        }
 
         /* 모바일 가로 (768px 이하, 가로 비율) - 레이아웃 조정 */
         @media (max-width: 768px) {
@@ -710,9 +722,6 @@
                 gap: 8px !important;
             }
             
-            .players-section {
-                gap: 6px !important;
-            }
 
             .player-mini-avatar {
                 width: 30px;
@@ -6934,26 +6943,118 @@
         }
 
 
-        // 전체화면 토글 함수
+        // 모바일 감지 함수
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // 브라우저별 전체화면 API 지원 확인
+        function getFullscreenAPI() {
+            const element = document.documentElement;
+            
+            if (element.requestFullscreen) {
+                return {
+                    request: () => element.requestFullscreen(),
+                    exit: () => document.exitFullscreen(),
+                    element: () => document.fullscreenElement
+                };
+            } else if (element.webkitRequestFullscreen) { // Safari
+                return {
+                    request: () => element.webkitRequestFullscreen(),
+                    exit: () => document.webkitExitFullscreen(),
+                    element: () => document.webkitFullscreenElement
+                };
+            } else if (element.mozRequestFullScreen) { // Firefox
+                return {
+                    request: () => element.mozRequestFullScreen(),
+                    exit: () => document.mozCancelFullScreen(),
+                    element: () => document.mozFullScreenElement
+                };
+            } else if (element.msRequestFullscreen) { // IE/Edge
+                return {
+                    request: () => element.msRequestFullscreen(),
+                    exit: () => document.msExitFullscreen(),
+                    element: () => document.msFullscreenElement
+                };
+            }
+            return null;
+        }
+
+        // 모바일 전체화면 안내 메시지 표시
+        function showMobileFullscreenGuide() {
+            const guide = document.createElement('div');
+            guide.className = 'mobile-fullscreen-guide';
+            guide.innerHTML = `
+                <div>
+                    <strong>📱 모바일 전체화면 안내</strong><br><br>
+                    모바일에서는 브라우저의 전체화면 기능을 사용해주세요:<br><br>
+                    <strong>Android:</strong><br>
+                    주소창 옆 메뉴 → "전체화면"<br><br>
+                    <strong>iOS:</strong><br>
+                    Safari 하단 공유 버튼 → "화면에 추가"<br><br>
+                    또는 홈 버튼을 두 번 빠르게 누르고 위로 스와이프
+                </div>
+                <button onclick="this.parentElement.parentElement.remove()">확인</button>
+            `;
+            document.body.appendChild(guide);
+            
+            // 5초 후 자동 제거
+            setTimeout(() => {
+                if (guide.parentElement) {
+                    guide.remove();
+                }
+            }, 5000);
+        }
+
+        // 전체화면 토글 함수 (개선된 버전)
         function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                // 전체화면 진입
-                document.documentElement.requestFullscreen().then(() => {
-                    document.body.classList.add('fullscreen-mode');
-                    document.getElementById('fullscreenIcon').classList.add('minimize');
-                    document.getElementById('fullscreenBtn').title = '전체화면 해제';
-                }).catch(err => {
-                    // 전체화면 진입 실패
-                });
-            } else {
-                // 전체화면 해제
-                document.exitFullscreen().then(() => {
-                    document.body.classList.remove('fullscreen-mode');
+            if (isMobile()) {
+                // 모바일에서는 CSS 기반 전체화면 모드 토글
+                const isMobileFullscreen = document.body.classList.contains('mobile-fullscreen');
+                
+                if (isMobileFullscreen) {
+                    // 모바일 전체화면 해제
+                    document.body.classList.remove('mobile-fullscreen');
                     document.getElementById('fullscreenIcon').classList.remove('minimize');
                     document.getElementById('fullscreenBtn').title = '전체화면 토글';
-                }).catch(err => {
-                    // 전체화면 해제 실패
-                });
+                } else {
+                    // 모바일 전체화면 진입
+                    document.body.classList.add('mobile-fullscreen');
+                    document.getElementById('fullscreenIcon').classList.add('minimize');
+                    document.getElementById('fullscreenBtn').title = '전체화면 해제';
+                    
+                    // 안내 메시지 표시
+                    showMobileFullscreenGuide();
+                }
+            } else {
+                // 데스크톱에서는 브라우저 전체화면 API 사용
+                const fullscreenAPI = getFullscreenAPI();
+                
+                if (!fullscreenAPI) {
+                    alert('이 브라우저는 전체화면 기능을 지원하지 않습니다.');
+                    return;
+                }
+                
+                if (!fullscreenAPI.element()) {
+                    // 전체화면 진입
+                    fullscreenAPI.request().then(() => {
+                        document.body.classList.add('fullscreen-mode');
+                        document.getElementById('fullscreenIcon').classList.add('minimize');
+                        document.getElementById('fullscreenBtn').title = '전체화면 해제';
+                    }).catch(err => {
+                        console.log('전체화면 진입 실패:', err);
+                        alert('전체화면 진입에 실패했습니다.');
+                    });
+                } else {
+                    // 전체화면 해제
+                    fullscreenAPI.exit().then(() => {
+                        document.body.classList.remove('fullscreen-mode');
+                        document.getElementById('fullscreenIcon').classList.remove('minimize');
+                        document.getElementById('fullscreenBtn').title = '전체화면 토글';
+                    }).catch(err => {
+                        console.log('전체화면 해제 실패:', err);
+                    });
+                }
             }
         }
 
@@ -7062,14 +7163,32 @@
 
 
 
-        // 전체화면 상태 변화 감지 (ESC 키 등으로 해제될 때)
-        document.addEventListener('fullscreenchange', () => {
-            if (!document.fullscreenElement) {
-                document.body.classList.remove('fullscreen-mode');
-                document.getElementById('fullscreenIcon').classList.remove('minimize');
-                document.getElementById('fullscreenBtn').title = '전체화면 토글';
-            }
-        });
+        // 전체화면 상태 변화 감지 (ESC 키 등으로 해제될 때) - 브라우저별 지원
+        function addFullscreenEventListeners() {
+            const events = [
+                'fullscreenchange',
+                'webkitfullscreenchange',
+                'mozfullscreenchange',
+                'MSFullscreenChange'
+            ];
+            
+            events.forEach(event => {
+                document.addEventListener(event, () => {
+                    const fullscreenAPI = getFullscreenAPI();
+                    if (fullscreenAPI && !fullscreenAPI.element()) {
+                        document.body.classList.remove('fullscreen-mode');
+                        document.body.classList.remove('mobile-fullscreen');
+                        const icon = document.getElementById('fullscreenIcon');
+                        const btn = document.getElementById('fullscreenBtn');
+                        if (icon) icon.classList.remove('minimize');
+                        if (btn) btn.title = '전체화면 토글';
+                    }
+                });
+            });
+        }
+        
+        // 전체화면 이벤트 리스너 등록
+        addFullscreenEventListeners();
 
         // F11 키 지원 (선택사항)
         document.addEventListener('keydown', (event) => {
